@@ -1,5 +1,6 @@
+# Structure-free Graph Condensation (SFGC): From Large-scale Graphs to Condensed Graph-free Data
 
-This is the Pytorch implementation for "Structure-free Graph Condensation (SFGC)"
+This is the Pytorch implementation for "Structure-free Graph Condensation (SFGC): From Large-scale Graphs to Condensed Graph-free Data"
 
 
 (1) Run to generate the buffer for keeping the model's training parameter distribution (training trajectory)
