@@ -3,7 +3,7 @@
 This is the Pytorch implementation for "Structure-free Graph Condensation (SFGC): From Large-scale Graphs to Condensed Graph-free Data"
 
 ### Requirements
-## Introduction
+## Instructions
 
 (1) Run to generate the buffer for keeping the model's training parameter distribution (training trajectory)
 
@@ -58,7 +58,7 @@ CUDA_VISIBLE_DEVICES=2 python test_other_arcs.py --device cuda:0 --dataset flick
 Detailed parameters and scripts can be found in script/4_shell_test.sh
 
 
-Abalation Study:
+### Abalation Study:
 
 A1: Cross-architecture test
 #['GAT', 'MLP', 'APPNP', 'GraphSage', 'Cheby','GCN']
