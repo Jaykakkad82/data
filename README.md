@@ -14,7 +14,7 @@ CUDA_VISIBLE_DEVICES=0 python buffer_transduct.py --device cuda:0 --lr_teacher 0
 --teacher_epochs 800 --dataset citeseer --teacher_nlayers=2 --traj_save_interval=10 --param_save_interval=10 --buffer_model_type 'GCN' \
 --num_experts=200 --wd_teacher 5e-4 --mom_teacher 0 --optim Adam --decay 0
 ```
-Detailed parameters and scripts can be found in script/1_shell_buffer.sh
+Detailed parameters and scripts can be found in scripts/1_shell_buffer.sh
 
 
 (2) Use the coreset method to initialize the synthesized small-scale graph node features
@@ -28,7 +28,7 @@ CUDA_VISIBLE_DEVICES=0 python train_coreset.py --dataset cora --device cuda:0 --
 CUDA_VISIBLE_DEVICES=3 python train_coreset_inductive.py --dataset reddit --device cuda:0 --epochs 800 --lr 0.001 \
 --weight_decay 5e-4  --save 1 --method kcenter --reduction_rate 0.001 --load_npy ''
 ```
-Detailed parameters and scripts can be found in script/2_shell_coreset.sh
+Detailed parameters and scripts can be found in scripts/2_shell_coreset.sh
 
 
 (3) Distill under training trajectory and coreset initialization to generate sythensized small-scale structure-free graph data
@@ -43,7 +43,7 @@ CUDA_VISIBLE_DEVICES=2 python distill_inductive_adj_identity.py --dataset flickr
 --condense_model GCN --interval_buffer 1 --rand_start 1 \
 --reduction_rate=0.01 --ntk_reg 1 --eval_interval 1 --ITER 2000 --samp_iter 1
 ```
-Detailed parameters and scripts can be found in script/3_shell_distill.sh
+Detailed parameters and scripts can be found in scripts/3_shell_distill.sh
 
 (4) Training with the small-scale structure free graph data and test on the large-scale graph test set:
 
@@ -55,7 +55,7 @@ CUDA_VISIBLE_DEVICES=2 python test_other_arcs.py --device cuda:0 --dataset flick
 --best_ntk_acc 0 --best_ntk_score 1 --test_opt_type Adam --test_model_type GCN \
 --load_path=${your_generated_data_path_from_step(3)}
 ```
-Detailed parameters and scripts can be found in script/4_shell_test.sh
+Detailed parameters and scripts can be found in scripts/4_shell_test.sh
 
 
 ### Abalation Study:
@@ -95,6 +95,6 @@ CUDA_VISIBLE_DEVICES=2 python distill_transduct_continue.py --dataset ogbn-arxiv
 --condense_model GCN --interval_buffer 1 --rand_start 1 \
 --reduction_rate=0.001 --ntk_reg 0.1 --eval_interval 10 --ITER 200 --samp_iter 1 --samp_num_per_class 50
 ```
-Detailed parameters and scripts can be found in script/strcuture_vs_structure-free-{dataset}.sh
+Detailed parameters and scripts can be found in scripts/strcuture_vs_structure-free-{dataset}.sh
 
 
