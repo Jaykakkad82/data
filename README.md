@@ -9,6 +9,16 @@ The framework is:
 
 
 ### Requirements
+
+torch==1.7.1+cu110
+torch-geometric==1.6.3
+torch-sparse==0.6.9
+torch-scatter==2.0.7
+tensorboardx==2.6
+deeprobust==0.2.4
+matplotlib==3.5.3
+scikit-learn==1.0.2
+
 ## Instructions
 
 (1) Run to generate the buffer for keeping the model's training parameter distribution (training trajectory)
