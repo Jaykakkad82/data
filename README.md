@@ -2,6 +2,8 @@
 
 This is the Pytorch implementation for "Structure-free Graph Condensation (SFGC): From Large-scale Graphs to Condensed Graph-free Data"
 
+Paper can be found in: https://arxiv.org/pdf/2306.02664.pdf
+
 The framework is:
 ![image](https://user-images.githubusercontent.com/61812981/221344391-11904a34-fc9c-479b-9f8d-02b72d2bf56b.png)
 
