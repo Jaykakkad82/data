@@ -14,6 +14,7 @@ from models.gcn import GCN
 from coreset import KCenter, Herding, Random
 from tqdm import tqdm
 # I can change
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--gpu_id', type=int, default=0, help='gpu id')
 parser.add_argument('--dataset', type=str, default='cora')
