@@ -13,7 +13,7 @@ from utils_graphsaint import DataGraphSAINT
 from models.gcn import GCN
 from coreset import KCenter, Herding, Random
 from tqdm import tqdm
-# I can change
+# I can change - new change
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--gpu_id', type=int, default=0, help='gpu id')
