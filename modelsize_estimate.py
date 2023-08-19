@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 
-
+#Need to find it
 def modelsize(model, input, type_size=4):
     para = sum([np.prod(list(p.size())) for p in model.parameters()])
     # print('Model {} : Number of params: {}'.format(model._get_name(), para))
