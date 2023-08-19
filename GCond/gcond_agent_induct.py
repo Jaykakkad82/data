@@ -79,6 +79,7 @@ class GCond:
         adj_syn = pge.inference(feat_syn)
         args = self.args
 
+        # Saving the Synthetic dataset
         if args.save:
             torch.save(adj_syn, f'saved_ours/adj_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
             torch.save(feat_syn, f'saved_ours/feat_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
@@ -88,6 +89,7 @@ class GCond:
                      train_iters=600, normalize=True, verbose=False, noval=noval)
 
         model.eval()
+        torch.save(adj_syn, f'Eval_model/model_{args.dataset}_{args.reduction_rate}_{args.seed}_induct.pt')
         labels_test = torch.LongTensor(data.labels_test).cuda()
 
         output = model.predict(data.feat_test, data.adj_test)
@@ -258,7 +260,7 @@ class GCond:
             if it % 50 == 0:
                 print('Epoch {}, loss_avg: {}'.format(it, loss_avg))
 
-            eval_epochs = [100, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000, 3000, 4000, 5000]
+            eval_epochs = [100, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000, 3000, 4000, 5000] # change
 
             if verbose and it in eval_epochs:
             # if verbose and (it+1) % 500 == 0:

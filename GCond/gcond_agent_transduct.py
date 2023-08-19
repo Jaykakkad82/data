@@ -100,6 +100,7 @@ class GCond:
                      train_iters=600, normalize=True, verbose=False)
 
         model.eval()
+        torch.save(adj_syn, f'Eval_model/model_{args.dataset}_{args.reduction_rate}_{args.seed}_trans.pt')
         labels_test = torch.LongTensor(data.labels_test).cuda()
 
         labels_train = torch.LongTensor(data.labels_train).cuda()
