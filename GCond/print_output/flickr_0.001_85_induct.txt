@@ -1,0 +1,84 @@
+Namespace(alpha=0, dataset='flickr', debug=0, dis_metric='ours', dropout=0.0, epochs=1000, gpu_id=0, hidden=256, inner=1, keep_ratio=1.0, label_rate=1, lr_adj=0.005, lr_feat=0.005, lr_model=0.01, nlayers=2, normalize_features=True, one_step=0, option=0, outer=10, reduction_rate=0.001, save=1, seed=85, sgc=2, weight_decay=0.0)
+adj_syn: (44, 44) feat_syn: torch.Size([44, 500])
+[15, 8]
+Epoch 0, loss_avg: 52.95594482421875
+Epoch 50, loss_avg: 16.49382847377232
+Epoch 100, loss_avg: 13.318809945242746
+Test set results: loss= 1.9071 accuracy= 0.4513
+tensor(395.5666, device='cuda:0') tensor(0.2043, device='cuda:0')
+Test: [array([0.45130641]), array([0.])]
+Epoch 150, loss_avg: 10.867860412597656
+Epoch 200, loss_avg: 9.426111548287528
+Test set results: loss= 1.9367 accuracy= 0.4628
+tensor(428.9983, device='cuda:0') tensor(0.2216, device='cuda:0')
+Test: [array([0.46282436]), array([0.])]
+Epoch 250, loss_avg: 9.252416447230749
+Epoch 300, loss_avg: 9.300961685180663
+Epoch 350, loss_avg: 9.48647700718471
+Epoch 400, loss_avg: 9.120370755876813
+Test set results: loss= 1.9535 accuracy= 0.4574
+tensor(405.7116, device='cuda:0') tensor(0.2096, device='cuda:0')
+Test: [array([0.45740151]), array([0.])]
+Epoch 450, loss_avg: 8.69214472089495
+Epoch 500, loss_avg: 8.405576487949917
+Epoch 550, loss_avg: 9.46663066319057
+Epoch 600, loss_avg: 8.829777199881418
+Test set results: loss= 1.8772 accuracy= 0.4599
+tensor(382.0895, device='cuda:0') tensor(0.1974, device='cuda:0')
+Test: [array([0.45986645]), array([0.])]
+Epoch 650, loss_avg: 8.65676749093192
+Epoch 700, loss_avg: 8.391135787963867
+Epoch 750, loss_avg: 8.811076082502092
+Epoch 800, loss_avg: 8.435616411481584
+Test set results: loss= 2.0308 accuracy= 0.4606
+tensor(366.7851, device='cuda:0') tensor(0.1895, device='cuda:0')
+Test: [array([0.46058352]), array([0.])]
+Epoch 850, loss_avg: 8.696812438964844
+Epoch 900, loss_avg: 8.761044202532087
+Epoch 950, loss_avg: 8.733443559919085
+Epoch 1000, loss_avg: 9.05638177054269
+Test set results: loss= 1.9817 accuracy= 0.4645
+tensor(370.7384, device='cuda:0') tensor(0.1915, device='cuda:0')
+Test: [array([0.46452741]), array([0.])]
+Namespace(alpha=0, dataset='flickr', debug=0, dis_metric='ours', dropout=0.0, epochs=1000, gpu_id=0, hidden=256, inner=1, keep_ratio=1.0, label_rate=1, lr_adj=0.005, lr_feat=0.005, lr_model=0.01, nlayers=2, normalize_features=True, one_step=0, option=0, outer=10, reduction_rate=0.001, save=1, seed=85, sgc=2, weight_decay=0.0)
+adj_syn: (44, 44) feat_syn: torch.Size([44, 500])
+[15, 8]
+Epoch 0, loss_avg: 52.95594482421875
+Epoch 50, loss_avg: 16.49382847377232
+Epoch 100, loss_avg: 13.318809945242746
+Test set results: loss= 1.9071 accuracy= 0.4513
+tensor(395.5666, device='cuda:0') tensor(0.2043, device='cuda:0')
+Test: [array([0.45130641]), array([0.])]
+Epoch 150, loss_avg: 10.867860412597656
+Epoch 200, loss_avg: 9.426111548287528
+Test set results: loss= 1.9367 accuracy= 0.4628
+tensor(428.9983, device='cuda:0') tensor(0.2216, device='cuda:0')
+Test: [array([0.46282436]), array([0.])]
+Epoch 250, loss_avg: 9.252416447230749
+Epoch 300, loss_avg: 9.300961685180663
+Epoch 350, loss_avg: 9.48647700718471
+Epoch 400, loss_avg: 9.120370755876813
+Test set results: loss= 1.9535 accuracy= 0.4574
+tensor(405.7116, device='cuda:0') tensor(0.2096, device='cuda:0')
+Test: [array([0.45740151]), array([0.])]
+Epoch 450, loss_avg: 8.69214472089495
+Epoch 500, loss_avg: 8.405576487949917
+Epoch 550, loss_avg: 9.46663066319057
+Epoch 600, loss_avg: 8.829777199881418
+Test set results: loss= 1.8772 accuracy= 0.4599
+tensor(382.0895, device='cuda:0') tensor(0.1974, device='cuda:0')
+Test: [array([0.45986645]), array([0.])]
+Epoch 650, loss_avg: 8.65676749093192
+Epoch 700, loss_avg: 8.391135787963867
+Epoch 750, loss_avg: 8.811076082502092
+Epoch 800, loss_avg: 8.435616411481584
+Test set results: loss= 2.0308 accuracy= 0.4606
+tensor(366.7851, device='cuda:0') tensor(0.1895, device='cuda:0')
+Test: [array([0.46058352]), array([0.])]
+Epoch 850, loss_avg: 8.696812438964844
+Epoch 900, loss_avg: 8.761044202532087
+Epoch 950, loss_avg: 8.733443559919085
+Epoch 1000, loss_avg: 9.05638177054269
+Test set results: loss= 1.9817 accuracy= 0.4645
+tensor(370.7384, device='cuda:0') tensor(0.1915, device='cuda:0')
+Test: [array([0.46452741]), array([0.])]

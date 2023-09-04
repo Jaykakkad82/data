@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: gcond
-  namespace: jjannu2
+  name: gcond1
+  namespace: jkakka4
   labels:
-    app: gcond
+    app: gcond1
 spec:
   dnsConfig:
     nameservers:
@@ -16,7 +16,7 @@ spec:
   containers:
   - image: nvcr.io/nvidia/pytorch:20.03-py3
     imagePullPolicy: IfNotPresent
-    name: gcond
+    name: gcond1
     args: ['sleep', 'infinity']
     resources:
       limits:
@@ -36,7 +36,7 @@ spec:
   - name: nfs-volume
     nfs:
       server: 10.2.100.1
-      path: /data/nfs/jjannu2
+      path: /data/nfs/jkakka4
   - name: dshm
     emptyDir:
       medium: Memory
@@ -47,11 +47,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: gcond-service           #Your app name adding -service
-  namespace: jjannu2
+  name: gcond1-service           #Your app name adding -service
+  namespace: jkakka4
 spec:
   selector:
-    app: gcond                  #Your app name as state on label above
+    app: gcond1                  #Your app name as state on label above
   type: NodePort
   ports:
   - name: one
@@ -64,15 +64,15 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: gcond-ingress-port1     #Your app name adding -ingress-port1
-  namespace: jjannu2
+  name: gcond1-ingress-port1     #Your app name adding -ingress-port1
+  namespace: jkakka4
 spec:
   entryPoints:
     - web
   routes:
-  - match: Host(`pods.evl.uic.edu`) && PathPrefix(`/jjannu2`)   #Your username
+  - match: Host(`pods.evl.uic.edu`) && PathPrefix(`/jkakka4`)   #Your username
     kind: Rule
     priority: 1
     services:
-    - name: gcond-service
+    - name: gcond1-service
       port: 9100
