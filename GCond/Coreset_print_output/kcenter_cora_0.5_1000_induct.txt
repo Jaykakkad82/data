@@ -1,0 +1,6 @@
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='kcenter', nlayers=2, normalize_features=True, reduction_rate=0.5, save=1, seed=1000, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.3668 accuracy= 0.9170
+idx_selected :  [array([45, 21, 44, 48,  4, 57,  0, 15, 14, 30]), array([91, 12, 49, 39, 55, 75, 66, 29, 78,  1]), array([ 98,  95,  94,  10,  79,  52,   3,  88,  65, 100]), array([105,  46,  58,  59,  73,   9,  90,  71,   5, 110]), array([ 36, 109, 131,  54, 121, 102, 126,  85, 139, 104]), array([ 20, 119,  76,  47,  37, 113, 114,  50, 129,  70]), array([123, 118,  77,  93,  23,  31, 106,  42, 116, 108])]
+Mean accuracy: [0.7223999999999999, 0.010307278981380084]

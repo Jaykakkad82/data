@@ -1,0 +1,13 @@
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='kcenter', nlayers=2, normalize_features=True, reduction_rate=0.013, save=1, seed=85, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.3651 accuracy= 0.9180
+Highlighted indices [ 45  91  98 105  36  20 123]
+X shape (2708, 7)
+Mean accuracy: [0.4407, 0.016858528998699742]
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='kcenter', nlayers=2, normalize_features=True, reduction_rate=0.013, save=1, seed=85, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.3651 accuracy= 0.9180
+idx_selected :  [array([45]), array([91]), array([98]), array([105]), array([36]), array([20]), array([123])]
+Mean accuracy: [0.4407, 0.016858528998699742]

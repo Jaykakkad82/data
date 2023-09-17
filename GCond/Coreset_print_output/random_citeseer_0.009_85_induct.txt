@@ -1,0 +1,12 @@
+Namespace(dataset='citeseer', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='random', nlayers=2, normalize_features=True, reduction_rate=0.009, save=1, seed=85, weight_decay=0.0005)
+size of adj_train: (120, 120)
+#edges in adj_train: 16.0
+Test set results: loss= 0.5460 accuracy= 0.8470
+Highlighted indices [array([49]) array([104]) array([3]) array([111]) array([60])
+ array([17, 28, 68, 58, 56, 92, 11, 18, 36, 83, 84, 70, 97, 32, 62, 80])]
+X shape (3327, 6)
+Namespace(dataset='citeseer', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='random', nlayers=2, normalize_features=True, reduction_rate=0.009, save=1, seed=85, weight_decay=0.0005)
+size of adj_train: (120, 120)
+#edges in adj_train: 16.0
+Test set results: loss= 0.5460 accuracy= 0.8470
+Mean accuracy: [0.169, 0.0]
