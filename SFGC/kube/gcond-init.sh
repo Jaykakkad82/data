@@ -1,5 +1,8 @@
 #! /bin/bash
 
+apt update
+apt install screen
+
 conda create -n gcond_env python=3.8 -y
 
 /opt/conda/envs/gcond_env/bin/pip install -r /data/requirements.txt
