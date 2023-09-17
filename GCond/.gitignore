@@ -12,6 +12,7 @@ dataset
 
 # Distribution / packaging
 .Python
+visuals_coreset/
 data/
 build/
 develop-eggs/
