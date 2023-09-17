@@ -1,0 +1,6 @@
+Namespace(dataset='citeseer', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='kcenter', nlayers=2, normalize_features=True, reduction_rate=0.5, save=1, seed=1000, weight_decay=0.0005)
+size of adj_train: (120, 120)
+#edges in adj_train: 16.0
+Test set results: loss= 0.5436 accuracy= 0.8460
+idx_selected :  [array([ 35,  98,   8,   6,  67,  61,  49,   4,  39, 100]), array([103, 102,  99,  95,  43,  41,  13,  46, 104,  65]), array([44, 22,  9, 52, 91,  2, 90,  3, 26, 33]), array([112, 113, 107, 118, 106, 114,  76, 115,  19, 109]), array([40, 16, 12, 60, 34, 69, 79, 75, 59, 48]), array([80, 83, 97, 17, 96, 86, 28, 68, 11, 47])]
+Mean accuracy: [0.6295, 0.006103277807866857]

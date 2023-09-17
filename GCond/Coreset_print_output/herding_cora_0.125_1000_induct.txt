@@ -1,0 +1,6 @@
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='herding', nlayers=2, normalize_features=True, reduction_rate=0.125, save=1, seed=1000, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.3668 accuracy= 0.9170
+idx_selected :  [array([45, 15]), array([91, 82]), array([98, 74]), array([105,  53]), array([ 36, 104]), array([20, 70]), array([123,  87,  26,  31,  56])]
+Mean accuracy: [0.2212, 0.01921874085365636]

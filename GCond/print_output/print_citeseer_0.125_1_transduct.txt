@@ -1,0 +1,31 @@
+Namespace(alpha=0, dataset='citeseer', debug=0, dis_metric='ours', dropout=0.0, epochs=600, gpu_id=0, hidden=256, inner=0, keep_ratio=1.0, lr_adj=0.0001, lr_feat=0.0001, lr_model=0.01, nlayers=2, normalize_features=True, one_step=0, outer=20, reduction_rate=0.125, save=1, seed=1, sgc=1, weight_decay=0.0)
+size of adj_train: (120, 120)
+#edges in adj_train: 16.0
+adj_syn: (15, 15) feat_syn: torch.Size([15, 3703])
+Epoch 0, loss_avg: 1.3786101420720418
+Epoch 50, loss_avg: 0.4327405153342679
+Epoch 100, loss_avg: 0.29736378387378143
+Epoch 150, loss_avg: 0.18832434408909535
+Epoch 200, loss_avg: 0.1546854117947167
+Epoch 250, loss_avg: 0.1460387955439792
+Epoch 300, loss_avg: 0.13829753844086576
+Epoch 350, loss_avg: 0.13693019487821897
+Epoch 400, loss_avg: 0.13657975807285136
+Train set results: loss= 0.5226 accuracy= 0.8917
+Test set results: loss= 1.1154 accuracy= 0.7120
+Train set results: loss= 0.5893 accuracy= 0.8667
+Test set results: loss= 1.1523 accuracy= 0.6950
+Train set results: loss= 0.5014 accuracy= 0.8917
+Test set results: loss= 1.1369 accuracy= 0.6900
+Train/Test Mean Accuracy: [array([0.88333333, 0.699     ]), array([0.01178511, 0.0094163 ])]
+Epoch 450, loss_avg: 0.13645363713133155
+Epoch 500, loss_avg: 0.13742056719425216
+Epoch 550, loss_avg: 0.138047948705624
+Epoch 600, loss_avg: 0.13757198485149574
+Train set results: loss= 0.5130 accuracy= 0.8750
+Test set results: loss= 1.1404 accuracy= 0.6920
+Train set results: loss= 0.5460 accuracy= 0.8750
+Test set results: loss= 1.1272 accuracy= 0.7090
+Train set results: loss= 0.5390 accuracy= 0.8833
+Test set results: loss= 1.1186 accuracy= 0.7110
+Train/Test Mean Accuracy: [array([0.87777778, 0.704     ]), array([0.00392837, 0.00852447])]

@@ -244,7 +244,9 @@ class GCond:
 
                 feat_syn_inner = feat_syn.detach()
                 adj_syn_inner = pge.inference(feat_syn_inner)
+                #print("Testing_after_inference" , adj_syn_inner)
                 adj_syn_inner_norm = utils.normalize_adj_tensor(adj_syn_inner, sparse=False)
+                #print("Testing_after_normalization", adj_syn_inner_norm)
                 feat_syn_inner_norm = feat_syn_inner
                 for j in range(inner_loop):
                     optimizer_model.zero_grad()
