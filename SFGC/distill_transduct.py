@@ -93,6 +93,8 @@ logging.info('args = {}'.format(args))
 #set = ['cora','citeseer','ogbn-arxiv','flickr', 'reddit']
 #args.dataset ='cora'
 #args.reduction_rate =0.01
+
+# Data import
 data_graphsaint = ['flickr', 'reddit', 'ogbn-arxiv']
 if args.dataset in data_graphsaint:
     data = DataGraphSAINT(args.dataset)
@@ -101,9 +103,11 @@ else:
     data_full = get_dataset(args.dataset)
     data = Transd2Ind(data_full)
 args.log_dir = log_dir
+
+# Distillation core algo and init
 agent = MetaGtt(data, args, device=device)
 writer = SummaryWriter(log_dir + '/tbx_log')
-
+# core method
 agent.distill(writer)
 
 logging.info('Finish! Log_dir: {}'.format(log_dir))
