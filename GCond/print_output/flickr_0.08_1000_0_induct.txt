@@ -1,0 +1,2 @@
+Namespace(alpha=0, dataset='flickr', debug=0, dis_metric='ours', dropout=0.0, epochs=1000, gpu_id=0, hidden=256, inner=1, keep_ratio=1.0, label_rate=1, lr_adj=0.005, lr_feat=0.005, lr_model=0.01, nlayers=2, normalize_features=True, one_step=0, option=0, outer=10, reduction_rate=0.08, save=1, seed=1000, sgc=2, weight_decay=0.0)
+adj_syn: (3570, 3570) feat_syn: torch.Size([3570, 500])

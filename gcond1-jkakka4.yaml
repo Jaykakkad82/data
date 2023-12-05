@@ -10,8 +10,8 @@ spec:
     nameservers:
     - 8.8.8.8
   nodeSelector:
-    #kubernetes.io/hostname: compaasgold05
-    nvidia.com/gpu.product: Tesla-T4-SHARED
+    kubernetes.io/hostname: compaassilver06
+    #nvidia.com/gpu.product: Tesla-T4-SHARED
     #nvidia.com/gpu.product: Tesla-V100-PCIE-32GB-SHARED
   containers:
   - image: nvcr.io/nvidia/pytorch:20.03-py3

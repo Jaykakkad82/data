@@ -1,0 +1,18 @@
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='herding', nlayers=2, normalize_features=True, reduction_rate=0.25, save=1, seed=1, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.6788 accuracy= 0.8670
+idx_selected :  [array([ 8, 25, 45, 40, 51]), array([82, 91, 89,  2, 22]), array([74, 98,  6, 88, 61]), array([105, 110,  64,  53,  16]), array([133, 104, 103, 112, 124]), array([ 20,  70,  97, 132, 129]), array([ 87,  99,  69, 123,  96])]
+Mean accuracy: [0.6899, 0.013816294727603333]
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='herding', nlayers=2, normalize_features=True, reduction_rate=0.25, save=1, seed=1, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.6788 accuracy= 0.8670
+idx_selected :  [array([ 8, 25, 45, 40, 51]), array([82, 91, 89,  2, 22]), array([74, 98,  6, 88, 61]), array([105, 110,  64,  53,  16]), array([133, 104, 103, 112, 124]), array([ 20,  70,  97, 132, 129]), array([ 87,  99,  69, 123,  96])]
+Mean accuracy: [0.6899, 0.013816294727603333]
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='herding', nlayers=2, normalize_features=True, reduction_rate=0.25, save=1, seed=1, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.6788 accuracy= 0.8670
+idx_selected :  [array([ 8, 25, 45, 40, 51]), array([82, 91, 89,  2, 22]), array([74, 98,  6, 88, 61]), array([105, 110,  64,  53,  16]), array([133, 104, 103, 112, 124]), array([ 20,  70,  97, 132, 129]), array([ 87,  99,  69, 123,  96])]
+Mean accuracy: [0.6899, 0.013816294727603333]

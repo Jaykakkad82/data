@@ -81,15 +81,15 @@ class GCond:
 
         # Saving the Synthetic dataset
         if args.save:
-            torch.save(adj_syn, f'saved_ours/adj_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
-            torch.save(feat_syn, f'saved_ours/feat_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
+            torch.save(adj_syn, f'saved_ours/adj_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}.pt')
+            torch.save(feat_syn, f'saved_ours/feat_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}.pt')
 
         noval = True
         model.fit_with_val(feat_syn, adj_syn, labels_syn, data,
                      train_iters=600, normalize=True, verbose=False, noval=noval)
 
         model.eval()
-        torch.save(adj_syn, f'Eval_model/model_{args.dataset}_{args.reduction_rate}_{args.seed}_induct.pt')
+        torch.save(model.state_dict(), f'Eval_model/model_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_induct.pt')
         labels_test = torch.LongTensor(data.labels_test).cuda()
 
         output = model.predict(data.feat_test, data.adj_test)

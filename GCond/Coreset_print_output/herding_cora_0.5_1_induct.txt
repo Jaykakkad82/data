@@ -1,0 +1,18 @@
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='herding', nlayers=2, normalize_features=True, reduction_rate=0.5, save=1, seed=1, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.6788 accuracy= 0.8670
+idx_selected :  [array([ 8, 25, 45, 40, 51, 30,  7, 15, 17, 14]), array([82, 91, 89,  2, 22, 63,  1, 66, 33, 43]), array([ 74,  98,   6,  88,  61,   3, 100,  65,  10,  81]), array([105, 110,  64,  53,  16,  71,   9,  83,  59, 101]), array([133, 104, 103, 112, 124, 109, 121, 136,  36, 126]), array([ 20,  70,  97, 132, 129, 117, 128, 120,  67,  50]), array([ 87,  99,  69, 123,  96, 116,  26,  93,  92,  77])]
+Mean accuracy: [0.7390000000000001, 0.006985699678629199]
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='herding', nlayers=2, normalize_features=True, reduction_rate=0.5, save=1, seed=1, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.6788 accuracy= 0.8670
+idx_selected :  [array([ 8, 25, 45, 40, 51, 30,  7, 15, 17, 14]), array([82, 91, 89,  2, 22, 63,  1, 66, 33, 43]), array([ 74,  98,   6,  88,  61,   3, 100,  65,  10,  81]), array([105, 110,  64,  53,  16,  71,   9,  83,  59, 101]), array([133, 104, 103, 112, 124, 109, 121, 136,  36, 126]), array([ 20,  70,  97, 132, 129, 117, 128, 120,  67,  50]), array([ 87,  99,  69, 123,  96, 116,  26,  93,  92,  77])]
+Mean accuracy: [0.7390000000000001, 0.006985699678629199]
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='herding', nlayers=2, normalize_features=True, reduction_rate=0.5, save=1, seed=1, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.6788 accuracy= 0.8670
+idx_selected :  [array([ 8, 25, 45, 40, 51, 30,  7, 15, 17, 14]), array([82, 91, 89,  2, 22, 63,  1, 66, 33, 43]), array([ 74,  98,   6,  88,  61,   3, 100,  65,  10,  81]), array([105, 110,  64,  53,  16,  71,   9,  83,  59, 101]), array([133, 104, 103, 112, 124, 109, 121, 136,  36, 126]), array([ 20,  70,  97, 132, 129, 117, 128, 120,  67,  50]), array([ 87,  99,  69, 123,  96, 116,  26,  93,  92,  77])]
+Mean accuracy: [0.7390000000000001, 0.006985699678629199]

@@ -10,3 +10,15 @@ size of adj_train: (140, 140)
 Test set results: loss= 0.3651 accuracy= 0.9180
 idx_selected :  [array([45, 15, 40, 17, 25,  8, 14, 51,  7, 30]), array([91, 82, 22, 63, 89, 66, 33,  2,  1, 75]), array([98, 74,  6,  3, 61, 52, 62, 81, 60, 80]), array([105,  53, 110,  28,  16,  71,   9,  73,   5,  64]), array([ 36, 104, 103, 135, 126, 136, 137, 124, 133, 112]), array([ 20,  70, 129, 128,  50, 132, 117,  37, 125,  97]), array([123,  87,  26,  31,  56,  99, 116,  69,  96, 122])]
 Mean accuracy: [0.7413000000000001, 0.007142128534267645]
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='herding', nlayers=2, normalize_features=True, reduction_rate=0.5, save=1, seed=85, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.7193 accuracy= 0.8610
+idx_selected :  [array([ 8, 40, 45, 30, 51, 14, 17, 15,  7, 25]), array([82, 91, 89,  2, 22, 63,  1, 66, 33, 78]), array([ 74,  61,   3,   6,  98,  52,  79,  81, 100,  88]), array([105,  83, 110,  64,   9,  53,  16,  71,  59, 101]), array([133, 104, 112, 103, 124, 136, 137, 126,  36, 135]), array([ 20,  70, 129, 128, 117,  37, 125,  50, 132,  97]), array([ 99,  56, 116, 123,  41,  69,  26,  87,  93, 108])]
+Mean accuracy: [0.7316, 0.0045869379764718905]
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='herding', nlayers=2, normalize_features=True, reduction_rate=0.5, save=1, seed=85, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.7193 accuracy= 0.8610
+idx_selected :  [array([ 8, 40, 45, 30, 51, 14, 17, 15,  7, 25]), array([82, 91, 89,  2, 22, 63,  1, 66, 33, 78]), array([ 74,  61,   3,   6,  98,  52,  79,  81, 100,  88]), array([105,  83, 110,  64,   9,  53,  16,  71,  59, 101]), array([133, 104, 112, 103, 124, 136, 137, 126,  36, 135]), array([ 20,  70, 129, 128, 117,  37, 125,  50, 132,  97]), array([ 99,  56, 116, 123,  41,  69,  26,  87,  93, 108])]
+Mean accuracy: [0.7316, 0.0045869379764718905]

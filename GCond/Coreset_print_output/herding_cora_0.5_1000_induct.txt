@@ -4,3 +4,9 @@ size of adj_train: (140, 140)
 Test set results: loss= 0.3668 accuracy= 0.9170
 idx_selected :  [array([45, 15, 40, 51, 14, 17, 25,  8, 30,  7]), array([91, 82, 22, 63, 89, 33, 66,  1, 78, 75]), array([98, 74,  6, 61,  3, 52, 62, 88, 10, 65]), array([105,  53, 110,  28,  16,  71,   9,  73,   5,  64]), array([ 36, 104, 103, 135, 126, 136, 137, 124, 133, 112]), array([ 20,  70, 129, 128,  50, 132,  97, 114,  67,  37]), array([123,  87,  26,  31,  56, 122, 116,  99,  69,  42])]
 Mean accuracy: [0.7476, 0.006200000000000005]
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='herding', nlayers=2, normalize_features=True, reduction_rate=0.5, save=1, seed=1000, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.6997 accuracy= 0.8620
+idx_selected :  [array([ 8, 25, 45, 40, 51, 30,  7, 15, 17, 14]), array([82, 91, 89,  2, 22, 63,  1, 66, 33, 75]), array([74, 61, 98,  3,  6, 52, 79, 81, 62, 80]), array([105,  83, 110,  64,   9,  16,  71,  53,  59, 101]), array([133, 104, 103, 112, 124, 139, 126, 121,  18, 138]), array([ 20,  70, 107, 129, 128, 120, 132, 114,  97, 113]), array([ 99,  56, 116,  41,  26,  69, 123,  87,  93, 108])]
+Mean accuracy: [0.7483000000000001, 0.00407553677446297]

@@ -3,3 +3,9 @@ size of adj_train: (120, 120)
 #edges in adj_train: 16.0
 Test set results: loss= 0.5436 accuracy= 0.8460
 Mean accuracy: [0.6436, 0.005553377350765934]
+Namespace(dataset='citeseer', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='random', nlayers=2, normalize_features=True, reduction_rate=0.5, save=1, seed=1000, weight_decay=0.0005)
+size of adj_train: (120, 120)
+#edges in adj_train: 16.0
+Test set results: loss= 0.8631 accuracy= 0.7840
+idx_selected :  [array([ 23, 100,   8,  35,  77,  94,   6,  66,  50,  61]), array([ 45,   5,  20,  46, 102,  57,  55,  99,  13,  95]), array([37, 63, 93, 22,  9, 44, 91, 21, 52, 26]), array([114, 113,  74, 116, 112, 111, 107, 119,   7,  19]), array([10, 30, 48, 42, 16, 25, 12, 75, 60, 31]), array([87, 70, 96, 68, 80, 36, 47, 92, 62, 97])]
+Mean accuracy: [0.641, 0.0062289646009589805]

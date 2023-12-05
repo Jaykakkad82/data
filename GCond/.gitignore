@@ -14,6 +14,12 @@ dataset
 .Python
 visuals_coreset/
 data/
+saved_ours/
+saved_core/
+print_output/
+Coreset_print_output/
+Eval_coreset_model/
+Eval_model/
 build/
 develop-eggs/
 dist/

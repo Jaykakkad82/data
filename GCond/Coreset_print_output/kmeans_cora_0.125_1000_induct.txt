@@ -21,3 +21,15 @@ size of adj_train: (140, 140)
 Test set results: loss= 1.9151 accuracy= 0.3190
 idx_selected :  [19, 51, 63, 33, 32, 95, 111, 90, 103, 109, 128, 129, 118, 92, 96, 99, 69]
 Mean accuracy: [0.19039999999999999, 0.017962182495454167]
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='kmeans', nlayers=2, normalize_features=True, reduction_rate=0.125, save=1, seed=1000, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.6997 accuracy= 0.8620
+idx_selected :  [13, 17, 63, 39, 81, 62, 59, 83, 133, 131, 128, 130, 118, 122, 69, 23, 96]
+Mean accuracy: [0.20459999999999998, 0.016094719630984567]
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='kmeans', nlayers=2, normalize_features=True, reduction_rate=0.125, save=1, seed=1000, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.6997 accuracy= 0.8620
+idx_selected :  [13, 17, 63, 39, 81, 62, 59, 83, 133, 131, 128, 130, 118, 122, 69, 23, 96]
+Mean accuracy: [0.20459999999999998, 0.016094719630984567]

@@ -60,7 +60,7 @@ def restore_stdout(original_stdout):
     sys.stdout.close()
     sys.stdout = original_stdout
 
-file_name_out = f'print_output/{args.dataset}_{args.reduction_rate}_{args.seed}_induct.txt'
+file_name_out = f'print_output/{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_induct.txt'
 original_stdout = redirect_stdout_to_file(file_name_out)
 
 print(args)
@@ -69,7 +69,7 @@ print(args)
 args_dict = vars(args)
 
 # Specify the file name for saving the arguments
-args_file = f'args_parsed/{args.dataset}_{args.reduction_rate}_{args.seed}_induct.json'
+args_file = f'args_parsed/{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_induct.json'
 
 # Save the arguments to a JSON file
 with open(args_file, 'w') as file:
@@ -85,7 +85,7 @@ else:
     data = Transd2Ind(data_full, keep_ratio=args.keep_ratio)
 
 # saving the data indices 
-file_name_idx = f'Index/{args.dataset}_{args.reduction_rate}_{args.seed}_transduct.npz'
+file_name_idx = f'Index/{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_transduct.npz'
 np.savez(file_name_idx, idx_train=data.idx_train, idx_test=data.idx_test, idx_val=data.idx_val)
 
 agent = GCond(data, args, device='cuda')

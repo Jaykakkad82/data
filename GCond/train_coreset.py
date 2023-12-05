@@ -160,7 +160,7 @@ for _ in tqdm(range(runs)):
 
 res = np.array(res)
 print('Mean accuracy:', repr([res.mean(), res.std()]))
-
+torch.save(model.state_dict(), f'Eval_coreset_model/model__{args.method}_{args.dataset}_{args.reduction_rate}_{args.seed}_trans.pt')
 # restore the original standard output
 restore_stdout(original_stdout)
 

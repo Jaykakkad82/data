@@ -1,0 +1,186 @@
+Namespace(alpha=0, dataset='cora', debug=0, dis_metric='ours', dropout=0.0, epochs=600, gpu_id=0, hidden=256, inner=0, keep_ratio=1.0, lr_adj=0.0001, lr_feat=0.0001, lr_model=0.01, nlayers=2, normalize_features=True, one_step=0, outer=20, reduction_rate=0.25, save=1, seed=1, sgc=1, weight_decay=0.0)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+adj_syn: (35, 35) feat_syn: torch.Size([35, 1433])
+Epoch 0, loss_avg: 2.4313949176243375
+Epoch 50, loss_avg: 0.3755705087823208
+Epoch 100, loss_avg: 0.17609182317099636
+Epoch 150, loss_avg: 0.16488707442507397
+Epoch 200, loss_avg: 0.15547174694720545
+Epoch 250, loss_avg: 0.15301216736156523
+Epoch 300, loss_avg: 0.15133496180882794
+Epoch 350, loss_avg: 0.15182970692914352
+Epoch 400, loss_avg: 0.1500675106635991
+Train set results: loss= 0.5242 accuracy= 0.9000
+Test set results: loss= 0.9421 accuracy= 0.8140
+Train set results: loss= 0.5464 accuracy= 0.9286
+Test set results: loss= 1.0854 accuracy= 0.8080
+Train set results: loss= 0.5740 accuracy= 0.9357
+Test set results: loss= 1.1233 accuracy= 0.8210
+Train/Test Mean Accuracy: [array([0.92142857, 0.81433333]), array([0.01543033, 0.00531246])]
+Epoch 450, loss_avg: 0.14985487493489336
+Epoch 500, loss_avg: 0.1498818152304747
+Epoch 550, loss_avg: 0.14852279730814433
+Epoch 600, loss_avg: 0.14766258542353525
+Train set results: loss= 0.5925 accuracy= 0.9357
+Test set results: loss= 1.1615 accuracy= 0.8190
+Train set results: loss= 1.1038 accuracy= 0.9500
+Test set results: loss= 1.5432 accuracy= 0.8100
+Train set results: loss= 0.5219 accuracy= 0.9357
+Test set results: loss= 1.0308 accuracy= 0.8210
+Train/Test Mean Accuracy: [array([0.94047619, 0.81666667]), array([0.00673435, 0.00478423])]
+Namespace(alpha=0, dataset='cora', debug=0, dis_metric='ours', dropout=0.0, epochs=600, gpu_id=0, hidden=256, inner=0, keep_ratio=1.0, lr_adj=0.0001, lr_feat=0.0001, lr_model=0.01, nlayers=2, normalize_features=True, one_step=0, outer=20, reduction_rate=0.25, save=1, seed=1, sgc=1, weight_decay=0.0)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+adj_syn: (35, 35) feat_syn: torch.Size([35, 1433])
+Epoch 0, loss_avg: 2.4313949176243375
+Epoch 50, loss_avg: 0.3755705087823208
+Epoch 100, loss_avg: 0.17609182317099636
+Epoch 150, loss_avg: 0.16488707442507397
+Epoch 200, loss_avg: 0.15547174694720545
+Epoch 250, loss_avg: 0.15301216736156523
+Epoch 300, loss_avg: 0.15133496180882794
+Epoch 350, loss_avg: 0.15182970692914352
+Epoch 400, loss_avg: 0.1500675106635991
+Train set results: loss= 0.5242 accuracy= 0.9000
+Test set results: loss= 0.9421 accuracy= 0.8140
+Train set results: loss= 0.5464 accuracy= 0.9286
+Test set results: loss= 1.0854 accuracy= 0.8080
+Train set results: loss= 0.5740 accuracy= 0.9357
+Test set results: loss= 1.1233 accuracy= 0.8210
+Train/Test Mean Accuracy: [array([0.92142857, 0.81433333]), array([0.01543033, 0.00531246])]
+Epoch 450, loss_avg: 0.14985487493489336
+Epoch 500, loss_avg: 0.1498818152304747
+Epoch 550, loss_avg: 0.14852279730814433
+Epoch 600, loss_avg: 0.14766258542353525
+Train set results: loss= 0.5925 accuracy= 0.9357
+Test set results: loss= 1.1615 accuracy= 0.8190
+Train set results: loss= 1.1038 accuracy= 0.9500
+Test set results: loss= 1.5432 accuracy= 0.8100
+Train set results: loss= 0.5219 accuracy= 0.9357
+Test set results: loss= 1.0308 accuracy= 0.8210
+Train/Test Mean Accuracy: [array([0.94047619, 0.81666667]), array([0.00673435, 0.00478423])]
+Namespace(alpha=0, dataset='cora', debug=0, dis_metric='ours', dropout=0.0, epochs=600, gpu_id=0, hidden=256, inner=0, keep_ratio=1.0, lr_adj=0.0001, lr_feat=0.0001, lr_model=0.01, nlayers=2, normalize_features=True, one_step=0, outer=20, reduction_rate=0.25, save=1, seed=1, sgc=1, weight_decay=0.0)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+adj_syn: (35, 35) feat_syn: torch.Size([35, 1433])
+Epoch 0, loss_avg: 2.4313949176243375
+Epoch 50, loss_avg: 0.3755705087823208
+Epoch 100, loss_avg: 0.17609182317099636
+Epoch 150, loss_avg: 0.16488707442507397
+Epoch 200, loss_avg: 0.15547174694720545
+Epoch 250, loss_avg: 0.15301216736156523
+Epoch 300, loss_avg: 0.15133496180882794
+Epoch 350, loss_avg: 0.15182970692914352
+Epoch 400, loss_avg: 0.1500675106635991
+Train set results: loss= 0.5242 accuracy= 0.9000
+Test set results: loss= 0.9421 accuracy= 0.8140
+Train set results: loss= 0.5464 accuracy= 0.9286
+Test set results: loss= 1.0854 accuracy= 0.8080
+Train set results: loss= 0.5740 accuracy= 0.9357
+Test set results: loss= 1.1233 accuracy= 0.8210
+Train/Test Mean Accuracy: [array([0.92142857, 0.81433333]), array([0.01543033, 0.00531246])]
+Epoch 450, loss_avg: 0.14985487493489336
+Epoch 500, loss_avg: 0.1498818152304747
+Epoch 550, loss_avg: 0.14852279730814433
+Epoch 600, loss_avg: 0.14766258542353525
+Train set results: loss= 0.5925 accuracy= 0.9357
+Test set results: loss= 1.1615 accuracy= 0.8190
+Train set results: loss= 1.1038 accuracy= 0.9500
+Test set results: loss= 1.5432 accuracy= 0.8100
+Train set results: loss= 0.5219 accuracy= 0.9357
+Test set results: loss= 1.0308 accuracy= 0.8210
+Train/Test Mean Accuracy: [array([0.94047619, 0.81666667]), array([0.00673435, 0.00478423])]
+Namespace(alpha=0, dataset='cora', debug=0, dis_metric='ours', dropout=0.0, epochs=600, gpu_id=0, hidden=256, inner=0, keep_ratio=1.0, lr_adj=0.0001, lr_feat=0.0001, lr_model=0.01, nlayers=2, normalize_features=True, one_step=0, outer=20, reduction_rate=0.25, save=1, seed=1, sgc=1, weight_decay=0.0)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+adj_syn: (35, 35) feat_syn: torch.Size([35, 1433])
+Epoch 0, loss_avg: 2.4313949176243375
+Epoch 50, loss_avg: 0.3755705087823208
+Epoch 100, loss_avg: 0.17609182317099636
+Epoch 150, loss_avg: 0.16488707442507397
+Epoch 200, loss_avg: 0.15547174694720545
+Epoch 250, loss_avg: 0.15301216736156523
+Epoch 300, loss_avg: 0.15133496180882794
+Epoch 350, loss_avg: 0.15182970692914352
+Epoch 400, loss_avg: 0.1500675106635991
+Train set results: loss= 0.5242 accuracy= 0.9000
+Test set results: loss= 0.9421 accuracy= 0.8140
+Train set results: loss= 0.5464 accuracy= 0.9286
+Test set results: loss= 1.0854 accuracy= 0.8080
+Train set results: loss= 0.5740 accuracy= 0.9357
+Test set results: loss= 1.1233 accuracy= 0.8210
+Train/Test Mean Accuracy: [array([0.92142857, 0.81433333]), array([0.01543033, 0.00531246])]
+Epoch 450, loss_avg: 0.14985487493489336
+Epoch 500, loss_avg: 0.1498818152304747
+Epoch 550, loss_avg: 0.14852279730814433
+Epoch 600, loss_avg: 0.14766258542353525
+Train set results: loss= 0.5925 accuracy= 0.9357
+Test set results: loss= 1.1615 accuracy= 0.8190
+Train set results: loss= 1.1038 accuracy= 0.9500
+Test set results: loss= 1.5432 accuracy= 0.8100
+Train set results: loss= 0.5219 accuracy= 0.9357
+Test set results: loss= 1.0308 accuracy= 0.8210
+Train/Test Mean Accuracy: [array([0.94047619, 0.81666667]), array([0.00673435, 0.00478423])]
+Namespace(alpha=0, dataset='cora', debug=0, dis_metric='ours', dropout=0.0, epochs=600, gpu_id=0, hidden=256, inner=0, keep_ratio=1.0, lr_adj=0.0001, lr_feat=0.0001, lr_model=0.01, nlayers=2, normalize_features=True, one_step=0, outer=20, reduction_rate=0.25, save=1, seed=1, sgc=1, weight_decay=0.0)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+adj_syn: (35, 35) feat_syn: torch.Size([35, 1433])
+Epoch 0, loss_avg: 2.4313949176243375
+Epoch 50, loss_avg: 0.3755705087823208
+Epoch 100, loss_avg: 0.17609182317099636
+Epoch 150, loss_avg: 0.16488707442507397
+Epoch 200, loss_avg: 0.15547174694720545
+Epoch 250, loss_avg: 0.15301216736156523
+Epoch 300, loss_avg: 0.15133496180882794
+Epoch 350, loss_avg: 0.15182970692914352
+Epoch 400, loss_avg: 0.1500675106635991
+Train set results: loss= 0.5242 accuracy= 0.9000
+Test set results: loss= 0.9421 accuracy= 0.8140
+Train set results: loss= 0.5464 accuracy= 0.9286
+Test set results: loss= 1.0854 accuracy= 0.8080
+Train set results: loss= 0.5740 accuracy= 0.9357
+Test set results: loss= 1.1233 accuracy= 0.8210
+Train/Test Mean Accuracy: [array([0.92142857, 0.81433333]), array([0.01543033, 0.00531246])]
+Epoch 450, loss_avg: 0.14985487493489336
+Epoch 500, loss_avg: 0.1498818152304747
+Epoch 550, loss_avg: 0.14852279730814433
+Epoch 600, loss_avg: 0.14766258542353525
+Train set results: loss= 0.5925 accuracy= 0.9357
+Test set results: loss= 1.1615 accuracy= 0.8190
+Train set results: loss= 1.1038 accuracy= 0.9500
+Test set results: loss= 1.5432 accuracy= 0.8100
+Train set results: loss= 0.5219 accuracy= 0.9357
+Test set results: loss= 1.0308 accuracy= 0.8210
+Train/Test Mean Accuracy: [array([0.94047619, 0.81666667]), array([0.00673435, 0.00478423])]
+Namespace(alpha=0, dataset='cora', debug=0, dis_metric='ours', dropout=0.0, epochs=600, gpu_id=0, hidden=256, inner=0, keep_ratio=1.0, lr_adj=0.0001, lr_feat=0.0001, lr_model=0.01, nlayers=2, normalize_features=True, one_step=0, outer=20, reduction_rate=0.25, save=1, seed=1, sgc=1, weight_decay=0.0)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+adj_syn: (35, 35) feat_syn: torch.Size([35, 1433])
+Epoch 0, loss_avg: 2.4313949176243375
+Epoch 50, loss_avg: 0.3755705087823208
+Epoch 100, loss_avg: 0.17609182317099636
+Epoch 150, loss_avg: 0.16488707442507397
+Epoch 200, loss_avg: 0.15547174694720545
+Epoch 250, loss_avg: 0.15301216736156523
+Epoch 300, loss_avg: 0.15133496180882794
+Epoch 350, loss_avg: 0.15182970692914352
+Epoch 400, loss_avg: 0.1500675106635991
+Train set results: loss= 0.5242 accuracy= 0.9000
+Test set results: loss= 0.9421 accuracy= 0.8140
+Train set results: loss= 0.5464 accuracy= 0.9286
+Test set results: loss= 1.0854 accuracy= 0.8080
+Train set results: loss= 0.5740 accuracy= 0.9357
+Test set results: loss= 1.1233 accuracy= 0.8210
+Train/Test Mean Accuracy: [array([0.92142857, 0.81433333]), array([0.01543033, 0.00531246])]
+Epoch 450, loss_avg: 0.14985487493489336
+Epoch 500, loss_avg: 0.1498818152304747
+Epoch 550, loss_avg: 0.14852279730814433
+Epoch 600, loss_avg: 0.14766258542353525
+Train set results: loss= 0.5925 accuracy= 0.9357
+Test set results: loss= 1.1615 accuracy= 0.8190
+Train set results: loss= 1.1038 accuracy= 0.9500
+Test set results: loss= 1.5432 accuracy= 0.8100
+Train set results: loss= 0.5219 accuracy= 0.9357
+Test set results: loss= 1.0308 accuracy= 0.8210
+Train/Test Mean Accuracy: [array([0.94047619, 0.81666667]), array([0.00673435, 0.00478423])]

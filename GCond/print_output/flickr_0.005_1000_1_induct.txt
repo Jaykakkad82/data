@@ -1,0 +1,42 @@
+Namespace(alpha=0, dataset='flickr', debug=0, dis_metric='mse', dropout=0.0, epochs=1000, gpu_id=0, hidden=256, inner=0, keep_ratio=1.0, label_rate=1, lr_adj=0.005, lr_feat=0.005, lr_model=0.01, nlayers=2, normalize_features=True, one_step=1, option=0, outer=20, reduction_rate=0.005, save=1, seed=1000, sgc=0, weight_decay=0.0)
+adj_syn: (223, 223) feat_syn: torch.Size([223, 500])
+[15, 8]
+Epoch 0, loss_avg: 0.26040675810405184
+Epoch 50, loss_avg: 0.021214199704783304
+Epoch 100, loss_avg: 0.017927109556538718
+Test set results: loss= 2.3412 accuracy= 0.4592
+tensor(757.4122, device='cuda:0') tensor(0.0152, device='cuda:0')
+Test: [array([0.45919419]), array([0.])]
+Epoch 150, loss_avg: 0.017226628426994597
+Epoch 200, loss_avg: 0.01752940426979746
+Test set results: loss= 2.3512 accuracy= 0.4578
+tensor(748.6506, device='cuda:0') tensor(0.0151, device='cuda:0')
+Test: [array([0.45776005]), array([0.])]
+Epoch 250, loss_avg: 0.015497085239206041
+Epoch 300, loss_avg: 0.015694755635091238
+Epoch 350, loss_avg: 0.015783389870609555
+Epoch 400, loss_avg: 0.01654995477625302
+Test set results: loss= 2.4401 accuracy= 0.4469
+tensor(700.5298, device='cuda:0') tensor(0.0141, device='cuda:0')
+Test: [array([0.44686954]), array([0.])]
+Epoch 450, loss_avg: 0.014956003640379224
+Epoch 500, loss_avg: 0.01521059668489865
+Epoch 550, loss_avg: 0.015156138581889016
+Epoch 600, loss_avg: 0.015471041202545166
+Test set results: loss= 2.4171 accuracy= 0.4527
+tensor(774.1643, device='cuda:0') tensor(0.0156, device='cuda:0')
+Test: [array([0.45269574]), array([0.])]
+Epoch 650, loss_avg: 0.014980945097548621
+Epoch 700, loss_avg: 0.014491794577666691
+Epoch 750, loss_avg: 0.015374224207230976
+Epoch 800, loss_avg: 0.015673348414046422
+Test set results: loss= 2.5581 accuracy= 0.4574
+tensor(790.3632, device='cuda:0') tensor(0.0159, device='cuda:0')
+Test: [array([0.4573567]), array([0.])]
+Epoch 850, loss_avg: 0.014483146901641573
+Epoch 900, loss_avg: 0.013726283929177694
+Epoch 950, loss_avg: 0.014626905747822353
+Epoch 1000, loss_avg: 0.016350081669432776
+Test set results: loss= 2.5010 accuracy= 0.4567
+tensor(804.2639, device='cuda:0') tensor(0.0162, device='cuda:0')
+Test: [array([0.45672926]), array([0.])]

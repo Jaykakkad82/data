@@ -1,0 +1,350 @@
+Namespace(alpha=0, dataset='cora', debug=0, dis_metric='mse', dropout=0.0, epochs=5000, gpu_id=0, hidden=256, inner=0, keep_ratio=1.0, lr_adj=0.001, lr_feat=0.001, lr_model=0.01, nlayers=2, normalize_features=True, one_step=1, outer=20, reduction_rate=0.25, save=1, seed=85, sgc=0, weight_decay=0.0)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+adj_syn: (35, 35) feat_syn: torch.Size([35, 1433])
+Epoch 0, loss_avg: 0.004463748740298408
+Epoch 50, loss_avg: 0.0018275998190796041
+Epoch 100, loss_avg: 0.0012856317006458141
+Epoch 150, loss_avg: 0.0012733418795795285
+Epoch 200, loss_avg: 0.0010023615335844644
+Epoch 250, loss_avg: 0.0009099965088213291
+Epoch 300, loss_avg: 0.0011113378128394854
+Epoch 350, loss_avg: 0.0012089379227801986
+Epoch 400, loss_avg: 0.0014209980050110154
+Train set results: loss= 1.5350 accuracy= 0.4071
+Test set results: loss= 1.6980 accuracy= 0.4340
+Train set results: loss= 1.5716 accuracy= 0.4071
+Test set results: loss= 1.7271 accuracy= 0.4690
+Train set results: loss= 1.6638 accuracy= 0.4214
+Test set results: loss= 1.8095 accuracy= 0.4280
+Train/Test Mean Accuracy: [array([0.41190476, 0.44366667]), array([0.00673435, 0.01808007])]
+Epoch 450, loss_avg: 0.0009400666883119275
+Epoch 500, loss_avg: 0.0010030616112840871
+Epoch 550, loss_avg: 0.0009512358899332775
+Epoch 600, loss_avg: 0.0009707102268269678
+Train set results: loss= 1.2433 accuracy= 0.6357
+Test set results: loss= 1.4420 accuracy= 0.6460
+Train set results: loss= 1.2814 accuracy= 0.6357
+Test set results: loss= 1.4732 accuracy= 0.6410
+Train set results: loss= 1.2955 accuracy= 0.6500
+Test set results: loss= 1.4867 accuracy= 0.6440
+Train/Test Mean Accuracy: [array([0.64047619, 0.64366667]), array([0.00673435, 0.0020548 ])]
+Epoch 650, loss_avg: 0.0010281411305942975
+Epoch 700, loss_avg: 0.0010100017801170152
+Epoch 750, loss_avg: 0.0007890427571883024
+Epoch 800, loss_avg: 0.0005523037695045356
+Train set results: loss= 1.1289 accuracy= 0.7857
+Test set results: loss= 1.4358 accuracy= 0.7490
+Train set results: loss= 1.0160 accuracy= 0.7357
+Test set results: loss= 1.2954 accuracy= 0.7380
+Train set results: loss= 0.9089 accuracy= 0.7571
+Test set results: loss= 1.1727 accuracy= 0.7320
+Train/Test Mean Accuracy: [array([0.75952381, 0.73966667]), array([0.02048173, 0.00703957])]
+Epoch 850, loss_avg: 0.0007820294723530633
+Epoch 900, loss_avg: 0.0007683593070430059
+Epoch 950, loss_avg: 0.0005947366854079849
+Epoch 1000, loss_avg: 0.0006543351447323072
+Train set results: loss= 0.8614 accuracy= 0.8429
+Test set results: loss= 1.2305 accuracy= 0.8030
+Train set results: loss= 1.1707 accuracy= 0.8714
+Test set results: loss= 1.5204 accuracy= 0.7990
+Train set results: loss= 0.9641 accuracy= 0.8857
+Test set results: loss= 1.3494 accuracy= 0.8120
+Train/Test Mean Accuracy: [array([0.86666667, 0.80466667]), array([0.01781742, 0.0054365 ])]
+Epoch 1050, loss_avg: 0.0005985925782493356
+Epoch 1100, loss_avg: 0.0005431608492611376
+Epoch 1150, loss_avg: 0.0005003650002302006
+Epoch 1200, loss_avg: 0.0007105262288121275
+Train set results: loss= 0.9791 accuracy= 0.8929
+Test set results: loss= 1.3808 accuracy= 0.7950
+Train set results: loss= 0.9265 accuracy= 0.8786
+Test set results: loss= 1.3396 accuracy= 0.7980
+Train set results: loss= 0.9616 accuracy= 0.8786
+Test set results: loss= 1.3563 accuracy= 0.8000
+Train/Test Mean Accuracy: [array([0.88333333, 0.79766667]), array([0.00673435, 0.0020548 ])]
+Epoch 1250, loss_avg: 0.0003423370854109052
+Epoch 1300, loss_avg: 0.0006483749525116536
+Epoch 1350, loss_avg: 0.00047490499055256267
+Epoch 1400, loss_avg: 0.0004429153276383861
+Epoch 1450, loss_avg: 0.00042009916503306794
+Epoch 1500, loss_avg: 0.0004415784139706374
+Epoch 1550, loss_avg: 0.0005639607790569507
+Epoch 1600, loss_avg: 0.0007692198325950835
+Train set results: loss= 0.8457 accuracy= 0.8857
+Test set results: loss= 1.2708 accuracy= 0.8180
+Train set results: loss= 0.8087 accuracy= 0.8786
+Test set results: loss= 1.2180 accuracy= 0.8020
+Train set results: loss= 0.7468 accuracy= 0.8357
+Test set results: loss= 1.1093 accuracy= 0.7810
+Train/Test Mean Accuracy: [array([0.86666667, 0.80033333]), array([0.02208004, 0.01515109])]
+Epoch 1650, loss_avg: 0.0004094561431599034
+Epoch 1700, loss_avg: 0.00037262143478095403
+Epoch 1750, loss_avg: 0.0004820434726349699
+Epoch 1800, loss_avg: 0.0005636275655137136
+Epoch 1850, loss_avg: 0.0007719178836725107
+Epoch 1900, loss_avg: 0.0005597680275109298
+Epoch 1950, loss_avg: 0.0005158426743640929
+Epoch 2000, loss_avg: 0.0004898052500545037
+Train set results: loss= 0.9570 accuracy= 0.9000
+Test set results: loss= 1.3855 accuracy= 0.8060
+Train set results: loss= 0.8673 accuracy= 0.8786
+Test set results: loss= 1.2768 accuracy= 0.7990
+Train set results: loss= 0.8202 accuracy= 0.8857
+Test set results: loss= 1.2444 accuracy= 0.8210
+Train/Test Mean Accuracy: [array([0.88809524, 0.80866667]), array([0.00890871, 0.00917727])]
+Epoch 2050, loss_avg: 0.0005294469775374633
+Epoch 2100, loss_avg: 0.0003971005159994061
+Epoch 2150, loss_avg: 0.0006666632840960054
+Epoch 2200, loss_avg: 0.0006808823387621413
+Epoch 2250, loss_avg: 0.0004091987612802043
+Epoch 2300, loss_avg: 0.0005778237044737519
+Epoch 2350, loss_avg: 0.0005741004496529906
+Epoch 2400, loss_avg: 0.00048209914068573936
+Epoch 2450, loss_avg: 0.0006367237510592485
+Epoch 2500, loss_avg: 0.0005987362026113199
+Epoch 2550, loss_avg: 0.0004965171409584616
+Epoch 2600, loss_avg: 0.0005151824419360624
+Epoch 2650, loss_avg: 0.00045636631260603095
+Epoch 2700, loss_avg: 0.0005108245500425203
+Epoch 2750, loss_avg: 0.00033907696867167017
+Epoch 2800, loss_avg: 0.0005217305316764008
+Epoch 2850, loss_avg: 0.00037579688987584556
+Epoch 2900, loss_avg: 0.0004148458625823358
+Epoch 2950, loss_avg: 0.0004883047445784141
+Epoch 3000, loss_avg: 0.00045458581221624286
+Train set results: loss= 0.9063 accuracy= 0.9214
+Test set results: loss= 1.3508 accuracy= 0.8010
+Train set results: loss= 0.6631 accuracy= 0.8714
+Test set results: loss= 1.0534 accuracy= 0.8000
+Train set results: loss= 0.5701 accuracy= 0.8500
+Test set results: loss= 0.8551 accuracy= 0.7860
+Train/Test Mean Accuracy: [array([0.88095238, 0.79566667]), array([0.02992811, 0.00684755])]
+Epoch 3050, loss_avg: 0.0005765596840451636
+Epoch 3100, loss_avg: 0.0004166185844511963
+Epoch 3150, loss_avg: 0.0006083662461171398
+Epoch 3200, loss_avg: 0.0003720685616917088
+Epoch 3250, loss_avg: 0.0004866802493990535
+Epoch 3300, loss_avg: 0.0003600475418637967
+Epoch 3350, loss_avg: 0.00046902332688102756
+Epoch 3400, loss_avg: 0.0005830492005055099
+Epoch 3450, loss_avg: 0.0004806771424498103
+Epoch 3500, loss_avg: 0.00041795900814140717
+Epoch 3550, loss_avg: 0.0006459374160181235
+Epoch 3600, loss_avg: 0.0005175634329828033
+Epoch 3650, loss_avg: 0.00044509071824159823
+Epoch 3700, loss_avg: 0.00048508638911517945
+Epoch 3750, loss_avg: 0.0004800440730730536
+Epoch 3800, loss_avg: 0.00035971392098699706
+Epoch 3850, loss_avg: 0.0005185462156629692
+Epoch 3900, loss_avg: 0.0004191119567849575
+Epoch 3950, loss_avg: 0.0005271445501154801
+Epoch 4000, loss_avg: 0.00046426713147817696
+Train set results: loss= 0.5669 accuracy= 0.8357
+Test set results: loss= 0.8271 accuracy= 0.7810
+Train set results: loss= 0.8071 accuracy= 0.9143
+Test set results: loss= 1.2670 accuracy= 0.8120
+Train set results: loss= 0.7629 accuracy= 0.9143
+Test set results: loss= 1.2300 accuracy= 0.7950
+Train/Test Mean Accuracy: [array([0.88809524, 0.796     ]), array([0.03703893, 0.01267544])]
+Epoch 4050, loss_avg: 0.0003725568802674619
+Epoch 4100, loss_avg: 0.00033894043730075006
+Epoch 4150, loss_avg: 0.0004597263407363413
+Epoch 4200, loss_avg: 0.0003298003401755999
+Epoch 4250, loss_avg: 0.0004851088810104415
+Epoch 4300, loss_avg: 0.0005447317798249887
+Epoch 4350, loss_avg: 0.0005629090379093525
+Epoch 4400, loss_avg: 0.0003954676036826035
+Epoch 4450, loss_avg: 0.0005860801571842882
+Epoch 4500, loss_avg: 0.0004906302354729873
+Epoch 4550, loss_avg: 0.00046464193289760244
+Epoch 4600, loss_avg: 0.0005522245964390721
+Epoch 4650, loss_avg: 0.000479210054942361
+Epoch 4700, loss_avg: 0.0005521018115174491
+Epoch 4750, loss_avg: 0.0004389113283845592
+Epoch 4800, loss_avg: 0.0005873003989276656
+Epoch 4850, loss_avg: 0.00045447517054180076
+Epoch 4900, loss_avg: 0.0005272701463869842
+Epoch 4950, loss_avg: 0.0006289358429158436
+Epoch 5000, loss_avg: 0.00048097490427068357
+Train set results: loss= 0.5300 accuracy= 0.8500
+Test set results: loss= 0.8559 accuracy= 0.7920
+Train set results: loss= 0.5345 accuracy= 0.8714
+Test set results: loss= 0.8866 accuracy= 0.7970
+Train set results: loss= 1.1915 accuracy= 0.9357
+Test set results: loss= 1.5582 accuracy= 0.8020
+Train/Test Mean Accuracy: [array([0.88571429, 0.797     ]), array([0.03642157, 0.00408248])]
+Namespace(alpha=0, dataset='cora', debug=0, dis_metric='mse', dropout=0.0, epochs=5000, gpu_id=0, hidden=256, inner=0, keep_ratio=1.0, lr_adj=0.001, lr_feat=0.001, lr_model=0.01, nlayers=2, normalize_features=True, one_step=1, outer=20, reduction_rate=0.25, save=1, seed=85, sgc=0, weight_decay=0.0)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+adj_syn: (35, 35) feat_syn: torch.Size([35, 1433])
+Epoch 0, loss_avg: 0.004463748740298408
+Epoch 50, loss_avg: 0.0018275998190796041
+Epoch 100, loss_avg: 0.0012856317006458141
+Epoch 150, loss_avg: 0.0012733418795795285
+Epoch 200, loss_avg: 0.0010023615335844644
+Epoch 250, loss_avg: 0.0009099965088213291
+Epoch 300, loss_avg: 0.0011113378128394854
+Epoch 350, loss_avg: 0.0012089379227801986
+Epoch 400, loss_avg: 0.0014209980050110154
+Train set results: loss= 1.5350 accuracy= 0.4071
+Test set results: loss= 1.6980 accuracy= 0.4340
+Train set results: loss= 1.5716 accuracy= 0.4071
+Test set results: loss= 1.7271 accuracy= 0.4690
+Train set results: loss= 1.6638 accuracy= 0.4214
+Test set results: loss= 1.8095 accuracy= 0.4280
+Train/Test Mean Accuracy: [array([0.41190476, 0.44366667]), array([0.00673435, 0.01808007])]
+Epoch 450, loss_avg: 0.0009400666883119275
+Epoch 500, loss_avg: 0.0010030616112840871
+Epoch 550, loss_avg: 0.0009512358899332775
+Epoch 600, loss_avg: 0.0009707102268269678
+Train set results: loss= 1.2433 accuracy= 0.6357
+Test set results: loss= 1.4420 accuracy= 0.6460
+Train set results: loss= 1.2814 accuracy= 0.6357
+Test set results: loss= 1.4732 accuracy= 0.6410
+Train set results: loss= 1.2955 accuracy= 0.6500
+Test set results: loss= 1.4867 accuracy= 0.6440
+Train/Test Mean Accuracy: [array([0.64047619, 0.64366667]), array([0.00673435, 0.0020548 ])]
+Epoch 650, loss_avg: 0.0010281411305942975
+Epoch 700, loss_avg: 0.0010100017801170152
+Epoch 750, loss_avg: 0.0007890427571883024
+Epoch 800, loss_avg: 0.0005523037695045356
+Train set results: loss= 1.1289 accuracy= 0.7857
+Test set results: loss= 1.4358 accuracy= 0.7490
+Train set results: loss= 1.0160 accuracy= 0.7357
+Test set results: loss= 1.2954 accuracy= 0.7380
+Train set results: loss= 0.9089 accuracy= 0.7571
+Test set results: loss= 1.1727 accuracy= 0.7320
+Train/Test Mean Accuracy: [array([0.75952381, 0.73966667]), array([0.02048173, 0.00703957])]
+Epoch 850, loss_avg: 0.0007820294723530633
+Epoch 900, loss_avg: 0.0007683593070430059
+Epoch 950, loss_avg: 0.0005947366854079849
+Epoch 1000, loss_avg: 0.0006543351447323072
+Train set results: loss= 0.8614 accuracy= 0.8429
+Test set results: loss= 1.2305 accuracy= 0.8030
+Train set results: loss= 1.1707 accuracy= 0.8714
+Test set results: loss= 1.5204 accuracy= 0.7990
+Train set results: loss= 0.9641 accuracy= 0.8857
+Test set results: loss= 1.3494 accuracy= 0.8120
+Train/Test Mean Accuracy: [array([0.86666667, 0.80466667]), array([0.01781742, 0.0054365 ])]
+Epoch 1050, loss_avg: 0.0005985925782493356
+Epoch 1100, loss_avg: 0.0005431608492611376
+Epoch 1150, loss_avg: 0.0005003650002302006
+Epoch 1200, loss_avg: 0.0007105262288121275
+Train set results: loss= 0.9791 accuracy= 0.8929
+Test set results: loss= 1.3808 accuracy= 0.7950
+Train set results: loss= 0.9265 accuracy= 0.8786
+Test set results: loss= 1.3396 accuracy= 0.7980
+Train set results: loss= 0.9616 accuracy= 0.8786
+Test set results: loss= 1.3563 accuracy= 0.8000
+Train/Test Mean Accuracy: [array([0.88333333, 0.79766667]), array([0.00673435, 0.0020548 ])]
+Epoch 1250, loss_avg: 0.0003423370854109052
+Epoch 1300, loss_avg: 0.0006483749525116536
+Epoch 1350, loss_avg: 0.00047490499055256267
+Epoch 1400, loss_avg: 0.0004429153276383861
+Epoch 1450, loss_avg: 0.00042009916503306794
+Epoch 1500, loss_avg: 0.0004415784139706374
+Epoch 1550, loss_avg: 0.0005639607790569507
+Epoch 1600, loss_avg: 0.0007692198325950835
+Train set results: loss= 0.8457 accuracy= 0.8857
+Test set results: loss= 1.2708 accuracy= 0.8180
+Train set results: loss= 0.8087 accuracy= 0.8786
+Test set results: loss= 1.2180 accuracy= 0.8020
+Train set results: loss= 0.7468 accuracy= 0.8357
+Test set results: loss= 1.1093 accuracy= 0.7810
+Train/Test Mean Accuracy: [array([0.86666667, 0.80033333]), array([0.02208004, 0.01515109])]
+Epoch 1650, loss_avg: 0.0004094561431599034
+Epoch 1700, loss_avg: 0.00037262143478095403
+Epoch 1750, loss_avg: 0.0004820434726349699
+Epoch 1800, loss_avg: 0.0005636275655137136
+Epoch 1850, loss_avg: 0.0007719178836725107
+Epoch 1900, loss_avg: 0.0005597680275109298
+Epoch 1950, loss_avg: 0.0005158426743640929
+Epoch 2000, loss_avg: 0.0004898052500545037
+Train set results: loss= 0.9570 accuracy= 0.9000
+Test set results: loss= 1.3855 accuracy= 0.8060
+Train set results: loss= 0.8673 accuracy= 0.8786
+Test set results: loss= 1.2768 accuracy= 0.7990
+Train set results: loss= 0.8202 accuracy= 0.8857
+Test set results: loss= 1.2444 accuracy= 0.8210
+Train/Test Mean Accuracy: [array([0.88809524, 0.80866667]), array([0.00890871, 0.00917727])]
+Epoch 2050, loss_avg: 0.0005294469775374633
+Epoch 2100, loss_avg: 0.0003971005159994061
+Epoch 2150, loss_avg: 0.0006666632840960054
+Epoch 2200, loss_avg: 0.0006808823387621413
+Epoch 2250, loss_avg: 0.0004091987612802043
+Epoch 2300, loss_avg: 0.0005778237044737519
+Epoch 2350, loss_avg: 0.0005741004496529906
+Epoch 2400, loss_avg: 0.00048209914068573936
+Epoch 2450, loss_avg: 0.0006367237510592485
+Epoch 2500, loss_avg: 0.0005987362026113199
+Epoch 2550, loss_avg: 0.0004965171409584616
+Epoch 2600, loss_avg: 0.0005151824419360624
+Epoch 2650, loss_avg: 0.00045636631260603095
+Epoch 2700, loss_avg: 0.0005108245500425203
+Epoch 2750, loss_avg: 0.00033907696867167017
+Epoch 2800, loss_avg: 0.0005217305316764008
+Epoch 2850, loss_avg: 0.00037579688987584556
+Epoch 2900, loss_avg: 0.0004148458625823358
+Epoch 2950, loss_avg: 0.0004883047445784141
+Epoch 3000, loss_avg: 0.00045458581221624286
+Train set results: loss= 0.9063 accuracy= 0.9214
+Test set results: loss= 1.3508 accuracy= 0.8010
+Train set results: loss= 0.6631 accuracy= 0.8714
+Test set results: loss= 1.0534 accuracy= 0.8000
+Train set results: loss= 0.5701 accuracy= 0.8500
+Test set results: loss= 0.8551 accuracy= 0.7860
+Train/Test Mean Accuracy: [array([0.88095238, 0.79566667]), array([0.02992811, 0.00684755])]
+Epoch 3050, loss_avg: 0.0005765596840451636
+Epoch 3100, loss_avg: 0.0004166185844511963
+Epoch 3150, loss_avg: 0.0006083662461171398
+Epoch 3200, loss_avg: 0.0003720685616917088
+Epoch 3250, loss_avg: 0.0004866802493990535
+Epoch 3300, loss_avg: 0.0003600475418637967
+Epoch 3350, loss_avg: 0.00046902332688102756
+Epoch 3400, loss_avg: 0.0005830492005055099
+Epoch 3450, loss_avg: 0.0004806771424498103
+Epoch 3500, loss_avg: 0.00041795900814140717
+Epoch 3550, loss_avg: 0.0006459374160181235
+Epoch 3600, loss_avg: 0.0005175634329828033
+Epoch 3650, loss_avg: 0.00044509071824159823
+Epoch 3700, loss_avg: 0.00048508638911517945
+Epoch 3750, loss_avg: 0.0004800440730730536
+Epoch 3800, loss_avg: 0.00035971392098699706
+Epoch 3850, loss_avg: 0.0005185462156629692
+Epoch 3900, loss_avg: 0.0004191119567849575
+Epoch 3950, loss_avg: 0.0005271445501154801
+Epoch 4000, loss_avg: 0.00046426713147817696
+Train set results: loss= 0.5669 accuracy= 0.8357
+Test set results: loss= 0.8271 accuracy= 0.7810
+Train set results: loss= 0.8071 accuracy= 0.9143
+Test set results: loss= 1.2670 accuracy= 0.8120
+Train set results: loss= 0.7629 accuracy= 0.9143
+Test set results: loss= 1.2300 accuracy= 0.7950
+Train/Test Mean Accuracy: [array([0.88809524, 0.796     ]), array([0.03703893, 0.01267544])]
+Epoch 4050, loss_avg: 0.0003725568802674619
+Epoch 4100, loss_avg: 0.00033894043730075006
+Epoch 4150, loss_avg: 0.0004597263407363413
+Epoch 4200, loss_avg: 0.0003298003401755999
+Epoch 4250, loss_avg: 0.0004851088810104415
+Epoch 4300, loss_avg: 0.0005447317798249887
+Epoch 4350, loss_avg: 0.0005629090379093525
+Epoch 4400, loss_avg: 0.0003954676036826035
+Epoch 4450, loss_avg: 0.0005860801571842882
+Epoch 4500, loss_avg: 0.0004906302354729873
+Epoch 4550, loss_avg: 0.00046464193289760244
+Epoch 4600, loss_avg: 0.0005522245964390721
+Epoch 4650, loss_avg: 0.000479210054942361
+Epoch 4700, loss_avg: 0.0005521018115174491
+Epoch 4750, loss_avg: 0.0004389113283845592
+Epoch 4800, loss_avg: 0.0005873003989276656
+Epoch 4850, loss_avg: 0.00045447517054180076
+Epoch 4900, loss_avg: 0.0005272701463869842
+Epoch 4950, loss_avg: 0.0006289358429158436
+Epoch 5000, loss_avg: 0.00048097490427068357
+Train set results: loss= 0.5300 accuracy= 0.8500
+Test set results: loss= 0.8559 accuracy= 0.7920
+Train set results: loss= 0.5345 accuracy= 0.8714
+Test set results: loss= 0.8866 accuracy= 0.7970
+Train set results: loss= 1.1915 accuracy= 0.9357
+Test set results: loss= 1.5582 accuracy= 0.8020
+Train/Test Mean Accuracy: [array([0.88571429, 0.797     ]), array([0.03642157, 0.00408248])]

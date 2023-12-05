@@ -3,3 +3,9 @@ size of adj_train: (140, 140)
 #edges in adj_train: 42.0
 Test set results: loss= 0.3668 accuracy= 0.9170
 Mean accuracy: [0.7071000000000001, 0.013171560272040637]
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='random', nlayers=2, normalize_features=True, reduction_rate=0.5, save=1, seed=1000, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.6997 accuracy= 0.8620
+idx_selected :  [array([14, 51,  8, 15, 40, 45,  7, 27, 24, 25]), array([38,  2, 22, 39, 86, 49, 43, 84, 12, 82]), array([ 61,  79, 100,  32,  10,  62,  98,  11,  65,  52]), array([ 83,  73,  16, 101,  72,  71,  58, 111,   5,   9]), array([ 18, 109, 131, 126,  85, 102,  36, 138, 136, 112]), array([128, 115, 130, 114, 117,  70,  76, 129, 113, 132]), array([ 77,  26, 122,  69,  92, 116, 127, 106,  41,  56])]
+Mean accuracy: [0.71, 0.009869143833180235]

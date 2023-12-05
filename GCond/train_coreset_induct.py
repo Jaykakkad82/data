@@ -11,7 +11,7 @@ from configs import load_config
 from utils import *
 from utils_graphsaint import DataGraphSAINT
 from models.gcn import GCN
-from coreset import KCenter, Herding, Random
+from coreset import KCenter, Herding, Random, kmeans
 from tqdm import tqdm
 # I can change - new change
 
@@ -29,8 +29,9 @@ parser.add_argument('--nlayers', type=int, default=2, help='Random seed.')
 parser.add_argument('--epochs', type=int, default=400)
 parser.add_argument('--inductive', type=int, default=1)
 parser.add_argument('--mlp', type=int, default=0)
-parser.add_argument('--method', type=str, choices=['kcenter', 'herding', 'random'])
+parser.add_argument('--method', type=str, choices=['kcenter', 'herding', 'random', 'kmeans'])
 parser.add_argument('--reduction_rate', type=float, required=True)
+parser.add_argument('--save', type=bool, default=True)
 args = parser.parse_args()
 
 torch.cuda.set_device(args.gpu_id)
@@ -53,6 +54,8 @@ def restore_stdout(original_stdout):
 
 file_name_out = f'Coreset_print_output/{args.method}_{args.dataset}_{args.reduction_rate}_{args.seed}_inductive.txt'
 original_stdout = redirect_stdout_to_file(file_name_out)
+
+print(args)
 
 # random seed setting
 random.seed(args.seed)
@@ -133,6 +136,8 @@ for _ in tqdm(range(runs)):
     res.append(acc_test.item())
 res = np.array(res)
 print('Mean accuracy:', repr([res.mean(), res.std()]))
+torch.save(model.state_dict(), f'Eval_coreset_model/model_{args.dataset}_{args.reduction_rate}_{args.seed}_induct.pt')
+
 
 # restore the original standard output
 restore_stdout(original_stdout)

@@ -59,7 +59,7 @@ def restore_stdout(original_stdout):
     sys.stdout.close()
     sys.stdout = original_stdout
 
-file_name_out = f'print_output/print_{args.dataset}_{args.reduction_rate}_{args.seed}_transduct.txt'
+file_name_out = f'print_output/print_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_transduct.txt'
 original_stdout = redirect_stdout_to_file(file_name_out)
 
 print(args)
@@ -68,7 +68,7 @@ print(args)
 args_dict = vars(args)
 
 # Specify the file name for saving the arguments
-args_file = f'args_parsed/{args.dataset}_{args.reduction_rate}_{args.seed}_induct.json'
+args_file = f'args_parsed/{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_transduct.json'
 
 # Save the arguments to a JSON file
 with open(args_file, 'w') as file:

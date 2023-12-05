@@ -1,0 +1,10 @@
+Namespace(dataset='flickr', dropout=0.0, epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='kcenter', mlp=0, nlayers=2, normalize_features=True, reduction_rate=0.001, save=True, seed=120, weight_decay=0.005)
+size of adj_train: (44625, 44625)
+#edges in adj_train: 218140
+Test set results: loss= 1.5502 accuracy= 0.4715
+idx_selected :  [array([10109]), array([23596,  2982]), array([10631, 35065]), array([ 3810, 19760, 42206]), array([12561, 27957, 43519, 21715]), array([35026, 36977, 11338,  3370, 13689, 31326, 42897, 32614,  3801,
+        4129, 32370]), array([ 5948, 17390,  2069,   470, 30219, 27918,  8486, 17370, 25111,
+       16054, 40754, 20518, 16878, 33988, 18066, 26149, 15260, 40462,
+       13761, 25982, 10070])]
+shape of feat_train: (44, 500)
+Mean accuracy: [0.4345941827634115, 0.0071612464473350184]

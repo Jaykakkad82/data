@@ -1,0 +1,8 @@
+Namespace(dataset='reddit', dropout=0, epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='kcenter', mlp=0, nlayers=2, normalize_features=True, reduction_rate=0.0005, save=True, seed=85, weight_decay=0.0)
+size of adj_train: (153932, 153932)
+#edges in adj_train: 10753238.0
+Test set results: loss= 0.4403 accuracy= 0.9413
+idx_selected :  [array([13694]), array([97335]), array([67316]), array([36456]), array([123541]), array([82638]), array([150745]), array([92259]), array([78624]), array([110337]), array([77495]), array([118869]), array([98249]), array([115565]), array([132162]), array([25595]), array([26937]), array([67576]), array([120018]), array([1246]), array([131943]), array([50727]), array([24352]), array([91023]), array([114061]), array([77823]), array([62477]), array([12481]), array([139760]), array([79088]), array([13161]), array([ 9166, 53191]), array([68271, 10228]), array([ 3151, 84680, 19877]), array([110587, 128890,  19979]), array([  7832,  76755, 148239]), array([100794,  68909, 101823,  84048]), array([138053,  37646, 125228,    589]), array([124341, 153026,   3674,  86640]), array([37299, 36102, 11378, 43203,  9463]), array([ 57710,  33502, 137629, 147112,  31713,  15933, 138042,  84473,
+         7211,  45370,  36932, 110536,  30678,  97214, 153125])]
+shape of feat_train: (76, 602)
+Mean accuracy: [0.44679040011566135, 0.013719047448489645]

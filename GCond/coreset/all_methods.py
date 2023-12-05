@@ -132,9 +132,13 @@ class KCenter(Base):
         # return np.array(idx_selected).reshape(-1)
         print("idx_selected : ", idx_selected)
         # visualize
-        path = f'visuals_coreset/{self.args.method}_{self.args.dataset}_{self.args.reduction_rate}_{self.args.seed}'
-        new = embeds.detach().cpu().numpy()
-        self.visualize_embed(new, col=self.data.labels_full, highlight_indices=np.hstack(idx_selected), save_path=path)
+        if not inductive:
+
+            path = f'visuals_coreset/{self.args.method}_{self.args.dataset}_{self.args.reduction_rate}_{self.args.seed}'
+            if inductive:
+                path = f'visuals_coreset/{self.args.method}_{self.args.dataset}_{self.args.reduction_rate}_{self.args.seed}_inductive'
+            new = embeds.detach().cpu().numpy()
+            self.visualize_embed(new, col=self.data.labels_full, highlight_indices=np.hstack(idx_selected), save_path=path)
         return np.hstack(idx_selected)
 
 
@@ -170,9 +174,13 @@ class Herding(Base):
         # return np.array(idx_selected).reshape(-1)
         print("idx_selected : ", idx_selected)
         # visualize
-        path = f'visuals_coreset/{self.args.method}_{self.args.dataset}_{self.args.reduction_rate}_{self.args.seed}'
-        new = embeds.detach().cpu().numpy()
-        self.visualize_embed(new, col=self.data.labels_full, highlight_indices=np.hstack(idx_selected), save_path=path )
+        if not inductive:
+
+            path = f'visuals_coreset/{self.args.method}_{self.args.dataset}_{self.args.reduction_rate}_{self.args.seed}'
+            if inductive:
+                path = f'visuals_coreset/{self.args.method}_{self.args.dataset}_{self.args.reduction_rate}_{self.args.seed}_inductive'
+            new = embeds.detach().cpu().numpy()
+            self.visualize_embed(new, col=self.data.labels_full, highlight_indices=np.hstack(idx_selected), save_path=path )
         return np.hstack(idx_selected)
 
 
@@ -199,9 +207,13 @@ class Random(Base):
         # return np.array(idx_selected).reshape(-1)
         print("idx_selected : ", idx_selected)
         # visualize
-        path = f'visuals_coreset/{self.args.method}_{self.args.dataset}_{self.args.reduction_rate}_{self.args.seed}'
-        new = embeds.detach().cpu().numpy()
-        self.visualize_embed(new  , col= self.data.labels_full, highlight_indices=np.hstack(idx_selected), save_path=path )
+        if not inductive:
+
+            path = f'visuals_coreset/{self.args.method}_{self.args.dataset}_{self.args.reduction_rate}_{self.args.seed}'
+            if inductive:
+                path = f'visuals_coreset/{self.args.method}_{self.args.dataset}_{self.args.reduction_rate}_{self.args.seed}_inductive'
+            new = embeds.detach().cpu().numpy()
+            self.visualize_embed(new  , col= self.data.labels_full, highlight_indices=np.hstack(idx_selected), save_path=path )
         return np.hstack(idx_selected)
 
 class kmeans(Base):
@@ -256,8 +268,12 @@ class kmeans(Base):
         print("idx_selected : ", idx_selected)
         # return np.array(idx_selected).reshape(-1)
         # visualize
-        path = f'visuals_coreset/{self.args.method}_{self.args.dataset}_{self.args.reduction_rate}_{self.args.seed}'
-        new = embeds.detach().cpu().numpy()
-        self.visualize_embed(new  , col= self.data.labels_full, highlight_indices=np.hstack(idx_selected), save_path=path )
+        if not inductive:
+
+            path = f'visuals_coreset/{self.args.method}_{self.args.dataset}_{self.args.reduction_rate}_{self.args.seed}'
+            if inductive:
+                path = f'visuals_coreset/{self.args.method}_{self.args.dataset}_{self.args.reduction_rate}_{self.args.seed}_inductive'
+            new = embeds.detach().cpu().numpy()
+            self.visualize_embed(new  , col= self.data.labels_full, highlight_indices=np.hstack(idx_selected), save_path=path )
         return np.hstack(idx_selected)
 

@@ -1,0 +1,18 @@
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='kmeans', nlayers=2, normalize_features=True, reduction_rate=0.25, save=1, seed=1, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.6788 accuracy= 0.8670
+idx_selected :  [44, 57, 40, 17, 48, 78, 43, 1, 12, 75, 62, 80, 94, 74, 81, 111, 53, 105, 34, 73, 138, 131, 135, 133, 124, 113, 130, 117, 129, 119, 118, 122, 23, 96, 69]
+Mean accuracy: [0.6656, 0.011892854997854814]
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='kmeans', nlayers=2, normalize_features=True, reduction_rate=0.25, save=1, seed=1, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.6788 accuracy= 0.8670
+idx_selected :  [44, 57, 40, 17, 48, 78, 43, 1, 12, 75, 62, 80, 94, 74, 81, 111, 53, 105, 34, 73, 138, 131, 135, 133, 124, 113, 130, 117, 129, 119, 118, 122, 23, 96, 69]
+Mean accuracy: [0.6656, 0.011892854997854814]
+Namespace(dataset='cora', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='kmeans', nlayers=2, normalize_features=True, reduction_rate=0.25, save=1, seed=1, weight_decay=0.0005)
+size of adj_train: (140, 140)
+#edges in adj_train: 42.0
+Test set results: loss= 0.6788 accuracy= 0.8670
+idx_selected :  [44, 57, 40, 17, 48, 78, 43, 1, 12, 75, 62, 80, 94, 74, 81, 111, 53, 105, 34, 73, 138, 131, 135, 133, 124, 113, 130, 117, 129, 119, 118, 122, 23, 96, 69]
+Mean accuracy: [0.6656, 0.011892854997854814]

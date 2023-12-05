@@ -1,0 +1,12 @@
+Namespace(dataset='citeseer', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='random', nlayers=2, normalize_features=True, reduction_rate=0.5, save=1, seed=15, weight_decay=0.0005)
+size of adj_train: (120, 120)
+#edges in adj_train: 16.0
+Test set results: loss= 0.8400 accuracy= 0.7860
+idx_selected :  [array([105,  89,   8,  49,  15,   6,  50,  94,  67,   4]), array([ 41,  46,  99,  57,  65,  71,  82,  20, 103,  43]), array([52, 88, 26,  3, 73, 44, 64, 54, 24,  2]), array([109,   7,  85, 113, 117, 107, 101, 106, 111, 115]), array([40, 42, 53, 14, 34, 75, 31, 12, 69, 79]), array([68, 83, 58, 92, 70, 18, 17, 47, 87, 11])]
+Mean accuracy: [0.5745000000000001, 0.00833366666000023]
+Namespace(dataset='citeseer', epochs=400, gpu_id=0, hidden=256, inductive=1, keep_ratio=1.0, lr=0.01, method='random', nlayers=2, normalize_features=True, reduction_rate=0.5, save=1, seed=15, weight_decay=0.0005)
+size of adj_train: (120, 120)
+#edges in adj_train: 16.0
+Test set results: loss= 0.8400 accuracy= 0.7860
+idx_selected :  [array([105,  89,   8,  49,  15,   6,  50,  94,  67,   4]), array([ 41,  46,  99,  57,  65,  71,  82,  20, 103,  43]), array([52, 88, 26,  3, 73, 44, 64, 54, 24,  2]), array([109,   7,  85, 113, 117, 107, 101, 106, 111, 115]), array([40, 42, 53, 14, 34, 75, 31, 12, 69, 79]), array([68, 83, 58, 92, 70, 18, 17, 47, 87, 11])]
+Mean accuracy: [0.5745000000000001, 0.00833366666000023]
