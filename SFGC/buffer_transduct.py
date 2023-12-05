@@ -97,7 +97,7 @@ def main(args):
                 acc_buffer = utils.accuracy(output[data.idx_train], labels[data.idx_train])
                 writer.add_scalar('buffer_train_loss_curve', loss_buffer.item(), e)
                 writer.add_scalar('buffer_train_acc_curve', acc_buffer.item(), e)
-                logging.info("Epochs: {} : Full graph train set results: loss= {:.4f}, accuracy= {:.4f} ".format(e,
+                logging.info("Progress: outer-{}/{}, inner-{}/{} : Full graph train set results: loss= {:.4f}, accuracy= {:.4f} ".format(it, args.num_experts, e, args.teacher_epochs,
                                                                                                                  loss_buffer.item(),
                                                                                                                  acc_buffer.item()))
                 loss_buffer.backward()
@@ -203,7 +203,7 @@ def main(args):
                 acc_buffer = utils.accuracy(output[data.idx_train], data_full.y[data.idx_train])
                 writer.add_scalar('buffer_train_loss_curve', loss_buffer.item(), e)
                 writer.add_scalar('buffer_train_acc_curve', acc_buffer.item(), e)
-                logging.info("Epochs: {} : Full graph train set results: loss= {:.4f}, accuracy= {:.4f} ".format(e,
+                logging.info("Progress: outer-{}/{}, inner-{}/{} : Full graph train set results: loss= {:.4f}, accuracy= {:.4f} ".format(it, args.num_experts, e, args.teacher_epochs,
                                                                                                                  loss_buffer.item(),
                                                                                                                  acc_buffer.item()))
                 loss_buffer.backward()

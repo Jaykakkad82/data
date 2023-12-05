@@ -1,5 +1,5 @@
 #@citeseer-r025
-CUDA_VISIBLE_DEVICES=1 python distill_transduct_adj_identity2.py --dataset citeseer --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python distill_transduct_adj_identity2.py --dataset citeseer --device cuda:0 \
 --lr_feat=0.0005 --optimizer_con Adam \
 --expert_epochs=500 --lr_student=1 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 \
 --start_epoch=30 --syn_steps=200 \
@@ -9,17 +9,17 @@ CUDA_VISIBLE_DEVICES=1 python distill_transduct_adj_identity2.py --dataset cites
 --reduction_rate=0.25 --ntk_reg 1 --eval_interval 1 --ITER 2000 --samp_iter=5 --samp_num_per_class=10
 
 #@citeseer-r05
-CUDA_VISIBLE_DEVICES=3 python distill_transduct_adj_identity2.py --dataset citeseer --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python distill_transduct_adj_identity2.py --dataset citeseer --device cuda:0 \
 --lr_feat=0.001 --optimizer_con Adam \
 --expert_epochs=500 --lr_student=1 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 \
 --start_epoch=30 --syn_steps=200 \
---buffer_path './logs/Buffer/citeseer-20221012-091556-763255' \
---coreset_init_path './logs/Coreset/citeseer-reduce_0.5-20221106-114854-910019' \
+--buffer_path './logs/Buffer/citeseer-20230917-041317-699068' \
+--coreset_init_path './logs/Coreset/citeseer-reduce_0.5-20230917-051821-869434' \
 --condense_model GCN --interval_buffer 1 --rand_start 1 \
 --reduction_rate=0.5 --ntk_reg 1 --eval_interval 1 --ITER 2000 --samp_iter=5 --samp_num_per_class=10
 
 #@citeseer-r1
-CUDA_VISIBLE_DEVICES=1 python distill_transduct_adj_identity2.py --dataset citeseer --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python distill_transduct_adj_identity2.py --dataset citeseer --device cuda:0 \
 --lr_feat=0.001 --optimizer_con Adam \
 --expert_epochs=400 --lr_student=0.6 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 \
 --start_epoch=30 --syn_steps=300 \
@@ -29,7 +29,7 @@ CUDA_VISIBLE_DEVICES=1 python distill_transduct_adj_identity2.py --dataset cites
 --reduction_rate=1 --ntk_reg 1 --eval_interval 1 --ITER 2000 --samp_iter=5 --samp_num_per_class=10
 
 #@cora-r025
-CUDA_VISIBLE_DEVICES=2 python  distill_transduct_adj_identity.py --dataset cora --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python  distill_transduct_adj_identity.py --dataset cora --device cuda:0 \
 --lr_feat=0.0001 --optimizer_con Adam \
 --expert_epochs=1500 --lr_student=0.5 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 \
 --start_epoch=50 --syn_steps=400 \
@@ -39,7 +39,7 @@ CUDA_VISIBLE_DEVICES=2 python  distill_transduct_adj_identity.py --dataset cora 
 --reduction_rate=0.25 --ntk_reg 1 --eval_interval 1 --ITER 2000 --samp_iter=5 --samp_num_per_class=10
 
 #@cora-r05
-CUDA_VISIBLE_DEVICES=3 python distill_transduct_adj_identity.py --dataset cora --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python distill_transduct_adj_identity.py --dataset cora --device cuda:0 \
 --lr_feat=0.0001 --optimizer_con Adam \
 --expert_epochs=1200 --lr_student=0.5 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 \
 --start_epoch=30 --syn_steps=500 \
@@ -49,7 +49,7 @@ CUDA_VISIBLE_DEVICES=3 python distill_transduct_adj_identity.py --dataset cora -
 --reduction_rate=0.5 --ntk_reg 1 --eval_interval 1 --ITER 2000 --samp_iter=5 --samp_num_per_class=10
 
 #@cora-r1
-CUDA_VISIBLE_DEVICES=1 python distill_transduct_adj_identity.py --dataset cora --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python distill_transduct_adj_identity.py --dataset cora --device cuda:0 \
 --lr_feat=0.0001 --optimizer_con Adam \
 --expert_epochs=2000 --lr_student=0.5 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 \
 --start_epoch=30 --syn_steps=500 \
@@ -59,7 +59,7 @@ CUDA_VISIBLE_DEVICES=1 python distill_transduct_adj_identity.py --dataset cora -
 --reduction_rate=1 --ntk_reg 1 --eval_interval 1 --ITER 2000 --samp_iter=5 --samp_num_per_class=10
 
 #@ogbn-r0001
-CUDA_VISIBLE_DEVICES=2 python distill_transduct_adj_identity2.py --dataset ogbn-arxiv --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python distill_transduct_adj_identity2.py --dataset ogbn-arxiv --device cuda:0 \
 --lr_feat=0.2 --optimizer_con Adam \
 --expert_epochs=1800 --lr_student=0.2 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 \
 --start_epoch=30 --syn_steps=600 \
@@ -69,7 +69,7 @@ CUDA_VISIBLE_DEVICES=2 python distill_transduct_adj_identity2.py --dataset ogbn-
 --reduction_rate=0.001 --ntk_reg 0.1 --eval_interval 1 --ITER 2000 --samp_iter 1 --samp_num_per_class=50
 
 #@ogbn-r0005
-CUDA_VISIBLE_DEVICES=3 python distill_transduct_adj_identity.py --dataset ogbn-arxiv --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python distill_transduct_adj_identity.py --dataset ogbn-arxiv --device cuda:0 \
 --lr_feat=0.1 --optimizer_con Adam \
 --expert_epochs=1900 --lr_student=0.1 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 \
 --start_epoch=30 --syn_steps=1200 \
@@ -79,7 +79,7 @@ CUDA_VISIBLE_DEVICES=3 python distill_transduct_adj_identity.py --dataset ogbn-a
 --reduction_rate=0.005 --ntk_reg 0.1 --eval_interval 1 --ITER 2000 --samp_iter 1 --samp_num_per_class=50
 
 #@ogbn-r001
-CUDA_VISIBLE_DEVICES=2 python distill_transduct_adj_identity.py --dataset ogbn-arxiv --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python distill_transduct_adj_identity.py --dataset ogbn-arxiv --device cuda:0 \
 --lr_feat=0.1 --optimizer_con Adam \
 --expert_epochs=1900 --lr_student=0.1 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 \
 --start_epoch=10 --syn_steps=1000 \
@@ -89,7 +89,7 @@ CUDA_VISIBLE_DEVICES=2 python distill_transduct_adj_identity.py --dataset ogbn-a
 --reduction_rate=0.01 --ntk_reg 1 --eval_interval 1 --ITER 2000 --samp_iter 1 --samp_num_per_class=10
 
 #@flickr-r0001
-CUDA_VISIBLE_DEVICES=1 python distill_inductive_adj_identity.py --dataset flickr --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python distill_inductive_adj_identity.py --dataset flickr --device cuda:0 \
 --lr_feat=0.1 --optimizer_con Adam \
 --expert_epochs=700 --lr_student=0.3 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 \
 --start_epoch=30 --syn_steps=600 \
@@ -99,7 +99,7 @@ CUDA_VISIBLE_DEVICES=1 python distill_inductive_adj_identity.py --dataset flickr
 --reduction_rate=0.001 --ntk_reg 1 --eval_interval 1 --ITER 2000 --samp_iter 1 --samp_num_per_class=10
 
 #@flickr-r0005
-CUDA_VISIBLE_DEVICES=3 python distill_inductive_adj_identity.py --dataset flickr --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python distill_inductive_adj_identity.py --dataset flickr --device cuda:0 \
 --lr_feat=0.01 --optimizer_con Adam \
 --expert_epochs=900 --lr_student=0.2 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 \
 --start_epoch=30 --syn_steps=600 \
@@ -109,7 +109,7 @@ CUDA_VISIBLE_DEVICES=3 python distill_inductive_adj_identity.py --dataset flickr
 --reduction_rate=0.005 --ntk_reg 0.01 --eval_interval 1 --ITER 2000 --samp_iter=5 --samp_num_per_class=10
 
 #@flickr-r001
-CUDA_VISIBLE_DEVICES=2 python distill_inductive_adj_identity.py --dataset flickr --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python distill_inductive_adj_identity.py --dataset flickr --device cuda:0 \
 --lr_feat=0.02 --optimizer_con Adam \
 --expert_epochs=900 --lr_student=0.2 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 \
 --start_epoch=30 --syn_steps=900 \
@@ -119,7 +119,7 @@ CUDA_VISIBLE_DEVICES=2 python distill_inductive_adj_identity.py --dataset flickr
 --reduction_rate=0.01 --ntk_reg 0.1 --eval_interval 1 --ITER 2000 --samp_iter 5 --samp_num_per_class=10
 
 #@reddit-r00005
-CUDA_VISIBLE_DEVICES=1 python distill_inductive_adj_identity.py --dataset reddit --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python distill_inductive_adj_identity.py --dataset reddit --device cuda:0 \
 --lr_feat=0.02 --optimizer_con Adam \
 --expert_epochs=900 --lr_student=0.5 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 \
 --start_epoch=30 --syn_steps=900 \
@@ -129,7 +129,7 @@ CUDA_VISIBLE_DEVICES=1 python distill_inductive_adj_identity.py --dataset reddit
 --reduction_rate=0.0005 --ntk_reg 0.01 --eval_interval 1 --ITER 3000 --samp_iter 5 --samp_num_per_class 50
 
 #@reddit-r0001
-CUDA_VISIBLE_DEVICES=1 python distill_inductive_adj_identity.py --dataset reddit --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python distill_inductive_adj_identity.py --dataset reddit --device cuda:0 \
 --lr_feat=0.05 --optimizer_con Adam \
 --expert_epochs=900 --lr_student=0.5 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 \
 --start_epoch=50 --syn_steps=900 \
@@ -139,7 +139,7 @@ CUDA_VISIBLE_DEVICES=1 python distill_inductive_adj_identity.py --dataset reddit
 --reduction_rate=0.001 --ntk_reg=0.01 --eval_interval 1 --ITER 3000 --samp_iter 1 --samp_num_per_class 50
 
 #@reddit-r0002
-CUDA_VISIBLE_DEVICES=2 python distill_inductive_adj_identity.py --dataset reddit --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python distill_inductive_adj_identity.py --dataset reddit --device cuda:0 \
 --lr_feat=${lr_feat} --optimizer_con Adam \
 --expert_epochs=${exp_e} --lr_student=${lr_stu} --optim_lr=0 \
 --start_epoch=${sta_e} --syn_steps=${syn_e} \
@@ -149,7 +149,7 @@ CUDA_VISIBLE_DEVICES=2 python distill_inductive_adj_identity.py --dataset reddit
 --reduction_rate=0.002 --ntk_reg=0.01 --eval_interval 5 --ITER 2000 --samp_iter 1 --samp_num_per_class 90
 
 #@reddit-r0005
-CUDA_VISIBLE_DEVICES=2 python distill_inductive_adj_identity.py --dataset reddit --device cuda:0 \
+CUDA_VISIBLE_DEVICES=0 python distill_inductive_adj_identity.py --dataset reddit --device cuda:0 \
 --lr_feat=0.2 --optimizer_con Adam \
 --expert_epochs=900 --lr_student=0.2 --optim_lr=0 \
 --start_epoch=30 --syn_steps=900 \
