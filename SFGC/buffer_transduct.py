@@ -61,7 +61,7 @@ def main(args):
             model = model_class(nfeat=features.shape[1], nhid=args.teacher_hidden, dropout=args.teacher_dropout,
                                 nlayers=args.teacher_nlayers,
                                 nclass=data.nclass, device=device).to(device)
-            print(model)
+            # print(model)
 
             model.initialize()
 
@@ -401,5 +401,7 @@ if __name__ == '__main__':
     logging.info('This is the log_dir: {}'.format(log_dir))
     writer = SummaryWriter(log_dir + '/tbx_log')
     main(args)
+    print(args)
+    print(log_dir)
     logging.info(args)
     logging.info('Finish!, Log_dir: {}'.format(log_dir))

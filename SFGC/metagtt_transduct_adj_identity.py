@@ -311,6 +311,7 @@ class MetaGtt:
         adj_syn_norm_key = {'0': 0}
 
         for it in range(0, args.ITER + 1):
+            print('Progress: outer - {}/{}====================================='.format(it, args.ITER))
             #logging.info(adj_syn_norm_key['0'])
             if args.dataset in ['ogbn-arxiv']:
                 #model = SGC1(nfeat=feat_syn.shape[1], nhid=self.args.student_hidden,

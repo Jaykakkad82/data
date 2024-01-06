@@ -14,6 +14,6 @@ CUDA_VISIBLE_DEVICES=0 python train_coreset.py --dataset citeseer --device cuda:
 CUDA_VISIBLE_DEVICES=0 python train_coreset.py --dataset citeseer --device cuda:0 --epochs 800 --lr 0.001 --weight_decay 5e-4  --save 1 --method kcenter --reduction_rate 0.25 --load_npy '' --seed 37 > ./logs/citeseer_train_coreset_025
 #./logs/Coreset/citeseer-reduce_0.25-20221106-171050-606991
 
-#@citeseer-r1
-CUDA_VISIBLE_DEVICES=0 python train_coreset.py --dataset citeseer --device cuda:0 --epochs 800 --lr 0.001 --weight_decay 5e-4  --save 1 --method kcenter --reduction_rate 1 --load_npy '' --seed 37 > ./logs/citeseer_log_train_coreset_1
+#@citeseer-r0125
+CUDA_VISIBLE_DEVICES=0 python train_coreset.py --dataset citeseer --device cuda:0 --epochs 800 --lr 0.001 --weight_decay 5e-4  --save 1 --method kcenter --reduction_rate 0.125 --load_npy '' --seed 37 > ./logs/citeseer_log_train_coreset_0125
 #./logs/Coreset/citeseer-reduce_1.0-20221106-171317-449627

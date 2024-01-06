@@ -106,4 +106,7 @@ writer = SummaryWriter(log_dir + '/tbx_log')
 
 agent.distill(writer)
 
+print(args)
+print('Finish! Log_dir: {}'.format(log_dir))
+
 logging.info('Finish! Log_dir: {}'.format(log_dir))

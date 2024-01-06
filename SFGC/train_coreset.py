@@ -206,3 +206,7 @@ else:
     logging.info(args)
     logging.info(log_dir)
     logging.info('Mean accuracy = {:.4f}, Std = {:.4f}'.format(res.mean(), res.std()))
+
+print('Finished')
+print(args)
+print(log_dir)

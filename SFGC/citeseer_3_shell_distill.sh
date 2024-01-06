@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#@citeseer-r0125
+CUDA_VISIBLE_DEVICES=0 python distill_transduct_adj_identity2.py --dataset citeseer --device cuda:0 --lr_feat=0.001 --optimizer_con Adam --expert_epochs=400 --lr_student=0.6 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 --start_epoch=30 --syn_steps=300 --buffer_path './logs/Buffer/citeseer-20231231-090051-020265' --coreset_init_path './logs/Coreset/citeseer-reduce_0.125-20231231-224930-354304' --condense_model GCN --interval_buffer 1 --rand_start 1 --reduction_rate=0.125 --ntk_reg 1 --eval_interval 1 --ITER 2000 --samp_iter=5 --samp_num_per_class=10 --seed_student 5 --coreset_seed 5
+
+#@citeseer-r025
+CUDA_VISIBLE_DEVICES=0 python distill_transduct_adj_identity2.py --dataset citeseer --device cuda:0 --lr_feat=0.0005 --optimizer_con Adam --expert_epochs=500 --lr_student=1 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 --start_epoch=30 --syn_steps=200 --buffer_path './logs/Buffer/citeseer-20231231-090051-020265' --coreset_init_path './logs/Coreset/citeseer-reduce_0.25-20231231-221645-868282' --condense_model GCN --interval_buffer 1 --rand_start 1 --reduction_rate=0.25 --ntk_reg 1 --eval_interval 1 --ITER 2000 --samp_iter=5 --samp_num_per_class=10 --seed_student 5 --coreset_seed 5
+
+#@citeseer-r05
+CUDA_VISIBLE_DEVICES=0 python distill_transduct_adj_identity2.py --dataset citeseer --device cuda:0 --lr_feat=0.001 --optimizer_con Adam --expert_epochs=500 --lr_student=1 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 --start_epoch=30 --syn_steps=200 --buffer_path './logs/Buffer/citeseer-20231231-090051-020265' --coreset_init_path './logs/Coreset/citeseer-reduce_0.5-20231231-104438-609715' --condense_model GCN --interval_buffer 1 --rand_start 1 --reduction_rate=0.5 --ntk_reg 1 --eval_interval 1 --ITER 2000 --samp_iter=5 --samp_num_per_class=10 --seed_student 5 --coreset_seed 5

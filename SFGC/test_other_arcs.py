@@ -24,6 +24,7 @@ from gntk_cond import GNTK
 import logging
 from tensorboardX import SummaryWriter
 from sklearn.neighbors import kneighbors_graph
+import json
 
 
 # random seed setting
@@ -77,7 +78,9 @@ def main(args):
         res_test = np.array(res_test)
         logging.info('Model:{}, Layer: {}'.format(args.test_model_type, nlayer))
         logging.info('TEST: Full Graph Mean Accuracy: {:.6f}, STD: {:.6f}'.format(res_test.mean(), res_test.std()))
+        print('TEST: Full Graph Mean Accuracy: {:.6f}, STD: {:.6f}'.format(res_test.mean(), res_test.std()))
         logging.info('TEST: Valid Graph Mean Accuracy: {:.6f}, STD: {:.6f}'.format(res_val.mean(), res_val.std()))
+        print('TEST: Valid Graph Mean Accuracy: {:.6f}, STD: {:.6f}'.format(res_val.mean(), res_val.std()))
 
     return best_acc_val, best_acc_test, args
 
@@ -230,6 +233,8 @@ def test(args, data, device, nlayers, model_type, nruns):
                     best_acc_test = acc_test.item()
                     best_acc_it = i
 
+                    torch.save(model.state_dict(), os.path.join(log_dir, f'{args.test_model_type}_eval.pt'))
+
     logging.info('FINAL BEST ACC TEST: {:.6f} with in {}-iteration'.format(best_acc_test,best_acc_it))
     return best_acc_val, best_acc_test
 
@@ -318,6 +323,8 @@ def nearest_neighbors(feat_syn, k, metric):
 
 
 if __name__ == '__main__':
+    torch.cuda.empty_cache()
+
     parser = argparse.ArgumentParser()
     parser.add_argument('--device', type=str, default='cpu')
     parser.add_argument('--dataset', type=str, default='cora')
@@ -354,12 +361,29 @@ if __name__ == '__main__':
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
     log_format = '%(asctime)s %(message)s'
-    logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=log_format, datefmt='%m/%d %I:%M:%S %p')
+    logging.basicConfig(filename=os.path.join(log_dir, 'test.log'), level=logging.INFO, format=log_format, datefmt='%m/%d %I:%M:%S %p')
     fh = logging.FileHandler(os.path.join(log_dir, 'test.log'))
     fh.setFormatter(logging.Formatter(log_format))
     logging.getLogger().addHandler(fh)
     logging.info('This is the log_dir: {}'.format(log_dir))
+    print(f'log_dir: {log_dir}')
     writer = SummaryWriter(log_dir + '/tbx_log')
+
+    # save args
+    # Convert the argparse namespace to a dictionary
+    args_dict = vars(args)
+
+    # Specify the file name for saving the arguments
+    args_file = os.path.join(log_dir, 'args_file.json')
+
+    # Save the arguments to a JSON file
+    with open(args_file, 'w') as file:
+        json.dump(args_dict, file, indent=4)
+
     main(args)
+    torch.cuda.empty_cache()
     logging.info(args)
     logging.info('Finish!, Log_dir: {}'.format(log_dir))
+
+    fh.flush()
+    fh.close()
