@@ -20,6 +20,8 @@ print_output/
 Coreset_print_output/
 Eval_coreset_model/
 Eval_model/
+args_parsed/
+Index/
 build/
 develop-eggs/
 dist/

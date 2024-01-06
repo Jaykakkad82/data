@@ -1,0 +1,7 @@
+Models,,GCN,GCN,GCN,GCN,GCN,GCN,GAT,GAT,GAT,GAT,GAT,GAT
+Masks,,High-only,Low-only,Mix-0.5,Mix-0.3H,Mix-0.7H,Mix-Div,High-only,Low-only,Mix-0.5,Mix-0.3H,Mix-0.7H,Mix-Div
+Dataset,Compression ratio,,,,,,,,,,,,
+cora,0.5,0,0,0,0,0,0,0,0,0,0,0,0
+cora,0.3,0,0,0,0,0,0,0,0,0,0,0,0
+citeseer,0.5,0,0,0,0,0,0,0,0,0,0,0,0
+citeseer,0.3,0,0,0,0,0,0,0,0,0,0,0,0

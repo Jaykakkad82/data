@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mynotebook
+  namespace: jkakka4
+  labels:
+    app: mynotebook
+spec:
+  dnsConfig:
+    nameservers:
+    - 8.8.8.8
+  nodeSelector:
+    # kubernetes.io/hostname: compaassilver06
+    nvidia.com/gpu.product: Tesla-T4-SHARED
+    #nvidia.com/gpu.product: Tesla-V100-PCIE-32GB-SHARED
+  containers:
+  - image: nvcr.io/nvidia/pytorch:23.03-py3
+    imagePullPolicy: IfNotPresent
+    name: mynotebook
+    args: ['sleep', 'infinity']
+    resources:
+      limits:
+        nvidia.com/gpu: 1               #Number of GPUs
+      requests:
+        memory: "100Mi"
+    volumeMounts:
+    - name: nfs-volume
+      mountPath: /data
+    - name: dshm
+      mountPath: /dev/shm
+    lifecycle:
+      postStart:
+        exec:
+          command: ["/bin/sh", "/data/init_notebook.sh"]
+  volumes:
+  - name: nfs-volume
+    nfs:
+      server: 10.2.100.1
+      path: /data/nfs/jkakka4
+  - name: dshm
+    emptyDir:
+      medium: Memory
+  restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mynotebook-service           #Your app name adding -service
+  namespace: jkakka4
+spec:
+  selector:
+    app: mynotebook                  #Your app name as state on label above
+  type: NodePort
+  ports:
+  - name: one
+    port: 9100
+    targetPort: 8888
+    protocol: TCP
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mynotebook-ingress-port1     #Your app name adding -ingress-port1
+  namespace: jkakka4
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`pods.evl.uic.edu`) && PathPrefix(`/jupyter`)   #Your username
+    kind: Rule
+    priority: 1
+    services:
+    - name: mynotebook-service
+      port: 9100
