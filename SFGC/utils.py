@@ -20,10 +20,78 @@ from torch_geometric.utils import degree
 import logging
 
 
+def random_remove_nodes(dataset, p_remove, root, name):
+    # Copy the original data to avoid modifying the original dataset
+    data = dataset[0]
+    new_data = data.clone()
+
+    # Generate a mask to randomly remove nodes
+    mask_nodes = torch.rand(data.num_nodes) > p_remove
+
+    node_map = {}
+    new_node_id = 0
+    for i in range(data.num_nodes):
+        if mask_nodes[i]:
+            node_map[i] = new_node_id
+            new_node_id += 1
+
+    # Remove selected nodes and their edges
+    new_data.x = new_data.x[mask_nodes]
+    new_data.y = new_data.y[mask_nodes]
+    new_data.train_mask = new_data.train_mask[mask_nodes]
+    new_data.val_mask = new_data.val_mask[mask_nodes]
+    new_data.test_mask = new_data.test_mask[mask_nodes]
+
+    # Remove edges connected to the removed nodes
+    mask = []
+    for i in range(data.edge_index.shape[1]):
+        if data.edge_index[0][i].item() in node_map and data.edge_index[1][i].item() in node_map:
+            new_data.edge_index[0][i] = node_map[new_data.edge_index[0][i].item()]
+            new_data.edge_index[1][i] = node_map[new_data.edge_index[1][i].item()]
+            mask.append(True)
+        else:
+            mask.append(False)
+    mask = torch.Tensor(mask).bool()
+
+
+    # Apply the mask to keep only edges above the threshold
+    new_data.edge_index = new_data.edge_index[:, mask]
+
+    # Manually create a new instance of the Planetoid class
+    transformed_dataset = Planetoid(root=root, name=name)
+
+    # Set the necessary attributes
+    transformed_dataset.data = new_data
+    
+    return transformed_dataset
+
+def random_remove_edges(dataset, p_remove, root, name):
+    # Copy the original data to avoid modifying the original dataset
+    data = dataset[0]
+    new_data = data.clone()
+
+    # Generate a mask to randomly remove nodes
+    mask = torch.rand(data.num_edges) > p_remove
+
+    edge_index_T = new_data.edge_index.T
+
+    # Apply the mask to keep only edges above the threshold
+    new_data.edge_index = new_data.edge_index[:, mask]
+
+    # Manually create a new instance of the Planetoid class
+    transformed_dataset = Planetoid(root=root, name=name)
+
+    # Set the necessary attributes
+    transformed_dataset.data = new_data
+    
+    return transformed_dataset
+
+
 def get_dataset(name, normalize_features=True, transform=None, if_dpr=True):
     path = osp.join(osp.dirname(osp.realpath(__file__)), 'data', name)
     if name in ['cora', 'citeseer', 'pubmed']:
         dataset = Planetoid(path, name)
+        # dataset = random_remove_nodes(dataset, 0.2, path, name)
     elif name in ['ogbn-arxiv']:
         dataset = PygNodePropPredDataset(name='ogbn-arxiv')
     else:

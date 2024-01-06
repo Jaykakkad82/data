@@ -80,6 +80,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=log_format, da
 fh = logging.FileHandler(os.path.join(log_dir, 'train.log'))
 fh.setFormatter(logging.Formatter(log_format))
 logging.getLogger().addHandler(fh)
+print('This is the log_dir: {}'.format(log_dir))
 logging.info('This is the log_dir: {}'.format(log_dir))
 
 
@@ -105,5 +106,8 @@ agent = MetaGtt(data, args, device=device)
 writer = SummaryWriter(log_dir + '/tbx_log')
 
 agent.distill(writer)
+
+print(args)
+print('Finish! Log_dir: {}'.format(log_dir))
 
 logging.info('Finish! Log_dir: {}'.format(log_dir))
