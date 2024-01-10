@@ -73,7 +73,7 @@ class MetaGtt:
             random.shuffle(expert_files)
             if args.max_files is not None:
                 expert_files = expert_files[:args.max_files]
-            print("loading file {}".format(expert_files[file_idx]))
+            # print("loading file {}".format(expert_files[file_idx]))
             buffer = torch.load(expert_files[file_idx])
             if args.max_experts is not None:
                 buffer = buffer[:args.max_experts]
@@ -349,7 +349,7 @@ class MetaGtt:
                     if file_idx == len(expert_files):
                         file_idx = 0
                         random.shuffle(expert_files)
-                    print("loading file {}".format(expert_files[file_idx]))
+                    # print("loading file {}".format(expert_files[file_idx]))
                     if args.max_files != 1:
                         del self.buffer
                         self.buffer = torch.load(expert_files[file_idx])

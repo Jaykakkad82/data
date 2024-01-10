@@ -11,6 +11,7 @@ import deeprobust.graph.utils as utils
 import datetime
 import os
 import sys
+from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 # parser.add_argument('--gpu_id', type=int, default=0, help='gpu id')
@@ -44,7 +45,7 @@ log_dir = './' + args.save_log + '/Coreset/{}-reduce_{}-{}'.format(args.dataset,
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 log_format = '%(asctime)s %(message)s'
-logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=log_format, datefmt='%m/%d %I:%M:%S %p')
+logging.basicConfig(filename=os.path.join(log_dir, 'coreset.log'), level=logging.INFO, format=log_format, datefmt='%m/%d %I:%M:%S %p')
 fh = logging.FileHandler(os.path.join(log_dir, 'coreset.log'))
 fh.setFormatter(logging.Formatter(log_format))
 logging.getLogger().addHandler(fh)
@@ -89,7 +90,7 @@ model = GCN(nfeat=features.shape[1], nhid=args.hidden, nclass=data.nclass, devic
 model = model.to(device)
 if args.load_npy=='':
     optimizer_model = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
-    for e in range(args.epochs + 1):
+    for e in tqdm(range(args.epochs + 1), desc='Coreset'):
         model.train()
         optimizer_model.zero_grad()
         embed, output = model.forward(features, adj)

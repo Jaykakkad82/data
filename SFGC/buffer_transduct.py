@@ -17,6 +17,7 @@ from itertools import repeat
 from models.gat import GAT
 from models.gcn import GCN
 from models.sgc import SGC
+from tqdm import tqdm
 
 
 def main(args):
@@ -51,7 +52,7 @@ def main(args):
     model_type = args.buffer_model_type
 
     if model_type != 'GAT':
-        for it in range(0, args.num_experts):
+        for it in tqdm(range(0, args.num_experts), desc="Buffer"):
             logging.info(
                 '======================== {} -th number of experts for {}-model_type=============================='.format(
                     it, model_type))
@@ -394,11 +395,12 @@ if __name__ == '__main__':
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
     log_format = '%(asctime)s %(message)s'
-    logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=log_format, datefmt='%m/%d %I:%M:%S %p')
+    logging.basicConfig(filename=os.path.join(log_dir, 'train.log'), level=logging.INFO, format=log_format, datefmt='%m/%d %I:%M:%S %p')
     fh = logging.FileHandler(os.path.join(log_dir, 'train.log'))
     fh.setFormatter(logging.Formatter(log_format))
     logging.getLogger().addHandler(fh)
     logging.info('This is the log_dir: {}'.format(log_dir))
+    print('This is the log_dir: {}'.format(log_dir))
     writer = SummaryWriter(log_dir + '/tbx_log')
     main(args)
     print(args)
