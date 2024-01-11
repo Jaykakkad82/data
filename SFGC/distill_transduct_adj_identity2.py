@@ -76,11 +76,12 @@ log_dir = './' + args.save_log + '/Distill/{}-reduce_{}-{}'.format(args.dataset,
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 log_format = '%(asctime)s %(message)s'
-logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=log_format, datefmt='%m/%d %I:%M:%S %p')
+logging.basicConfig(filename=os.path.join(log_dir, 'train.log'), level=logging.INFO, format=log_format, datefmt='%m/%d %I:%M:%S %p')
 fh = logging.FileHandler(os.path.join(log_dir, 'train.log'))
 fh.setFormatter(logging.Formatter(log_format))
 logging.getLogger().addHandler(fh)
 logging.info('This is the log_dir: {}'.format(log_dir))
+print('This is the log_dir: {}'.format(log_dir))
 
 
 # random seed setting

@@ -24,6 +24,7 @@ from sklearn.neighbors import kneighbors_graph
 from collections import Counter
 import scipy
 from gntk_cond import GNTK
+from tqdm import tqdm
 
 
 class MetaGtt:
@@ -73,7 +74,7 @@ class MetaGtt:
             random.shuffle(expert_files)
             if args.max_files is not None:
                 expert_files = expert_files[:args.max_files]
-            print("loading file {}".format(expert_files[file_idx]))
+            # print("loading file {}".format(expert_files[file_idx]))
             buffer = torch.load(expert_files[file_idx])
             if args.max_experts is not None:
                 buffer = buffer[:args.max_experts]
@@ -314,7 +315,7 @@ class MetaGtt:
         best_loss_it = 0
         adj_syn_norm_key = {'0': 0}
 
-        for it in range(0, args.ITER + 1):
+        for it in tqdm(range(0, args.ITER + 1), desc='Distill'):
             #logging.info(adj_syn_norm_key['0'])
             if args.dataset in ['ogbn-arxiv']:
                 #model = SGC1(nfeat=feat_syn.shape[1], nhid=self.args.student_hidden,
@@ -354,7 +355,7 @@ class MetaGtt:
                     if file_idx == len(expert_files):
                         file_idx = 0
                         random.shuffle(expert_files)
-                    print("loading file {}".format(expert_files[file_idx]))
+                    # print("loading file {}".format(expert_files[file_idx]))
                     if args.max_files != 1:
                         del self.buffer
                         self.buffer = torch.load(expert_files[file_idx])
