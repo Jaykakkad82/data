@@ -11,6 +11,7 @@ import deeprobust.graph.utils as utils
 import datetime
 import os
 import sys
+from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 # parser.add_argument('--gpu_id', type=int, default=0, help='gpu id')
@@ -92,7 +93,7 @@ model = model.to(device)
 if args.load_npy == '':
     optimizer_model = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     best_load_test = best_load_it = 0
-    for e in range(args.epochs + 1):
+    for e in tqdm(range(args.epochs + 1), desc='Coreset'):
         model.train()
         optimizer_model.zero_grad()
         embed, output = model.forward(features, adj)
@@ -216,6 +217,7 @@ else:
     logging.info(args)
     logging.info(log_dir)
     logging.info('Mean accuracy = {:.4f}, Std = {:.4f}'.format(res.mean(), res.std()))
-    print(args)
-    print(log_dir)
     print('Mean accuracy = {:.4f}, Std = {:.4f}'.format(res.mean(), res.std()))
+
+print(args)
+print('Finish!, Log_dir: {}'.format(log_dir))

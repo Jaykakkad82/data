@@ -14,6 +14,8 @@ import datetime
 import os
 from tensorboardX import SummaryWriter
 import deeprobust.graph.utils as utils
+import json
+import sys
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--device', type=str, default='cpu')
@@ -39,7 +41,7 @@ parser.add_argument('--expert_epochs', type=int, default=50,help='how many exper
 parser.add_argument('--start_epoch', type=int, default=10, help='max epoch we can start at')
 parser.add_argument('--ITER', type=int, default=5000, help='how many distillation steps to perform')
 parser.add_argument('--syn_steps', type=int, default=20,help = 'how many steps to take on synthetic data')
-parser.add_argument('--buffer_path', type=str, default='./logs/Buffer/cora-20220925-225653-091173', help='buffer path')
+parser.add_argument('--buffer_path', type=str, default='', help='buffer path')
 parser.add_argument('--condense_model', type=str, default='GCN', help='Default condensation model')
 
 parser.add_argument('--eval_model', type=str, default='SGC', help='evaluation model for saving best feat')
@@ -64,15 +66,44 @@ parser.add_argument('--ntk_reg', type=float, default=5e-2, help='L2 penalty reg 
 parser.add_argument('--samp_iter', type=int, default=5, help='sampling numbers in the validation for ntk')
 parser.add_argument('--samp_num_per_class', type=int, default=10, help='sampling numbers for each class')
 
-parser.add_argument('--coreset_init_path', type=str, default='logs/Coreset/cora-reduce_0.5-20221024-112028-667459')
+parser.add_argument('--coreset_init_path', type=str, default='')
 parser.add_argument('--coreset_method', type=str, default='kcenter')
 parser.add_argument('--coreset_seed', type=int, default=15)
 
-args = parser.parse_args()
+parser.add_argument('--uid', type=str, default='default-uid', help='stores log file path')
+parser.add_argument('--noise-type', type=str, default='edge_add')
+parser.add_argument('--noise', type=float, default=0)
 
+args = parser.parse_args()
 
 log_dir = './' + args.save_log + '/Distill/{}-reduce_{}-{}'.format(args.dataset, str(args.reduction_rate),
                                                         datetime.datetime.now().strftime("%Y%m%d-%H%M%S-%f"))
+
+uid = args.uid
+if uid != '':
+    print(f'Checking uid: {uid}')
+    uid_dir = os.path.join('./logs/ckpt', uid)
+    file_path = os.path.join(uid_dir, f'distill_{args.reduction_rate}.json')
+    if os.path.exists(file_path):
+        print('Job already finished, exiting')
+        sys.exit(0)
+
+    print(f'Loading uid: {uid}')
+    uid_dir = os.path.join('./logs/ckpt', uid)
+    buffer_file_path = os.path.join(uid_dir, 'buffer.json')
+    print(f'Loading buffer path: {buffer_file_path}')
+    coreset_file_path = os.path.join(uid_dir, f'coreset_{args.reduction_rate}.json')
+    print(f'Loading coreset: {coreset_file_path}')
+    json_data = {'log_dir': log_dir}
+    with open(buffer_file_path, 'r') as json_file:
+        json_data = json.load(json_file)
+        args.buffer_path = json_data['log_dir']
+    with open(coreset_file_path, 'r') as json_file:
+        json_data = json.load(json_file)
+        args.coreset_init_path = json_data['log_dir']
+else:
+    print('uid missing')
+
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 log_format = '%(asctime)s %(message)s'
@@ -99,13 +130,23 @@ if args.dataset in data_graphsaint:
     data = DataGraphSAINT(args.dataset)
     data_full = data.data_full
 else:
-    data_full = get_dataset(args.dataset)
+    data_full = get_dataset(args.dataset, noise_type=args.noise_type, noise=args.noise)
     data = Transd2Ind(data_full)
 args.log_dir = log_dir
 agent = MetaGtt(data, args, device=device)
 writer = SummaryWriter(log_dir + '/tbx_log')
 
 agent.distill(writer)
+
+if uid != '':
+    print(f'Saving uid: {uid}')
+    uid_dir = os.path.join('./logs/ckpt', uid)
+    file_path = os.path.join(uid_dir, f'distill_{args.reduction_rate}.json')
+    json_data = {'log_dir': log_dir}
+    if not os.path.exists(uid_dir):
+        os.makedirs(uid_dir)
+    with open(file_path, 'w') as json_file:
+        json.dump(json_data, json_file, indent=2)
 
 print(args)
 print('Finish! Log_dir: {}'.format(log_dir))

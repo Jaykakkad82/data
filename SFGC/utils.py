@@ -131,11 +131,14 @@ def random_add_edges(dataset, p_add, root, name):
     return transformed_dataset
 
 
-def get_dataset(name, normalize_features=True, transform=None, if_dpr=True):
+def get_dataset(name, normalize_features=True, transform=None, if_dpr=True, noise_type=None, noise=0):
     path = osp.join(osp.dirname(osp.realpath(__file__)), 'data', name)
     if name in ['cora', 'citeseer', 'pubmed']:
         dataset = Planetoid(path, name)
         # dataset = random_remove_nodes(dataset, 0.2, path, name)
+        if noise > 0:
+            print('Loading noise data')
+            dataset = random_add_edges(dataset, noise, path, name)
     elif name in ['ogbn-arxiv']:
         dataset = PygNodePropPredDataset(name='ogbn-arxiv')
     else:
