@@ -358,7 +358,7 @@ class experiment2():
 import pandas as pd
 class datastorage():
   def __init__(self, theshold_list):
-    self.methods = ["random","herding","kcenter","kmeans", "gcond","sfgc", "one-step"]
+    self.methods = ["random","herding","kcenter","kmeans", "gcond","sfgc", "one-step","sgdd"]
     self.threshold = theshold_list
     self.data = ["cora", "citeseer"]
     self.compression =  [0.125,0.25,0.5]
@@ -425,27 +425,27 @@ class datastorage():
 
     # print("Jacard Nodes Similarity")
     # print(average_jac_nodes)
-    average_jac_nodes.to_csv("Avg_Jacard_nodes_similarity")
+    average_jac_nodes.to_csv("Avg_Jacard_nodes_similarity.csv")
     # print("Jacard Edges Similarity")
     # print(average_jac_edges)
-    average_jac_edges.to_csv("Avg_Jacard_edges_similarity")
+    average_jac_edges.to_csv("Avg_Jacard_edges_similarity.csv")
     # print("Cosine Similarity - Overall")
     # print(average_cosine)
-    average_cosine.to_csv("Avg_Cosine_similarity")
+    average_cosine.to_csv("Avg_Cosine_similarity.csv")
 
     output_folder = 'rawFiles'
     os.makedirs(output_folder, exist_ok=True)
-    self.jac_node_1.to_csv("rawFiles/jac_node_1")
-    self.jac_node_15.to_csv("rawFiles/jac_node_15")
-    self.jac_node_85.to_csv("rawFiles/jac_node_85")
+    self.jac_node_1.to_csv("rawFiles/jac_node_1.csv")
+    self.jac_node_15.to_csv("rawFiles/jac_node_15.csv")
+    self.jac_node_85.to_csv("rawFiles/jac_node_85.csv")
 
-    self.jac_edge_1.to_csv("rawFiles/jac_edge_1")
-    self.jac_edge_15.to_csv("rawFiles/jac_edge_15")
-    self.jac_edge_85.to_csv("rawFiles/jac_edge_85")
+    self.jac_edge_1.to_csv("rawFiles/jac_edge_1.csv")
+    self.jac_edge_15.to_csv("rawFiles/jac_edge_15.csv")
+    self.jac_edge_85.to_csv("rawFiles/jac_edge_85.csv")
 
-    self.cosine_1.to_csv("rawFiles/cosine_1")
-    self.cosine_15.to_csv("rawFiles/cosine_15")
-    self.cosine_85.to_csv("rawFiles/cosine_85")
+    self.cosine_1.to_csv("rawFiles/cosine_1.csv")
+    self.cosine_15.to_csv("rawFiles/cosine_15.csv")
+    self.cosine_85.to_csv("rawFiles/cosine_85.csv")
 
 
 # ## =========================== MAIN PROGRAM ====================================================================================
@@ -483,6 +483,8 @@ pathlist = {('citeseer', 'herding', 0.125, 15): 'models_selection/herding/model_
             ('citeseer', 'one-step', 0.125, 15): 'models_distil/onestep/model_citeseer_0.125_15__1_trans.pt', ('citeseer', 'one-step', 0.125, 1): 'models_distil/onestep/model_citeseer_0.125_1__1_trans.pt', ('citeseer', 'one-step', 0.125, 85): 'models_distil/onestep/model_citeseer_0.125_85__1_trans.pt', ('citeseer', 'one-step', 0.25, 15): 'models_distil/onestep/model_citeseer_0.25_15__1_trans.pt', ('citeseer', 'one-step', 0.25, 1): 'models_distil/onestep/model_citeseer_0.25_1__1_trans.pt', ('citeseer', 'one-step', 0.25, 85): 'models_distil/onestep/model_citeseer_0.25_85__1_trans.pt', ('citeseer', 'one-step', 0.5, 15): 'models_distil/onestep/model_citeseer_0.5_15__1_trans.pt', ('citeseer', 'one-step', 0.5, 1): 'models_distil/onestep/model_citeseer_0.5_1__1_trans.pt', ('citeseer', 'one-step', 0.5, 85): 'models_distil/onestep/model_citeseer_0.5_85__1_trans.pt', ('cora', 'one-step', 0.125, 15): 'models_distil/onestep/model_cora_0.125_15__1_trans.pt', ('cora', 'one-step', 0.125, 1): 'models_distil/onestep/model_cora_0.125_1__1_trans.pt', ('cora', 'one-step', 0.125, 85): 'models_distil/onestep/model_cora_0.125_85__1_trans.pt', ('cora', 'one-step', 0.25, 15): 'models_distil/onestep/model_cora_0.25_15__1_trans.pt', ('cora', 'one-step', 0.25, 1): 'models_distil/onestep/model_cora_0.25_1__1_trans.pt', ('cora', 'one-step', 0.25, 85): 'models_distil/onestep/model_cora_0.25_85__1_trans.pt', ('cora', 'one-step', 0.5, 15): 'models_distil/onestep/model_cora_0.5_15__1_trans.pt', ('cora', 'one-step', 0.5, 1): 'models_distil/onestep/model_cora_0.5_1__1_trans.pt', ('cora', 'one-step', 0.5, 85): 'models_distil/onestep/model_cora_0.5_85__1_trans.pt'}
 
 # pathlist= {('citeseer','sfgc',0.5,15):"models_distil/sfgc/GCN_eval.pt"}
+pathlist = {('citeseer', 'sfgc', 0.125, 1): 'models_distil/sfgc/model_citeseer_0.125_1.pt', ('citeseer', 'sfgc', 0.125, 85): 'models_distil/sfgc/model_citeseer_0.125_85.pt', ('citeseer', 'sfgc', 0.125, 15): 'models_distil/sfgc/model_citeseer_0.125_15.pt', ('citeseer', 'sfgc', 0.25, 1): 'models_distil/sfgc/model_citeseer_0.25_1.pt', ('citeseer', 'sfgc', 0.25, 15): 'models_distil/sfgc/model_citeseer_0.25_15.pt', ('citeseer', 'sfgc', 0.25, 85): 'models_distil/sfgc/model_citeseer_0.25_85.pt', ('citeseer', 'sfgc', 0.5, 1): 'models_distil/sfgc/model_citeseer_0.5_1.pt', ('citeseer', 'sfgc', 0.5, 85): 'models_distil/sfgc/model_citeseer_0.5_85.pt', ('citeseer', 'sfgc', 0.5, 15): 'models_distil/sfgc/model_citeseer_0.5_15.pt', ('cora', 'sfgc', 0.125, 1): 'models_distil/sfgc/model_cora_0.125_1.pt', ('cora', 'sfgc', 0.125, 85): 'models_distil/sfgc/model_cora_0.125_85.pt', ('cora', 'sfgc', 0.125, 15): 'models_distil/sfgc/model_cora_0.125_15.pt', ('cora', 'sfgc', 0.25, 1): 'models_distil/sfgc/model_cora_0.25_1.pt', ('cora', 'sfgc', 0.25, 85): 'models_distil/sfgc/model_cora_0.25_85.pt', ('cora', 'sfgc', 0.25, 15): 'models_distil/sfgc/model_cora_0.25_15.pt', ('cora', 'sfgc', 0.5, 1): 'models_distil/sfgc/model_cora_0.5_1.pt', ('cora', 'sfgc', 0.5, 85): 'models_distil/sfgc/model_cora_0.5_85.pt', ('cora', 'sfgc', 0.5, 15): 'models_distil/sfgc/model_cora_0.5_15.pt', 
+('citeseer', 'sgdd', 0.25, 1): 'models_distil/sgdd/model_citeseer_0.25_1_sgdd.pt', ('citeseer', 'sgdd', 0.25, 85): 'models_distil/sgdd/model_citeseer_0.25_85_sgdd.pt', ('citeseer', 'sgdd', 0.25, 15): 'models_distil/sgdd/model_citeseer_0.25_15_sgdd.pt', ('citeseer', 'sgdd', 0.5, 15): 'models_distil/sgdd/model_citeseer_0.5_15_sgdd.pt', ('citeseer', 'sgdd', 0.5, 85): 'models_distil/sgdd/model_citeseer_0.5_85_sgdd.pt', ('citeseer', 'sgdd', 0.5, 1): 'models_distil/sgdd/model_citeseer_0.5_1_sgdd.pt', ('cora', 'sgdd', 0.25, 85): 'models_distil/sgdd/model_cora_0.25_85_sgdd.pt', ('cora', 'sgdd', 0.25, 1): 'models_distil/sgdd/model_cora_0.25_1_sgdd.pt', ('cora', 'sgdd', 0.25, 15): 'models_distil/sgdd/model_cora_0.25_15_sgdd.pt', ('cora', 'sgdd', 0.5, 85): 'models_distil/sgdd/model_cora_0.5_85_sgdd.pt', ('cora', 'sgdd', 0.5, 15): 'models_distil/sgdd/model_cora_0.5_15_sgdd.pt', ('cora', 'sgdd', 0.5, 1): 'models_distil/sgdd/model_cora_0.5_1_sgdd.pt', ('citeseer', 'sgdd', 0.125, 1): 'models_distil/sgdd/model_citeseer_0.125_1_sgdd.pt', ('citeseer', 'sgdd', 0.125, 15): 'models_distil/sgdd/model_citeseer_0.125_15_sgdd.pt', ('citeseer', 'sgdd', 0.125, 85): 'models_distil/sgdd/model_citeseer_0.125_85_sgdd.pt', ('cora', 'sgdd', 0.125, 1): 'models_distil/sgdd/model_cora_0.125_1_sgdd.pt', ('cora', 'sgdd', 0.125, 15): 'models_distil/sgdd/model_cora_0.125_15_sgdd.pt', ('cora', 'sgdd', 0.125, 85): 'models_distil/sgdd/model_cora_0.125_85_sgdd.pt'}
 exp.run_experiment(pathlist)
 
 exp.results_store.display_save()

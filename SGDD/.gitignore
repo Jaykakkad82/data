@@ -13,6 +13,7 @@ print_output/
 data/
 Eval_model/
 saved_ours/
+nautilus_results/
 
 .Python
 build/

@@ -1,7 +1,7 @@
 import os
 
 # Directory containing your files
-directory_path = 'models_distil/onestep'
+directory_path = 'models_distil/sgdd'
 
 # Dictionary to store details
 file_details = {}
@@ -21,7 +21,7 @@ for filename in os.listdir(directory_path):
         # Check if the filename has the expected format
         #if len(parts) == 3:
         #_,dataset, compression, seed,_,_ = parts
-        key = (parts[1], 'one-step', float(parts[2]), int(parts[3]))
+        key = (parts[1], 'sgdd', float(parts[2]), int(parts[3].split(".")[0]))
             
         # Add entry to the dictionary
         file_details[key] = file_path
@@ -30,3 +30,5 @@ for filename in os.listdir(directory_path):
 print(file_details)
 # for key, value in file_details.items():
 #     print(f"{key}: {value}")
+
+
