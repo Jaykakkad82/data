@@ -30,6 +30,9 @@ parser.add_argument('--inductive', type=int, default=1)
 parser.add_argument('--save', type=int, default=1)
 parser.add_argument('--method', type=str, choices=['kcenter', 'herding', 'random', 'kmeans'])
 parser.add_argument('--reduction_rate', type=float, required=True)
+parser.add_argument('--noise-type', type=str, default='edge_add')
+parser.add_argument('--noise', type=float, default=0)
+
 args = parser.parse_args()
 
 torch.cuda.set_device(args.gpu_id)
@@ -71,7 +74,8 @@ if args.dataset in data_graphsaint:
     data_full = data.data_full
     data = Transd2Ind(data_full, keep_ratio=args.keep_ratio)
 else:
-    data_full = get_dataset(args.dataset, args.normalize_features)
+    # get_dataset(args.dataset, args.normalize_features, noise_type=args.noise_type, noise=args.noise)
+    data_full = get_dataset(args.dataset, args.normalize_features, noise_type=args.noise_type, noise=args.noise)
     data = Transd2Ind(data_full, keep_ratio=args.keep_ratio)
 
 features = data_full.features
