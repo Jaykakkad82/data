@@ -12,6 +12,8 @@ import datetime
 import os
 import sys
 from tqdm import tqdm
+import json
+import sys
 
 parser = argparse.ArgumentParser()
 # parser.add_argument('--gpu_id', type=int, default=0, help='gpu id')
@@ -34,6 +36,11 @@ parser.add_argument('--reduction_rate', type=float, default=0.5)
 parser.add_argument('--load_npy', type=str, default='')
 parser.add_argument('--opt_type_train', type=str, default='Adam')
 parser.add_argument('--runs', type=int, default=10)
+
+parser.add_argument('--uid', type=str, default='default-uid', help='stores log file path')
+parser.add_argument('--noise-type', type=str, default='edge_add')
+parser.add_argument('--noise', type=float, default=0)
+
 args = parser.parse_args()
 
 device = torch.device(args.device)
@@ -42,6 +49,18 @@ device = torch.device(args.device)
 # print(args)
 log_dir = './' + args.save_log + '/Coreset/{}-reduce_{}-{}'.format(args.dataset, str(args.reduction_rate),
                                                                    datetime.datetime.now().strftime("%Y%m%d-%H%M%S-%f"))
+
+uid = args.uid
+if uid != '':
+    print(f'Checking uid: {uid}')
+    uid_dir = os.path.join('./logs/ckpt', uid)
+    file_path = os.path.join(uid_dir, f'coreset_{args.reduction_rate}.json')
+    if os.path.exists(file_path):
+        print('Job already finished, exiting')
+        sys.exit(0)
+else:
+    print('uid missing')
+
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 log_format = '%(asctime)s %(message)s'
@@ -50,6 +69,8 @@ fh = logging.FileHandler(os.path.join(log_dir, 'coreset.log'))
 fh.setFormatter(logging.Formatter(log_format))
 logging.getLogger().addHandler(fh)
 logging.info('This is the log_dir: {}'.format(log_dir))
+
+print('This is the log_dir: {}'.format(log_dir))
 
 # random seed setting
 random.seed(args.seed)
@@ -64,7 +85,7 @@ if args.dataset in data_graphsaint:
     data_full = data.data_full
     data = Transd2Ind(data_full, keep_ratio=args.keep_ratio)
 else:
-    data_full = get_dataset(args.dataset, args.normalize_features)
+    data_full = get_dataset(args.dataset, args.normalize_features, noise_type=args.noise_type, noise=args.noise)
     data = Transd2Ind(data_full, keep_ratio=args.keep_ratio)
 
 features, adj, labels = data.feat_full, data.adj_full, data.labels_full
@@ -207,6 +228,19 @@ else:
     logging.info(args)
     logging.info(log_dir)
     logging.info('Mean accuracy = {:.4f}, Std = {:.4f}'.format(res.mean(), res.std()))
+
+uid = args.uid
+if uid != '':
+    print(f'Saving uid: {uid}')
+    uid_dir = os.path.join('./logs/ckpt', uid)
+    file_path = os.path.join(uid_dir, f'coreset_{args.reduction_rate}.json')
+    json_data = {'log_dir': log_dir}
+    if not os.path.exists(uid_dir):
+        os.makedirs(uid_dir)
+    with open(file_path, 'w') as json_file:
+        json.dump(json_data, json_file, indent=2)
+else:
+    print('uid missing')
 
 print('Finished')
 print(args)

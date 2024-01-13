@@ -25,6 +25,8 @@ import logging
 from tensorboardX import SummaryWriter
 from sklearn.neighbors import kneighbors_graph
 import json
+from tqdm import tqdm
+import sys
 
 
 # random seed setting
@@ -47,7 +49,7 @@ def main(args):
         data = DataGraphSAINT(args.dataset)
         data_full = data.data_full
     else:
-        data_full = get_dataset(args.dataset)
+        data_full = get_dataset(args.dataset, noise_type=args.noise_type, noise=args.noise)
         data = Transd2Ind(data_full)
 
     #logging.info(train_args.__dict__)
@@ -56,7 +58,7 @@ def main(args):
         res_val = []
         res_test = []
         nlayer = 2
-        for i in range(args.nruns):
+        for i in tqdm(range(args.nruns), desc='Test'):
             best_acc_val, best_acc_test = test_gat(args, data, device, nlayers=nlayer, model_type='GAT')
             res_val.append(best_acc_val)
             res_test.append(best_acc_test)
@@ -70,7 +72,7 @@ def main(args):
         res_val = []
         res_test = []
         nlayer = 2
-        for i in range(args.nruns):
+        for i in tqdm(range(args.nruns), desc='Test'):
             best_acc_val, best_acc_test = test(args, data, device, nlayer, model_type=args.test_model_type, nruns=i)
             res_val.append(best_acc_val)
             res_test.append(best_acc_test)
@@ -341,8 +343,7 @@ if __name__ == '__main__':
     parser.add_argument('--nruns', type=int, default=10)
     parser.add_argument('--test_model_type', type=str, default='GCN')
     parser.add_argument('--save_log', type=str, default='logs', help='path to save log')
-    parser.add_argument('--load_path', type=str, default='./logs/Distill/cora-reduce_0.25-20221026-135148-821946',
-                        help='path to load dataset')
+    parser.add_argument('--load_path', type=str, default='', help='path to load dataset')
     parser.add_argument('--best_ntk_score', type=int, default=1, help='whether use the best condensed graph data')
     parser.add_argument('--best_test_acc', type=int, default=0, help='whether use the best condensed graph data')
     parser.add_argument('--best_val_acc', type=int, default=0, help='whether use the best condensed graph data')
@@ -352,6 +353,10 @@ if __name__ == '__main__':
     parser.add_argument('--lr_decay', type=int, default=0, help='whether half epoch decay lr')
     parser.add_argument('--test_opt_type', type=str, default='Adam',help='choosing the optimizer type')
 
+    parser.add_argument('--uid', type=str, default='', help='stores log file path')
+    parser.add_argument('--noise-type', type=str, default='edge_add')
+    parser.add_argument('--noise', type=float, default=0)
+
     args = parser.parse_args()
 
     log_dir = './' + args.save_log + '/Test/{}-model_{}-reduce_{}-{}'.format(args.dataset, args.test_model_type,
@@ -360,6 +365,27 @@ if __name__ == '__main__':
                                                                                  "%Y%m%d-%H%M%S-%f"))
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
+
+    uid = args.uid
+    if uid != '':
+        print(f'Checking uid: {uid}')
+        uid_dir = os.path.join('./logs/ckpt', uid)
+        file_path = os.path.join(uid_dir, f'test_{args.reduction_rate}.json')
+        if os.path.exists(json_data):
+            print('Job already finished, exiting')
+            sys.exit(0)
+
+        print(f'Loading uid: {uid}')
+        uid_dir = os.path.join('./logs/ckpt', uid)
+        distill_file_path = os.path.join(uid_dir, f'distill_{args.reduction_rate}.json')
+        json_data = {'log_dir': log_dir}
+        with open(distill_file_path, 'r') as json_file:
+            json_data = json.load(json_file)
+            args.load_path = json_data['log_dir']
+            print(f'Loading coreset: {args.load_path}')
+    else:
+        print('uid missing')
+
     log_format = '%(asctime)s %(message)s'
     logging.basicConfig(filename=os.path.join(log_dir, 'test.log'), level=logging.INFO, format=log_format, datefmt='%m/%d %I:%M:%S %p')
     fh = logging.FileHandler(os.path.join(log_dir, 'test.log'))
@@ -380,10 +406,22 @@ if __name__ == '__main__':
     with open(args_file, 'w') as file:
         json.dump(args_dict, file, indent=4)
 
-    main(args)
+    best_acc_val, best_acc_test, _ = main(args)
     torch.cuda.empty_cache()
     logging.info(args)
     logging.info('Finish!, Log_dir: {}'.format(log_dir))
+
+    if uid != '':
+        print(f'Saving uid: {uid}')
+        uid_dir = os.path.join('./logs/ckpt', uid)
+        file_path = os.path.join(uid_dir, f'test_{args.reduction_rate}.json')
+        json_data = {'log_dir': log_dir, 'best_acc_val': best_acc_val, 'best_acc_test': best_acc_test}
+        if not os.path.exists(uid_dir):
+            os.makedirs(uid_dir)
+        with open(file_path, 'w') as json_file:
+            json.dump(json_data, json_file, indent=2)
+    else:
+        print('uid missing')
 
     fh.flush()
     fh.close()

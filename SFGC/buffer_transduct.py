@@ -18,6 +18,8 @@ from models.gat import GAT
 from models.gcn import GCN
 from models.sgc import SGC
 from tqdm import tqdm
+import json
+import sys
 
 
 def main(args):
@@ -34,7 +36,7 @@ def main(args):
         data = DataGraphSAINT(args.dataset)
         data_full = data.data_full
     else:
-        data_full = get_dataset(args.dataset)
+        data_full = get_dataset(args.dataset, noise_type=args.noise_type, noise=args.noise)
         data = Transd2Ind(data_full)
 
     features, adj, labels = data.feat_full, data.adj_full, data.labels_full
@@ -388,10 +390,27 @@ if __name__ == '__main__':
     parser.add_argument('--decay', type=int, default=0, choices=[1, 0], help='whether to decay lr at 1/2 training epochs')
     parser.add_argument('--decay_factor', type=float, default=0.1, help='decay factor of lr at 1/2 training epochs')
 
+    parser.add_argument('--uid', type=str, default='', help='stores log file path')
+    parser.add_argument('--noise-type', type=str, default='edge_add')
+    parser.add_argument('--noise', type=float, default=0)
+    
+
     args = parser.parse_args()
 
     log_dir = './' + args.save_log + '/Buffer/{}-{}'.format(args.dataset,
                                                             datetime.datetime.now().strftime("%Y%m%d-%H%M%S-%f"))
+    
+    uid = args.uid
+    if uid != '':
+        print(f'Checking uid: {uid}')
+        uid_dir = os.path.join('./logs/ckpt', uid)
+        file_path = os.path.join(uid_dir, 'buffer.json')
+        if os.path.exists(file_path):
+            print('Job already finished, exiting')
+            sys.exit(0)
+    else:
+        print('uid missing')
+
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
     log_format = '%(asctime)s %(message)s'
@@ -403,7 +422,22 @@ if __name__ == '__main__':
     print('This is the log_dir: {}'.format(log_dir))
     writer = SummaryWriter(log_dir + '/tbx_log')
     main(args)
+
+    uid = args.uid
+    if uid != '':
+        print(f'Saving uid: {uid}')
+        uid_dir = os.path.join('./logs/ckpt', uid)
+        file_path = os.path.join(uid_dir, 'buffer.json')
+        json_data = {'log_dir': log_dir}
+        if not os.path.exists(uid_dir):
+            os.makedirs(uid_dir)
+        with open(file_path, 'w') as json_file:
+            json.dump(json_data, json_file, indent=2)
+    else:
+        print('uid missing')
+
     print(args)
-    print(log_dir)
+    print('Finish!, Log_dir: {}'.format(log_dir))
+
     logging.info(args)
     logging.info('Finish!, Log_dir: {}'.format(log_dir))
