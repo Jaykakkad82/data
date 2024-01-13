@@ -14,6 +14,7 @@ data/
 Eval_model/
 saved_ours/
 saved_core/
+heatmap_out/
 
 .Python
 build/

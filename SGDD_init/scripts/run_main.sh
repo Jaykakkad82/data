@@ -8,7 +8,7 @@
 
 # python train_SGDD.py --dataset "cora"  --nlayers=2 --beta 0.1 --r=0.25 --gpu_id=0 --inittype='kcenter'
 
-for s in 1000 120 85 15
+for s in 1 1000 120 85 15
 do
     for r in 0.25 0.5
     do

@@ -17,6 +17,7 @@ from models.IGNR import GraphonLearner as IGNR
 import scipy.sparse as sp
 from torch_sparse import SparseTensor
 from tqdm import trange
+import matplotlib.pyplot as plt
 
 
 class SGDD:
@@ -106,9 +107,9 @@ class SGDD:
         if not os.path.exists('saved_ours'):
             os.makedirs('saved_ours')
         if self.args.save:
-            torch.save(adj_syn, f'saved_ours/adj_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
-            torch.save(feat_syn, f'saved_ours/feat_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
-            torch.save(labels_syn, f'saved_ours/label_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
+            torch.save(adj_syn, f'saved_ours/adj_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.inittype}.pt')
+            torch.save(feat_syn, f'saved_ours/feat_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.inittype}.pt')
+            torch.save(labels_syn, f'saved_ours/label_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.inittype}.pt')
 
         if self.args.lr_adj == 0:
             n = len(labels_syn)
@@ -140,10 +141,10 @@ class SGDD:
         if acc_test.item() > self.best_acc:
             self.best_acc= acc_test.item()
             print("Saving Model at acc: ", self.best_acc)
-            torch.save(model.state_dict(), f'Eval_model/model_{args.dataset}_{args.reduction_rate}_{args.seed}_sgdd.pt')
-            torch.save(adj_syn, f'Eval_distildata/adj_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
-            torch.save(feat_syn, f'Eval_distildata/feat_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
-            torch.save(labels_syn, f'Eval_distildata/label_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
+            torch.save(model.state_dict(), f'Eval_model/model_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.inittype}_sgdd.pt')
+            torch.save(adj_syn, f'Eval_distildata/adj_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.inittype}.pt')
+            torch.save(feat_syn, f'Eval_distildata/feat_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.inittype}.pt')
+            torch.save(labels_syn, f'Eval_distildata/label_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.inittype}.pt')
 
         if verbose:
             print("Test set results:",
@@ -155,7 +156,7 @@ class SGDD:
         args = self.args
         data = self.data
         feat_syn, IGNR, labels_syn = self.feat_syn, self.IGNR, self.labels_syn
-        features, adj, labels = data.feat_full, data.adj_full, data.labels_full
+        features, adj, labels = data.feat_full, data.adj_full, data.labels_full 
         idx_train = data.idx_train
 
         syn_class_indices = self.syn_class_indices
@@ -224,6 +225,22 @@ class SGDD:
                 adj_syn_norm = utils.normalize_adj_tensor(adj_syn, sparse=False)
                 feat_syn_norm = feat_syn
 
+                self.visualize_heatmap(adj_syn_norm, f'epoch_{ol}')
+                
+                # =================================================
+                # # Convert the tensor to a NumPy array
+                # import matplotlib.pyplot as plt
+                # import seaborn as sns
+                # numpy_array = adj_syn_norm.cpu().detach().numpy()
+
+                # # Plot the heatmap using matplotlib
+                # # plt.imshow(numpy_array, cmap='hot', interpolation='nearest')
+                # sns.heatmap(numpy_array, cmap='hot', annot=True, fmt=".2f", cbar=True)
+
+                # # plt.colorbar()  # Add a colorbar for reference
+                # plt.show()
+                # plt.savefig('heatmap.png')
+                # ====================================================
 
                 BN_flag = False
                 for module in model.modules():
@@ -351,6 +368,7 @@ class SGDD:
         args.out.update(self.best_acc_mean, (args.dataset,args.reduction_rate,args.inittype,"sgdd", args.seed))
         
         print("Best Test accuracy", self.best_acc)
+        print("updated output: ", self.best_acc_mean, " for: ", (args.dataset,args.reduction_rate,args.inittype,"sgdd", args.seed))
 
     def get_sub_adj_feat(self, features):
         data = self.data
@@ -385,6 +403,8 @@ class SGDD:
         feat_train = features[idx_selected_train]
         print("Initialized using - ",f'{self.args.coreset_init_path}/idx_{self.args.dataset}_{self.args.reduction_rate}_{self.args.inittype}_{self.args.seed}.npy')
         # adj_train = adj[np.ix_(idx_selected_train, idx_selected_train)]
+        print("coreset labels: ", self.data.labels_full[idx_selected_train])
+        print("synthetic labels: ", self.labels_syn)
         from sklearn.metrics.pairwise import cosine_similarity
         # features[features!=0] = 1
         k = 2
@@ -396,6 +416,25 @@ class SGDD:
             sims[i, indices_argsort[: -k]] = 0                  # only top k element are kept
         adj_knn = torch.FloatTensor(sims).to(self.device)
         return feat_train, adj_knn
+    def visualize_heatmap(self,adj, heading=""):
+        plt.imshow(adj.detach().cpu().numpy(), cmap='viridis', interpolation='nearest',  aspect='auto')
+        plt.colorbar()  # Add a colorbar to show the scale
+        plt.title(heading)
+        plt.show()
+        plt.savefig(f'heatmap_out/heatmap_{heading}.png')
+        plt.clf()
+        # # Convert the tensor to a NumPy array
+                # import matplotlib.pyplot as plt
+                # import seaborn as sns
+                # numpy_array = adj_syn_norm.cpu().detach().numpy()
+
+                # # Plot the heatmap using matplotlib
+                # # plt.imshow(numpy_array, cmap='hot', interpolation='nearest')
+                # sns.heatmap(numpy_array, cmap='hot', annot=True, fmt=".2f", cbar=True)
+
+                # # plt.colorbar()  # Add a colorbar for reference
+                # plt.show()
+                # plt.savefig('heatmap.png')
 
 
 def get_loops(args):
