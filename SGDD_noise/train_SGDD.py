@@ -49,6 +49,10 @@ parser.add_argument('--outer', type=int, default=20)
 parser.add_argument('--save', type=int, default=1)
 parser.add_argument('--one_step', type=int, default=0)
 parser.add_argument('--mode', type=str, default='disabled', help='whether to use the wandb')
+
+parser.add_argument('--noise-type', type=str, default='edge_add')
+parser.add_argument('--noise', type=float, default=0)
+
 args = parser.parse_args()
 
 torch.cuda.set_device(args.gpu_id)
@@ -82,7 +86,7 @@ if args.dataset in data_graphsaint:
     data = DataGraphSAINT(args.dataset)
     data_full = data.data_full
 else:
-    data_full = get_dataset(args.dataset, args.normalize_features)
+    data_full = get_dataset(args.dataset, args.normalize_features, noise_type=args.noise_type, noise=args.noise)
     data = Transd2Ind(data_full, keep_ratio=args.keep_ratio)
 
 if data_full.adj.shape[0] < 5000:

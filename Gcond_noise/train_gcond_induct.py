@@ -36,6 +36,10 @@ parser.add_argument('--option', type=int, default=0)
 parser.add_argument('--save', type=int, default=1)
 parser.add_argument('--label_rate', type=float, default=1)
 parser.add_argument('--one_step', type=int, default=0)
+
+parser.add_argument('--noise-type', type=str, default='edge_add')
+parser.add_argument('--noise', type=float, default=0)
+
 args = parser.parse_args()
 
 torch.cuda.set_device(args.gpu_id)
@@ -81,7 +85,7 @@ if args.dataset in data_graphsaint:
     data = DataGraphSAINT(args.dataset, label_rate=args.label_rate)
     data_full = data.data_full
 else:
-    data_full = get_dataset(args.dataset, args.normalize_features)
+    data_full = get_dataset(args.dataset, args.normalize_features, noise_type=args.noise_type, noise=args.noise)
     data = Transd2Ind(data_full, keep_ratio=args.keep_ratio)
 
 # saving the data indices 

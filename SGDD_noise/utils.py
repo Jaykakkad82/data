@@ -28,10 +28,123 @@ except:
     P = "P"
 
 
-def get_dataset(name: str, normalize_features=False, transform=None, if_dpr=True):
+def random_remove_nodes(dataset, p_remove, root, name):
+    # Copy the original data to avoid modifying the original dataset
+    data = dataset[0]
+    new_data = data.clone()
+
+    # Generate a mask to randomly remove nodes
+    mask_nodes = torch.ones(data.num_nodes, dtype=bool)
+    mask_nodes[ : int(data.num_nodes*p_remove)] = False
+    shuffled_indices = torch.randperm(data.num_nodes)
+    mask_nodes = mask_nodes[shuffled_indices]
+
+    node_map = {}
+    new_node_id = 0
+    for i in range(data.num_nodes):
+        if mask_nodes[i]:
+            node_map[i] = new_node_id
+            new_node_id += 1
+
+    # Remove selected nodes and their edges 
+    new_data.x = new_data.x[mask_nodes]
+    new_data.y = new_data.y[mask_nodes]
+    new_data.train_mask = new_data.train_mask[mask_nodes]
+    new_data.val_mask = new_data.val_mask[mask_nodes]
+    new_data.test_mask = new_data.test_mask[mask_nodes]
+
+    # Remove edges connected to the removed nodes
+    mask = []
+    for i in range(data.edge_index.shape[1]):
+        if data.edge_index[0][i].item() in node_map and data.edge_index[1][i].item() in node_map:
+            new_data.edge_index[0][i] = node_map[new_data.edge_index[0][i].item()]
+            new_data.edge_index[1][i] = node_map[new_data.edge_index[1][i].item()]
+            mask.append(True)
+        else:
+            mask.append(False)
+    mask = torch.Tensor(mask).bool()
+
+
+    # Apply the mask to keep only edges above the threshold
+    new_data.edge_index = new_data.edge_index[:, mask]
+
+    # Manually create a new instance of the Planetoid class
+    transformed_dataset = Planetoid(root=root, name=name)
+
+    # Set the necessary attributes
+    transformed_dataset.data = new_data
+    
+    return transformed_dataset
+
+def random_remove_edges(dataset, p_remove, root, name):
+    # Copy the original data to avoid modifying the original dataset
+    data = dataset[0]
+    new_data = data.clone()
+
+    undirected_edge_index = set()
+    for edge in data.edge_index.T:
+        edge = tuple(edge.tolist())
+        if (edge[1], edge[0]) not in undirected_edge_index:
+            undirected_edge_index.add(edge)
+    undirected_edge_index = torch.tensor(list([list(edge) for edge in undirected_edge_index]), dtype=torch.long)
+
+    num_underected_edges = len(undirected_edge_index)
+    mask_edges = torch.ones(num_underected_edges, dtype=bool)
+    mask_edges[ : int(num_underected_edges*p_remove)] = False
+    shuffled_indices = torch.randperm(num_underected_edges)
+    mask_edges = mask_edges[shuffled_indices]
+
+    undirected_edge_index = undirected_edge_index[mask_edges]
+
+    directed_edge_index = torch.cat([undirected_edge_index, torch.flip(undirected_edge_index, dims=[1])], dim=0)
+    
+    _, sorted_idx = torch.sort(directed_edge_index.T[0, :], dim=0, descending=False)
+    directed_edge_index = directed_edge_index[sorted_idx]
+
+    new_data.edge_index = directed_edge_index.T
+
+    # Manually create a new instance of the Planetoid class
+    transformed_dataset = Planetoid(root=root, name=name)
+
+    # Set the necessary attributes
+    transformed_dataset.data = new_data
+    
+    return transformed_dataset
+
+def random_add_edges(dataset, p_add, root, name):
+    # Copy the original data to avoid modifying the original dataset
+    data = dataset[0]
+    new_data = data.clone()
+    num_samples = int((data.num_edges // 2)*p_add)
+    u = torch.randint(0, data.num_nodes, (num_samples, ))
+    v = torch.randint(0, data.num_nodes, (num_samples, ))
+    f_edges = torch.cat([u.unsqueeze(1), v.unsqueeze(1)], dim=0)
+    b_edges = torch.cat([v.unsqueeze(1), u.unsqueeze(1)], dim=0)
+    new_edges = torch.cat([f_edges, b_edges], dim=1)
+
+    new_edges = torch.cat([new_data.edge_index.T, new_edges], dim=0)
+    new_edges = torch.unique(new_edges, dim=0)
+    _, sorted_idx = torch.sort(new_edges.T[0, :], dim=0, descending=False)
+    new_edges = new_edges[sorted_idx]
+
+    new_data.edge_index = new_edges.T
+
+    # Manually create a new instance of the Planetoid class
+    transformed_dataset = Planetoid(root=root, name=name)
+
+    # Set the necessary attributes
+    transformed_dataset.data = new_data
+    
+    return transformed_dataset
+
+
+def get_dataset(name: str, normalize_features=False, transform=None, if_dpr=True, noise_type=None, noise=0):
     path = osp.join(osp.dirname(osp.realpath(__file__)), 'data', name)
     if name in ['cora', 'citeseer', 'pubmed']:
         dataset = Planetoid(path, name)
+        if noise > 0:
+            print('Loading noise data')
+            dataset = random_add_edges(dataset, noise, path, name)
     elif name in ['ogbn-arxiv']:
         dataset = PygNodePropPredDataset(name='ogbn-arxiv')
     elif name in ['yelpchi', 'amazon']:
