@@ -311,7 +311,7 @@ class MetaGtt:
         best_loss_it = 0
         adj_syn_norm_key = {'0': 0}
 
-        for it in tqdm(range(0, args.ITER + 1), desc='Progress'):
+        for it in tqdm(range(0, args.ITER + 1), desc="Distill progress"):
             # print('Progress: outer - {}/{}====================================='.format(it, args.ITER))
             #logging.info(adj_syn_norm_key['0'])
             if args.dataset in ['ogbn-arxiv']:

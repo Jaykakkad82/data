@@ -91,16 +91,16 @@ if uid != '':
     print(f'Loading uid: {uid}')
     uid_dir = os.path.join('./logs/ckpt', uid)
     buffer_file_path = os.path.join(uid_dir, 'buffer.json')
-    print(f'Loading buffer path: {buffer_file_path}')
     coreset_file_path = os.path.join(uid_dir, f'coreset_{args.reduction_rate}.json')
-    print(f'Loading coreset: {coreset_file_path}')
     json_data = {'log_dir': log_dir}
     with open(buffer_file_path, 'r') as json_file:
         json_data = json.load(json_file)
         args.buffer_path = json_data['log_dir']
+        print(f'Loading buffer path: {args.buffer_path}')
     with open(coreset_file_path, 'r') as json_file:
         json_data = json.load(json_file)
         args.coreset_init_path = json_data['log_dir']
+        print(f'Loading coreset: {args.coreset_init_path}')
 else:
     print('uid missing')
 
@@ -147,6 +147,8 @@ if uid != '':
         os.makedirs(uid_dir)
     with open(file_path, 'w') as json_file:
         json.dump(json_data, json_file, indent=2)
+else:
+    print('uid missing')
 
 print(args)
 print('Finish! Log_dir: {}'.format(log_dir))
