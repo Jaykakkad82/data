@@ -13,7 +13,7 @@ from gcond_agent_transduct import GCond
 from utils_graphsaint import DataGraphSAINT
 import json
 from output import datastorage
-
+#
 parser = argparse.ArgumentParser()
 parser.add_argument('--gpu_id', type=int, default=0, help='gpu id')
 parser.add_argument('--dataset', type=str, default='cora')

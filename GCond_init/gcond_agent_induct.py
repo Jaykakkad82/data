@@ -15,7 +15,7 @@ from models.sgc_multi import SGC as SGC1
 from models.parametrized_adj import PGE
 import scipy.sparse as sp
 from torch_sparse import SparseTensor
-
+#
 
 class GCond:
 
@@ -35,6 +35,7 @@ class GCond:
         self.optimizer_feat = torch.optim.Adam([self.feat_syn], lr=args.lr_feat)
         self.optimizer_pge = torch.optim.Adam(self.pge.parameters(), lr=args.lr_adj)
         print('adj_syn:', (n,n), 'feat_syn:', self.feat_syn.shape)
+        self.best_acc_mean = 0
 
     def reset_parameters(self):
         self.feat_syn.data.copy_(torch.randn(self.feat_syn.size()))
@@ -131,7 +132,13 @@ class GCond:
         features, adj, labels = data.feat_train, data.adj_train, data.labels_train
         syn_class_indices = self.syn_class_indices
         features, adj, labels = utils.to_tensor(features, adj, labels, device=self.device)
-        feat_sub, adj_sub = self.get_sub_adj_feat(features)
+        
+        if args.inittype==None:
+            feat_sub, adj_sub = self.get_sub_adj_feat(features)
+        else:
+            feat_sub, adj_sub = self.get_coreset_init(features)
+        
+        # feat_sub, adj_sub = self.get_sub_adj_feat(features)
         self.feat_syn.data.copy_(feat_sub)
 
         if utils.is_sparse_tensor(adj):
@@ -272,7 +279,9 @@ class GCond:
                 res = np.array(res)
                 print('Test:',
                         repr([res.mean(0), res.std(0)]))
-
+                if res.mean(0)[1]> self.best_acc_mean:
+                    self.best_acc_mean= res.mean(0)[1]
+        args.out.update(self.best_acc_mean, (args.dataset,args.reduction_rate,args.inittype,"gcond", args.seed))
 
 
     def get_sub_adj_feat(self, features):
@@ -305,6 +314,26 @@ class GCond:
             sims[i, indices_argsort[: -k]] = 0
         adj_knn = torch.FloatTensor(sims).to(self.device)
         return features, adj_knn
+    
+    
+    def get_coreset_init(self, features):   
+        # saved_core/idx_reddit_0.02_random_1000_inductive.npy
+        idx_selected_train = np.load(
+            f'{self.args.coreset_init_path}/idx_{self.args.dataset}_{self.args.reduction_rate}_{self.args.inittype}_{self.args.seed}_inductive.npy')
+        feat_train = features[idx_selected_train]
+        print("Initialized using - ",f'{self.args.coreset_init_path}/idx_{self.args.dataset}_{self.args.reduction_rate}_{self.args.inittype}_{self.args.seed}_inductive.npy')
+        # adj_train = adj[np.ix_(idx_selected_train, idx_selected_train)]
+        from sklearn.metrics.pairwise import cosine_similarity
+        # features[features!=0] = 1
+        k = 2
+        sims = cosine_similarity(feat_train.cpu().numpy())
+        sims[(np.arange(len(sims)), np.arange(len(sims)))] = 0 # diagonal elements set to zero
+
+        for i in range(len(sims)):
+            indices_argsort = np.argsort(sims[i])
+            sims[i, indices_argsort[: -k]] = 0                  # only top k element are kept
+        adj_knn = torch.FloatTensor(sims).to(self.device)
+        return feat_train, adj_knn
 
 
 def get_loops(args):

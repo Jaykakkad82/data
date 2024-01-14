@@ -9,6 +9,7 @@ import torch.nn.functional as F
 from gcond_agent_induct import GCond
 from utils_graphsaint import DataGraphSAINT
 import json
+from output import datastorage
 
 
 parser = argparse.ArgumentParser()
@@ -36,6 +37,10 @@ parser.add_argument('--option', type=int, default=0)
 parser.add_argument('--save', type=int, default=1)
 parser.add_argument('--label_rate', type=float, default=1)
 parser.add_argument('--one_step', type=int, default=0)
+parser.add_argument('--inittype', type=str, default=None)
+parser.add_argument('--coreset_init_path', type=str, default="saved_core")
+
+
 args = parser.parse_args()
 
 torch.cuda.set_device(args.gpu_id)
@@ -60,7 +65,7 @@ def restore_stdout(original_stdout):
     sys.stdout.close()
     sys.stdout = original_stdout
 
-file_name_out = f'print_output/{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_induct.txt'
+file_name_out = f'print_output/{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_{args.inittype}_induct.txt'
 original_stdout = redirect_stdout_to_file(file_name_out)
 
 print(args)
@@ -68,12 +73,23 @@ print(args)
 # Convert the argparse namespace to a dictionary
 args_dict = vars(args)
 
-# Specify the file name for saving the arguments
-args_file = f'args_parsed/{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_induct.json'
+# set result table details
+seed_list = [1,15,85,120,1000]
+init_list = ["herding", "kcenter"]
+compr_list = {"cora": [0.25,0.5], "citeseer": [0.25,0.5],"reddit":[0.001,0.005,0.01]}
+data_list = ["cora", "citeseer","reddit"]
+method_list = ["gcond", "sgdd"]
 
-# Save the arguments to a JSON file
-with open(args_file, 'w') as file:
-    json.dump(args_dict, file, indent=4)
+myresults = datastorage(seed_list,init_list,compr_list,data_list,method_list)
+args.out = myresults
+args.out.load_table()
+
+# Specify the file name for saving the arguments
+# args_file = f'args_parsed/{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_induct.json'
+
+# # Save the arguments to a JSON file
+# with open(args_file, 'w') as file:
+#     json.dump(args_dict, file, indent=4)
 
 data_graphsaint = ['flickr', 'reddit', 'ogbn-arxiv']
 if args.dataset in data_graphsaint:
@@ -91,6 +107,7 @@ np.savez(file_name_idx, idx_train=data.idx_train, idx_test=data.idx_test, idx_va
 agent = GCond(data, args, device='cuda')
 
 agent.train()
+args.out.display_save()
 
 # restore the original standard output
 restore_stdout(original_stdout)

@@ -23,7 +23,9 @@ do
 
     # for r in 0.001 0.005 0.0005
     # do
-    #     #python train_gcond_induct.py --dataset reddit --sgc=1 --nlayers=2 --lr_feat=0.1 --lr_adj=0.1  --r=${r} --seed=1 --gpu_id=0 --epochs=1000  --inner=1 --outer=10 --save=1 
+    #     python train_gcond_induct.py --dataset reddit --sgc=1 --nlayers=2 --lr_feat=0.1 --lr_adj=0.1  --r=${r} --seed=${s} --gpu_id=0 --epochs=1000  --inner=1 --outer=10 --save=1 --inittype='herding'
+    #     python train_gcond_induct.py --dataset reddit --sgc=1 --nlayers=2 --lr_feat=0.1 --lr_adj=0.1  --r=${r} --seed=${s} --gpu_id=0 --epochs=1000  --inner=1 --outer=10 --save=1 --inittype='kcenter'
+
     #     # python train_gcond_induct.py --dataset reddit --nlayers=2 --lr_feat=5e-3 --lr_adj=5e-3 --r=${r}  --sgc=0 --seed=${s} --dis=mse --gpu_id=0 --one_step=1  --epochs=1000 --save=1
 
     # done
