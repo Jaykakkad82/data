@@ -89,8 +89,8 @@ class GCond:
         args = self.args
 
         if self.args.save:
-            torch.save(adj_syn, f'saved_ours/adj_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}.pt')
-            torch.save(feat_syn, f'saved_ours/feat_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}.pt')
+            torch.save(adj_syn, f'saved_ours/adj_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_{args.noise_type}.pt')
+            torch.save(feat_syn, f'saved_ours/feat_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_{args.noise_type}.pt')
 
         if self.args.lr_adj == 0:
             n = len(labels_syn)
@@ -100,7 +100,7 @@ class GCond:
                      train_iters=600, normalize=True, verbose=False)
 
         model.eval()
-        torch.save(model.state_dict(), f'Eval_model/model_{args.dataset}_{args.reduction_rate}_{args.seed}__{args.one_step}_trans.pt')
+        torch.save(model.state_dict(), f'Eval_model/model_{args.dataset}_{args.reduction_rate}_{args.seed}__{args.one_step}_{args.noise_type}_trans.pt')
         labels_test = torch.LongTensor(data.labels_test).cuda()
 
         labels_train = torch.LongTensor(data.labels_train).cuda()

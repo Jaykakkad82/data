@@ -50,7 +50,7 @@ parser.add_argument('--save', type=int, default=1)
 parser.add_argument('--one_step', type=int, default=0)
 parser.add_argument('--mode', type=str, default='disabled', help='whether to use the wandb')
 
-parser.add_argument('--noise-type', type=str, default='edge_add')
+parser.add_argument('--noise_type', type=str, default='edge_add')
 parser.add_argument('--noise', type=float, default=0)
 
 args = parser.parse_args()
@@ -76,7 +76,7 @@ def restore_stdout(original_stdout):
     sys.stdout = original_stdout
 
 # change the standard output to store in file
-file_name_out = f'print_output/{args.dataset}_{args.reduction_rate}_{args.seed}__{args.one_step}sgc.txt'
+file_name_out = f'print_output/{args.dataset}_{args.reduction_rate}_{args.seed}_{args.noise_type}_{args.one_step}sgc.txt'
 original_stdout = redirect_stdout_to_file(file_name_out)
 
 print(args) # print it

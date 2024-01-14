@@ -200,7 +200,7 @@ class SGDD:
 
             for ol in range(outer_loop):
                 adj_syn, opt_loss = self.ignr(self.feat_syn, Lx=data.adj_mx)
-                print(opt_loss)
+                # print(opt_loss)
                 adj_syn_norm = utils.normalize_adj_tensor(adj_syn, sparse=False)
                 feat_syn_norm = feat_syn
 
