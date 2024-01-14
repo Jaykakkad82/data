@@ -371,7 +371,7 @@ if __name__ == '__main__':
         print(f'Checking uid: {uid}')
         uid_dir = os.path.join('./logs/ckpt', uid)
         file_path = os.path.join(uid_dir, f'test_{args.reduction_rate}.json')
-        if os.path.exists(json_data):
+        if os.path.exists(file_path):
             print('Job already finished, exiting')
             sys.exit(0)
 
