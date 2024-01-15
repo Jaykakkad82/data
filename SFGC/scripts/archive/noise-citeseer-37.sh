@@ -1,11 +1,11 @@
 #! /bin/bash
 
 reduction_rate=0.25
-noise_type="add_edges"
+noise_type="shuffle_nodes"
 dataset="citeseer"
-seed=31
+seed=37
 noise_list=(0.1 0.15 0.2)
-uid_list=(1007 1008 1009)
+uid_list=(1001 1002 1003)
 for i in {0..2}
 do
     noise="${noise_list[$i]}"

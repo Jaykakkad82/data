@@ -378,7 +378,6 @@ if __name__ == '__main__':
         print(f'Loading uid: {uid}')
         uid_dir = os.path.join('./logs/ckpt', uid)
         distill_file_path = os.path.join(uid_dir, f'distill_{args.reduction_rate}.json')
-        json_data = {'log_dir': log_dir}
         with open(distill_file_path, 'r') as json_file:
             json_data = json.load(json_file)
             args.load_path = json_data['log_dir']
@@ -415,7 +414,7 @@ if __name__ == '__main__':
         print(f'Saving uid: {uid}')
         uid_dir = os.path.join('./logs/ckpt', uid)
         file_path = os.path.join(uid_dir, f'test_{args.reduction_rate}.json')
-        json_data = {'log_dir': log_dir, 'best_acc_val': best_acc_val, 'best_acc_test': best_acc_test}
+        json_data = {'log_dir': log_dir, 'best_acc_val': best_acc_val, 'best_acc_test': best_acc_test, 'uid': uid}
         if not os.path.exists(uid_dir):
             os.makedirs(uid_dir)
         with open(file_path, 'w') as json_file:

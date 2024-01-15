@@ -1,11 +1,11 @@
 #! /bin/bash
 
 reduction_rate=0.25
-noise_type="add_edges"
+noise_type="shuffle_nodes"
 dataset="cora"
-seed=37
+seed=15
 noise_list=(0.1 0.15 0.2)
-uid_list=(1010 1011 1012)
+uid_list=(1013 1014 1015)
 for i in {0..2}
 do
     noise="${noise_list[$i]}"

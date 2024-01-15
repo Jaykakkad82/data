@@ -1,7 +1,7 @@
 #! /bin/bash
 
 reduction_rate=0.25
-noise_type="add_edges"
+noise_type="shuffle_nodes"
 dataset="citeseer"
 seed=15
 noise_list=(0.1 0.15 0.2)
