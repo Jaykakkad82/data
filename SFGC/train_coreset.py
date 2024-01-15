@@ -234,7 +234,7 @@ if uid != '':
     print(f'Saving uid: {uid}')
     uid_dir = os.path.join('./logs/ckpt', uid)
     file_path = os.path.join(uid_dir, f'coreset_{args.reduction_rate}.json')
-    json_data = {'log_dir': log_dir}
+    json_data = {'log_dir': log_dir, 'uid': uid}
     if not os.path.exists(uid_dir):
         os.makedirs(uid_dir)
     with open(file_path, 'w') as json_file:

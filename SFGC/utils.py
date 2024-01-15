@@ -22,6 +22,7 @@ import random
 
 
 def random_remove_nodes(dataset, p_remove, root, name):
+    print('random_remove_nodes called')
     # Copy the original data to avoid modifying the original dataset
     data = dataset[0]
     new_data = data.clone()
@@ -70,6 +71,7 @@ def random_remove_nodes(dataset, p_remove, root, name):
     return transformed_dataset
 
 def random_remove_edges(dataset, p_remove, root, name):
+    print('random_remove_edges called')
     # Copy the original data to avoid modifying the original dataset
     data = dataset[0]
     new_data = data.clone()
@@ -105,6 +107,7 @@ def random_remove_edges(dataset, p_remove, root, name):
     return transformed_dataset
 
 def random_add_edges(dataset, p_add, root, name):
+    print('random_add_edges called')
     # Copy the original data to avoid modifying the original dataset
     data = dataset[0]
     new_data = data.clone()
@@ -130,6 +133,38 @@ def random_add_edges(dataset, p_add, root, name):
     
     return transformed_dataset
 
+def random_sample_without_replacement(tensor_in, sample_size=None):
+    if type(tensor_in) == int:
+        tensor_in = torch.arange(tensor_in)
+    
+    shuffled_indices = torch.randperm(len(tensor_in))
+
+    if sample_size is None:
+        sample_size = len(tensor_in)
+    sample_size = min(sample_size, len(tensor_in))
+
+    return tensor_in[shuffled_indices[:sample_size]]
+
+def shuffle_node_features(dataset, p_shuffle, root, name):
+    print('shuffle_node_features called')
+    # Copy the original data to avoid modifying the original dataset
+    data = dataset[0]
+    new_data = data.clone()
+    
+    num_nodes_to_shuffle = int(data.num_nodes * p_shuffle)
+    left = random_sample_without_replacement(data.num_nodes, num_nodes_to_shuffle)
+    right = random_sample_without_replacement(left)
+
+    new_data.x[right] = torch.Tensor(new_data.x[left])
+
+    # Manually create a new instance of the Planetoid class
+    transformed_dataset = Planetoid(root=root, name=name)
+
+    # Set the necessary attributes
+    transformed_dataset.data = new_data
+    
+    return transformed_dataset
+
 
 def get_dataset(name, normalize_features=True, transform=None, if_dpr=True, noise_type=None, noise=0):
     path = osp.join(osp.dirname(osp.realpath(__file__)), 'data', name)
@@ -138,7 +173,10 @@ def get_dataset(name, normalize_features=True, transform=None, if_dpr=True, nois
         # dataset = random_remove_nodes(dataset, 0.2, path, name)
         if noise > 0:
             print('Loading noise data')
-            dataset = random_add_edges(dataset, noise, path, name)
+            if noise_type == 'shuffle_nodes':
+                dataset = shuffle_node_features(dataset, noise, path, name)
+            else:
+                dataset = random_add_edges(dataset, noise, path, name)
     elif name in ['ogbn-arxiv']:
         dataset = PygNodePropPredDataset(name='ogbn-arxiv')
     else:

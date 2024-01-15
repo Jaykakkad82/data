@@ -92,7 +92,6 @@ if uid != '':
     uid_dir = os.path.join('./logs/ckpt', uid)
     buffer_file_path = os.path.join(uid_dir, 'buffer.json')
     coreset_file_path = os.path.join(uid_dir, f'coreset_{args.reduction_rate}.json')
-    json_data = {'log_dir': log_dir}
     with open(buffer_file_path, 'r') as json_file:
         json_data = json.load(json_file)
         args.buffer_path = json_data['log_dir']
@@ -142,7 +141,7 @@ if uid != '':
     print(f'Saving uid: {uid}')
     uid_dir = os.path.join('./logs/ckpt', uid)
     file_path = os.path.join(uid_dir, f'distill_{args.reduction_rate}.json')
-    json_data = {'log_dir': log_dir}
+    json_data = {'log_dir': log_dir, 'uid': uid}
     if not os.path.exists(uid_dir):
         os.makedirs(uid_dir)
     with open(file_path, 'w') as json_file:

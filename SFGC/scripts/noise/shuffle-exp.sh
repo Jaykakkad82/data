@@ -1,15 +1,23 @@
 #! /bin/bash
 
+start="$1"
+end="$2"
+echo "Start: "$start "end: "$end
+
 reduction_rate=0.25
-noise_type="add_edges"
-dataset="citeseer"
-seed=37
-noise_list=(0.1 0.15 0.2)
-uid_list=(1001 1002 1003)
-for i in {0..2}
+noise_type="shuffle_nodes"
+dataset_list=("citeseer" "citeseer" "citeseer" "citeseer" "citeseer" "citeseer" "citeseer" "citeseer" "citeseer" "cora" "cora" "cora" "cora" "cora" "cora" "cora" "cora" "cora")
+seed_list=(37 37 37 15 15 15 31 31 31 37 37 37 15 15 15 31 31 31)
+noise_list=(1 0.5 0.25 1 0.5 0.25 1 0.5 0.25 1 0.5 0.25 1 0.5 0.25 1 0.5 0.25)
+uid_list=(1021 1022 1023 1024 1025 1026 1027 1028 1029 1030 1031 1032 1033 1034 1035 1036 1037 1038)
+for ((i=$start; i<=$end; i++));
 do
+    dataset="${dataset_list[$i]}"
+    seed="${seed_list[$i]}"
     noise="${noise_list[$i]}"
     uid="${uid_list[$i]}"
+
+    echo "reduction_rate: "$reduction_rate "noise_type: "$noise_type "dataset: "$dataset "seed: "$seed "noise: "$noise "uid: "$uid
 
     CUDA_VISIBLE_DEVICES=0 python buffer_transduct.py --device cuda:0 --lr_teacher 0.001 --teacher_epochs 800 --dataset $dataset --teacher_nlayers=2 --traj_save_interval=10 --param_save_interval=10 --buffer_model_type 'GCN' --num_experts=200 --wd_teacher 5e-4 --mom_teacher 0 --optim Adam --decay 0 --seed_teacher $seed --uid=$uid --noise-type=$noise_type --noise=$noise
 
@@ -34,3 +42,11 @@ do
     echo "---------------------------------------------------------------------"
 done
 
+# sh scripts/noise/shuffle-exp.sh 0 2
+# sh scripts/noise/shuffle-exp.sh 3 5
+# sh scripts/noise/shuffle-exp.sh 6 8
+# sh scripts/noise/shuffle-exp.sh 9 11
+# sh scripts/noise/shuffle-exp.sh 12 14
+# sh scripts/noise/shuffle-exp.sh 15 17
+
+# CUDA_VISIBLE_DEVICES=0 python distill_transduct_adj_identity2.py --dataset citeseer --device cuda:0 --lr_feat=0.0005 --optimizer_con Adam --expert_epochs=500 --lr_student=1 --optim_lr=1 --optimizer_lr SGD --lr_lr 1e-6 --start_epoch=30 --syn_steps=200 --condense_model GCN --interval_buffer 1 --rand_start 1 --reduction_rate=0.25 --ntk_reg 1 --eval_interval 1 --ITER 2000 --samp_iter=5 --samp_num_per_class=10 --seed_student 37 --coreset_seed 37 --uid=1021 --noise-type=shuffle_nodes --noise=0.2
