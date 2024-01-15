@@ -15,7 +15,7 @@ class datastorage():
         self.results = self.create_table()
         output_folder = 'init_results_files'
         os.makedirs(output_folder, exist_ok=True)
-        self.path = "init_results_files/results-in.csv"
+        self.path = "init_results_files/results-in-red.csv"
         
         self.i =0
 

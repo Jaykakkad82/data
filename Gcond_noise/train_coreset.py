@@ -30,7 +30,7 @@ parser.add_argument('--inductive', type=int, default=1)
 parser.add_argument('--save', type=int, default=1)
 parser.add_argument('--method', type=str, choices=['kcenter', 'herding', 'random', 'kmeans'])
 parser.add_argument('--reduction_rate', type=float, required=True)
-parser.add_argument('--noise-type', type=str, default='edge_add')
+parser.add_argument('--noise_type', type=str, default='edge_add')
 parser.add_argument('--noise', type=float, default=0)
 
 args = parser.parse_args()
@@ -53,7 +53,7 @@ def restore_stdout(original_stdout):
     sys.stdout.close()
     sys.stdout = original_stdout
 
-file_name_out = f'Coreset_print_output/{args.method}_{args.dataset}_{args.reduction_rate}_{args.seed}_induct.txt'
+file_name_out = f'Coreset_print_output/{args.method}_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.noise_type}_induct.txt'
 original_stdout = redirect_stdout_to_file(file_name_out)
 
 
@@ -143,7 +143,7 @@ adj_train = adj[np.ix_(idx_selected, idx_selected)]
 labels_train = labels[idx_selected]
 
 if args.save:
-    np.save(f'saved_core/idx_{args.dataset}_{args.reduction_rate}_{args.method}_{args.seed}.npy', idx_selected)
+    np.save(f'saved_core/idx_{args.dataset}_{args.reduction_rate}_{args.method}_{args.seed}_{args.noise_type}.npy', idx_selected)
 
 
 res = []
@@ -164,7 +164,7 @@ for _ in tqdm(range(runs)):
 
 res = np.array(res)
 print('Mean accuracy:', repr([res.mean(), res.std()]))
-torch.save(model.state_dict(), f'Eval_coreset_model/model__{args.method}_{args.dataset}_{args.reduction_rate}_{args.seed}_trans.pt')
+torch.save(model.state_dict(), f'Eval_coreset_model/model__{args.method}_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.noise_type}_trans.pt')
 # restore the original standard output
 restore_stdout(original_stdout)
 

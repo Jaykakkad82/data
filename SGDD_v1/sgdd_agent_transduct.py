@@ -1,5 +1,6 @@
 import numpy as np
 import torch
+import tqdm
 import torch.nn as nn
 import torch.optim as optim
 from torch.nn import Parameter
@@ -8,61 +9,79 @@ from utils import match_loss, regularization, row_normalize_tensor
 import deeprobust.graph.utils as utils
 from copy import deepcopy
 import numpy as np
-from tqdm import tqdm
 from models.gcn import GCN
+import tqdm
 from models.sgc import SGC
 from models.sgc_multi import SGC as SGC1
+from models.IGNR import GraphonLearner as IGNR
 from models.parametrized_adj import PGE
 import scipy.sparse as sp
 from torch_sparse import SparseTensor
 
 
-class GCond:
+class SGDD:
 
     def __init__(self, data, args, device='cuda', **kwargs):
         self.data = data
         self.args = args
         self.device = device
 
-        # n = data.nclass * args.nsamples
         n = int(data.feat_train.shape[0] * args.reduction_rate)
-        # from collections import Counter; print(Counter(data.labels_train))
 
         d = data.feat_train.shape[1]
+        self.labels_syn = torch.LongTensor(self.generate_labels_syn(data, balance=True)).to(device)
+        n = len(self.labels_syn)
         self.nnodes_syn = n
         self.feat_syn = nn.Parameter(torch.FloatTensor(n, d).to(device))
-        self.pge = PGE(nfeat=d, nnodes=n, device=device,args=args).to(device)
 
-        self.labels_syn = torch.LongTensor(self.generate_labels_syn(data)).to(device)
+        self.ignr = IGNR(node_feature=d, nfeat=128, nnodes=n, device=device, args=args
+                         ).to(device)
 
         self.reset_parameters()
         self.optimizer_feat = torch.optim.Adam([self.feat_syn], lr=args.lr_feat)
-        self.optimizer_pge = torch.optim.Adam(self.pge.parameters(), lr=args.lr_adj)
+        self.optimizer_ignr = torch.optim.Adam(self.ignr.parameters(), lr=args.lr_adj)
         print('adj_syn:', (n,n), 'feat_syn:', self.feat_syn.shape)
+        self.best_acc = 0
 
     def reset_parameters(self):
         self.feat_syn.data.copy_(torch.randn(self.feat_syn.size()))
 
-    def generate_labels_syn(self, data):
+    def generate_labels_syn(self, data, total_labels=None, balance=False):
         from collections import Counter
         counter = Counter(data.labels_train)
-        num_class_dict = {}
-        n = len(data.labels_train)
-
-        sorted_counter = sorted(counter.items(), key=lambda x:x[1])
-        sum_ = 0
+        num_classes = len(counter)
+        if total_labels is None:
+            total_labels = int(len(data.labels_train) * self.args.reduction_rate)
+        if total_labels < num_classes:
+            print("Warning: total_labels < num_classes, you may need to increase reduction_rate")
+            total_labels = num_classes
         labels_syn = []
+        num_class_dict = {}
         self.syn_class_indices = {}
-        for ix, (c, num) in enumerate(sorted_counter):
-            if ix == len(sorted_counter) - 1:
-                num_class_dict[c] = int(n * self.args.reduction_rate) - sum_
-                self.syn_class_indices[c] = [len(labels_syn), len(labels_syn) + num_class_dict[c]]
+
+        if balance:
+            num_labels_per_class, remainder = divmod(total_labels, num_classes)
+
+            for i, c in enumerate(counter.keys()):
+                additional_label = 1 if i < remainder else 0
+                num_class_dict[c] = num_labels_per_class + additional_label
+                start_index = len(labels_syn)
                 labels_syn += [c] * num_class_dict[c]
-            else:
-                num_class_dict[c] = max(int(num * self.args.reduction_rate), 1)
-                sum_ += num_class_dict[c]
-                self.syn_class_indices[c] = [len(labels_syn), len(labels_syn) + num_class_dict[c]]
+                self.syn_class_indices[c] = [start_index, start_index + num_class_dict[c]]
+        else:
+            sorted_counter = sorted(counter.items(), key=lambda x: x[1])
+            sum_ = 0
+
+            for ix, (c, num) in enumerate(sorted_counter):
+                if ix == len(sorted_counter) - 1:
+                    num_class_dict[c] = total_labels - sum_
+                else:
+                    num_class_dict[c] = max(int(num * self.args.reduction_rate), 1)
+                    sum_ += num_class_dict[c]
+
+                start_index = len(labels_syn)
                 labels_syn += [c] * num_class_dict[c]
+                self.syn_class_indices[c] = [start_index, start_index + num_class_dict[c]]
 
         self.num_class_dict = num_class_dict
         return labels_syn
@@ -72,8 +91,8 @@ class GCond:
         res = []
 
         data, device = self.data, self.device
-        feat_syn, pge, labels_syn = self.feat_syn.detach(), \
-                                self.pge, self.labels_syn
+        feat_syn, ignr, labels_syn = self.feat_syn.detach(), \
+                                self.ignr, self.labels_syn
 
         # with_bn = True if args.dataset in ['ogbn-arxiv'] else False
         model = GCN(nfeat=feat_syn.shape[1], nhid=self.args.hidden, dropout=0.5,
@@ -85,12 +104,12 @@ class GCond:
                         weight_decay=0e-4, nlayers=2, with_bn=False,
                         nclass=data.nclass, device=device).to(device)
 
-        adj_syn = pge.inference(feat_syn)
+        adj_syn = ignr.inference(feat_syn)
         args = self.args
 
         if self.args.save:
-            torch.save(adj_syn, f'saved_ours/adj_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_{args.noise_type}.pt')
-            torch.save(feat_syn, f'saved_ours/feat_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_{args.noise_type}.pt')
+            torch.save(adj_syn, f'saved_ours/adj_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
+            torch.save(feat_syn, f'saved_ours/feat_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
 
         if self.args.lr_adj == 0:
             n = len(labels_syn)
@@ -100,7 +119,6 @@ class GCond:
                      train_iters=600, normalize=True, verbose=False)
 
         model.eval()
-        torch.save(model.state_dict(), f'Eval_model/model_{args.dataset}_{args.reduction_rate}_{args.seed}__{args.one_step}_{args.noise_type}_trans.pt')
         labels_test = torch.LongTensor(data.labels_test).cuda()
 
         labels_train = torch.LongTensor(data.labels_train).cuda()
@@ -117,6 +135,9 @@ class GCond:
         output = model.predict(data.feat_full, data.adj_full)
         loss_test = F.nll_loss(output[data.idx_test], labels_test)
         acc_test = utils.accuracy(output[data.idx_test], labels_test)
+        
+
+
         res.append(acc_test.item())
         if verbose:
             print("Test set results:",
@@ -127,7 +148,7 @@ class GCond:
     def train(self, verbose=True):
         args = self.args
         data = self.data
-        feat_syn, pge, labels_syn = self.feat_syn, self.pge, self.labels_syn
+        feat_syn, ignr, labels_syn = self.feat_syn, self.ignr, self.labels_syn
         features, adj, labels = data.feat_full, data.adj_full, data.labels_full
         idx_train = data.idx_train
 
@@ -151,7 +172,7 @@ class GCond:
         outer_loop, inner_loop = get_loops(args)
         loss_avg = 0
 
-        for it in range(args.epochs+1):
+        for it in tqdm.tqdm(range(args.epochs+1)):
             if args.dataset in ['ogbn-arxiv']:
                 model = SGC1(nfeat=feat_syn.shape[1], nhid=self.args.hidden,
                             dropout=0.0, with_bn=False,
@@ -178,7 +199,8 @@ class GCond:
             model.train()
 
             for ol in range(outer_loop):
-                adj_syn = pge(self.feat_syn)
+                adj_syn, opt_loss = self.ignr(self.feat_syn, Lx=data.adj_mx)
+                # print(opt_loss)
                 adj_syn_norm = utils.normalize_adj_tensor(adj_syn, sparse=False)
                 feat_syn_norm = feat_syn
 
@@ -222,15 +244,20 @@ class GCond:
                     loss_reg = args.alpha * regularization(adj_syn, utils.tensor2onehot(labels_syn))
                 else:
                     loss_reg = torch.tensor(0)
+                
+                if args.opt_scale > 0:
+                    loss_opt = args.opt_scale * opt_loss
+                else:
+                    loss_opt = torch.tensor(0)
 
-                loss = loss + loss_reg
+                loss = loss + loss_reg + loss_opt
 
                 # update sythetic graph
                 self.optimizer_feat.zero_grad()
-                self.optimizer_pge.zero_grad()
+                self.optimizer_ignr.zero_grad()
                 loss.backward()
                 if it % 50 < 10:
-                    self.optimizer_pge.step()
+                    self.optimizer_ignr.step()
                 else:
                     self.optimizer_feat.step()
 
@@ -243,10 +270,8 @@ class GCond:
                     break
 
                 feat_syn_inner = feat_syn.detach()
-                adj_syn_inner = pge.inference(feat_syn_inner)
-                #print("Testing_after_inference" , adj_syn_inner)
+                adj_syn_inner = ignr.inference(feat_syn_inner)
                 adj_syn_inner_norm = utils.normalize_adj_tensor(adj_syn_inner, sparse=False)
-                #print("Testing_after_normalization", adj_syn_inner_norm)
                 feat_syn_inner_norm = feat_syn_inner
                 for j in range(inner_loop):
                     optimizer_model.zero_grad()
@@ -256,28 +281,35 @@ class GCond:
                     # print(loss_syn_inner.item())
                     optimizer_model.step() # update gnn param
 
-
             loss_avg /= (data.nclass*outer_loop)
             if it % 50 == 0:
                 print('Epoch {}, loss_avg: {}'.format(it, loss_avg))
 
-            eval_epochs = [400, 600, 800, 1000, 1200, 1600, 2000, 3000, 4000, 5000]
+            eval_epochs = [50, 100, 200, 400, 600, 800, 1000, 1200, 1600, 2000, 3000, 4000, 5000]
 
             if verbose and it in eval_epochs:
             # if verbose and (it+1) % 50 == 0:
                 res = []
-                runs = 1 if args.dataset in ['ogbn-arxiv'] else 3
+                runs = args.test_runs
                 for i in range(runs):
                     if args.dataset in ['ogbn-arxiv']:
-                        res.append(self.test_with_val())
+                        res.append(self.test_with_val(verbose=False))
                     else:
-                        res.append(self.test_with_val())
+                        res.append(self.test_with_val(verbose=False))
 
                 res = np.array(res)
-                print('Train/Test Mean Accuracy:',
-                        repr([res.mean(0), res.std(0)]))
+                train_mean, test_mean = res.mean(0)
+                train_std, test_std = res.std(0)
+                print(f"Train_acc: {train_mean:.2f}±{train_std:.2f}, Test_acc: {test_mean:.2f}±{test_std:.2f}")
+                if test_mean > self.best_acc:
+                    self.best_acc= test_mean
+                    print("Saving Model at acc: ", self.best_acc)
+                    torch.save(model.state_dict(), f'Eval_model/model_{args.dataset}_{args.reduction_rate}_{args.seed}_sgdd.pt')
+                    torch.save(adj_syn, f'Eval_distildata/adj_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
+                    torch.save(feat_syn, f'Eval_distildata/feat_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
+                    torch.save(labels_syn, f'Eval_distildata/label_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
 
-    def get_sub_adj_feat(self, features):
+    def get_sub_adj_feat_SGDD(self, features):
         data = self.data
         args = self.args
         idx_selected = []
@@ -307,6 +339,19 @@ class GCond:
             sims[i, indices_argsort[: -k]] = 0
         adj_knn = torch.FloatTensor(sims).to(self.device)
         return features, adj_knn
+
+    def get_sub_adj_feat(self, features):
+        data = self.data
+        args = self.args
+        idx_selected = []
+
+        from collections import Counter;
+        counter = Counter(self.labels_syn.cpu().numpy())
+
+        ids_per_cls_train = [(self.data.labels_train == c).nonzero()[0] for c in counter.keys()]
+        idx_selected = data.sampling(ids_per_cls_train, counter, features, 0.5, counter)
+        features = features[idx_selected]
+        return features, None
 
 
 def get_loops(args):

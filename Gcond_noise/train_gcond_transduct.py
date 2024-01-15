@@ -37,7 +37,7 @@ parser.add_argument('--outer', type=int, default=20)
 parser.add_argument('--save', type=int, default=1)
 parser.add_argument('--one_step', type=int, default=0)
 
-parser.add_argument('--noise-type', type=str, default='edge_add')
+parser.add_argument('--noise_type', type=str, default='edge_add')
 parser.add_argument('--noise', type=float, default=0)
 
 args = parser.parse_args()
@@ -63,7 +63,7 @@ def restore_stdout(original_stdout):
     sys.stdout.close()
     sys.stdout = original_stdout
 
-file_name_out = f'print_output/print_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_transduct.txt'
+file_name_out = f'print_output/print_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_{args.noise_type}_transduct.txt'
 original_stdout = redirect_stdout_to_file(file_name_out)
 
 print(args)
@@ -71,12 +71,12 @@ print(args)
 # Convert the argparse namespace to a dictionary
 args_dict = vars(args)
 
-# Specify the file name for saving the arguments
-args_file = f'args_parsed/{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_transduct.json'
+# # Specify the file name for saving the arguments
+# args_file = f'args_parsed/{args.dataset}_{args.reduction_rate}_{args.seed}_{args.one_step}_{args.noise_type}_transduct.json'
 
-# Save the arguments to a JSON file
-with open(args_file, 'w') as file:
-    json.dump(args_dict, file, indent=4)
+# # Save the arguments to a JSON file
+# with open(args_file, 'w') as file:
+#     json.dump(args_dict, file, indent=4)
 
 data_graphsaint = ['flickr', 'reddit', 'ogbn-arxiv']
 if args.dataset in data_graphsaint:
@@ -86,8 +86,8 @@ else:
     data_full = get_dataset(args.dataset, args.normalize_features, noise_type=args.noise_type, noise=args.noise)
     data = Transd2Ind(data_full, keep_ratio=args.keep_ratio)
 # saving the data indices 
-file_name_idx = f'Index/{args.dataset}_{args.reduction_rate}_{args.seed}_induct.npz'
-np.savez(file_name_idx, idx_train=data.idx_train, idx_test=data.idx_test, idx_val=data.idx_val)
+# file_name_idx = f'Index/{args.dataset}_{args.reduction_rate}_{args.seed}_induct.npz'
+# np.savez(file_name_idx, idx_train=data.idx_train, idx_test=data.idx_test, idx_val=data.idx_val)
 
 agent = GCond(data, args, device='cuda')
 
