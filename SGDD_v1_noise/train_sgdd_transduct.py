@@ -88,7 +88,7 @@ def restore_stdout(original_stdout):
     sys.stdout = original_stdout
 
 # change the standard output to store in file
-file_name_out = f'print_output/{args.dataset}_{args.reduction_rate}_{args.seed}__{args.one_step}sgc.txt'
+file_name_out = f'print_output/{args.dataset}_{args.reduction_rate}_{args.seed}__{args.one_step}_{args.noise_type}_sgc.txt'
 original_stdout = redirect_stdout_to_file(file_name_out)
 
 print(args) # print it

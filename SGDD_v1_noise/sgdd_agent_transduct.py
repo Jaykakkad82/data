@@ -108,8 +108,8 @@ class SGDD:
         args = self.args
 
         if self.args.save:
-            torch.save(adj_syn, f'saved_ours/adj_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
-            torch.save(feat_syn, f'saved_ours/feat_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
+            torch.save(adj_syn, f'saved_ours/adj_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.noise_type}.pt')
+            torch.save(feat_syn, f'saved_ours/feat_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.noise_type}.pt')
 
         if self.args.lr_adj == 0:
             n = len(labels_syn)
@@ -304,10 +304,10 @@ class SGDD:
                 if test_mean > self.best_acc:
                     self.best_acc= test_mean
                     print("Saving Model at acc: ", self.best_acc)
-                    torch.save(model.state_dict(), f'Eval_model/model_{args.dataset}_{args.reduction_rate}_{args.seed}_sgdd.pt')
-                    torch.save(adj_syn, f'Eval_distildata/adj_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
-                    torch.save(feat_syn, f'Eval_distildata/feat_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
-                    torch.save(labels_syn, f'Eval_distildata/label_{args.dataset}_{args.reduction_rate}_{args.seed}.pt')
+                    torch.save(model.state_dict(), f'Eval_model/model_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.noise_type}_sgdd.pt')
+                    torch.save(adj_syn, f'Eval_distildata/adj_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.noise_type}.pt')
+                    torch.save(feat_syn, f'Eval_distildata/feat_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.noise_type}.pt')
+                    torch.save(labels_syn, f'Eval_distildata/label_{args.dataset}_{args.reduction_rate}_{args.seed}_{args.noise_type}.pt')
 
     def get_sub_adj_feat_SGDD(self, features):
         data = self.data
